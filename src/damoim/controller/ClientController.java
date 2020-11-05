@@ -1,5 +1,6 @@
 package damoim.controller;
 
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class ClientController implements Controller {
 	/**
 	 * 참여자차트만들기
 	 * */
-	public ModelAndView clientSelectChart(HttpServletRequest request,HttpServletResponse response)throws SQLException {
+	public ModelAndView clientSelectChart(HttpServletRequest request,HttpServletResponse response)throws Exception {
 		System.out.println("clientSelectChart call..");
 		ModelAndView mv = new ModelAndView();
 		HttpSession session = request.getSession();
@@ -116,6 +117,23 @@ public class ClientController implements Controller {
 			request.setAttribute("list", list);
 			mv.setRedirect(false);
 			mv.setViewName(request.getContextPath()+"/client/MyJoinMoim");
+		}
+		return mv;
+	}
+	
+	/**
+	 * 마이페이지에서 내가 개설한 모임보기
+	 * */
+	public ModelAndView hostSelectMoimByMe(HttpServletRequest request,HttpServletResponse response)throws SQLException{
+		System.out.println("hostSelectMoimByMe call..");
+		ModelAndView mv = new ModelAndView();
+		HttpSession session = request.getSession();
+		int userNo = (int)session.getAttribute("session_userNo");
+		List<PostDTO> list = ClientService.hostSelectMoimByMe(userNo);
+		if(list!=null) {
+			request.setAttribute("list", list);
+			mv.setRedirect(false);
+			mv.setViewName(request.getContextPath()+"/client/MyCreateMoim");
 		}
 		return mv;
 	}

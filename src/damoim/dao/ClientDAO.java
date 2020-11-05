@@ -59,6 +59,13 @@ public interface ClientDAO {
 	 * */
 	int[] hostSelectChart(int clientNo) throws SQLException;
 	
+	/**
+	 * 마이페이지에서 내가 개설한 모임정보 조회
+	 * 
+	 * @param id
+	 * @return list
+	 * */
+	List<PostDTO> hostSelectMoimByMe(int userNo) throws SQLException;
 	
 	/**
 	 * 마이페이지에서 내가 참여한 모임정보 조회
