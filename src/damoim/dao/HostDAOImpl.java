@@ -16,21 +16,22 @@ public class HostDAOImpl implements HostDAO {
 	@Override
 	public int hostCreateMoim(PostDTO postDTO) throws SQLException{
 		String sql = "insert into post values("
-				+ "post_no.nextval, 2, ?, ?, ?, ?, ?, ?, "
+				+ "post_no.nextval, ?, ?, ?, ?, ?, ?, ?, "
 				+ "sysdate, ?, ?, ?, 0, ?, ?)";
 		Connection con = DbUtil.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, postDTO.getPostTitle());
-		ps.setString(2, postDTO.getPostDescr());
-		ps.setString(3, postDTO.getPostContent());
-		ps.setInt(4, postDTO.getCategoryCode());
-		ps.setInt(5, postDTO.getLocationCode());
-		ps.setString(6, postDTO.getLocationDetail());
-		ps.setString(7, postDTO.getDeadline());
-		ps.setString(8, postDTO.getMeetingDate());
-		ps.setInt(9, postDTO.getTotalPeople());
-		ps.setString(10, postDTO.getThumbnailFile());
-		ps.setString(11, postDTO.getBannerFile());
+		ps.setInt(1, postDTO.getUserNo());
+		ps.setString(2, postDTO.getPostTitle());
+		ps.setString(3, postDTO.getPostDescr());
+		ps.setString(4, postDTO.getPostContent());
+		ps.setInt(5, postDTO.getCategoryCode());
+		ps.setInt(6, postDTO.getLocationCode());
+		ps.setString(7, postDTO.getLocationDetail());
+		ps.setString(8, postDTO.getDeadline());
+		ps.setString(9, postDTO.getMeetingDate());
+		ps.setInt(10, postDTO.getTotalPeople());
+		ps.setString(11, postDTO.getThumbnailFile());
+		ps.setString(12, postDTO.getBannerFile());
 		
 		int result = ps.executeUpdate();
 		return result;
@@ -60,7 +61,6 @@ public class HostDAOImpl implements HostDAO {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postNum);
 		int result = ps.executeUpdate();
-		System.out.println(result);
 		return result;
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -36,14 +37,13 @@ public class HostController implements Controller {
 	
 	public ModelAndView hostPostInsert(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		
+		HttpSession session = request.getSession();
+		int userNo = (int)session.getAttribute("session_userNo");
 		ModelAndView mv = new ModelAndView();
 		int maxSize = 1024*1024*100; // 100mb
 		String encoding = "UTF-8";
 		
 		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
-		
-		
 		System.out.println("HostController insert called...........");
 		String postTitle = mr.getParameter("postTitle");
 		String postDescr = mr.getParameter("postDescr");
@@ -63,17 +63,15 @@ public class HostController implements Controller {
 			bannerName = banner.getName();
 		}
 		String thumbnailName = thumbnail.getName();
-		System.out.println(deadline);
-		PostDTO post = new PostDTO(0, 0, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, 
+		PostDTO post = new PostDTO(0, userNo, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, 
 				deadline, meetingDate, totalPeople, 1, thumbnailName, bannerName);
 		int result = HostService.insert(post);
 		// ClientService�쓽 currentPeople 利앷��떆�궎�뒗 硫붿냼�뱶 �샇異쒗븷寃� 	
 		
 		
 		if(result > 0) {
-			request.setAttribute("msg", "asdasdasdasdasdasdasd");
-			mv.setViewName("/test_index.jsp");
-			mv.setRedirect(false);
+			mv.setViewName(request.getContextPath()+"/index.jsp");
+			mv.setRedirect(true);
 		} else throw new Exception("asdasd");
 		return mv;
 		
@@ -84,6 +82,8 @@ public class HostController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		int maxSize = 1024*1024*100; // 100mb
 		String encoding = "UTF-8";
+		HttpSession session = request.getSession();
+		int userNo = (int)session.getAttribute("session_userNo");
 		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
 		String postNum = mr.getParameter("post_no");
 		if(postNum == null) {
@@ -98,13 +98,13 @@ public class HostController implements Controller {
 		String meetingDate = mr.getParameter("meetingDate");
 		int totalPeople = Integer.parseInt(mr.getParameter("totalPeople"));
 		
-		PostDTO post = new PostDTO(postNo, 0, null, postDescr, postContent, 0, locationCode, locationDetail, 
+		PostDTO post = new PostDTO(postNo, userNo, null, postDescr, postContent, 0, locationCode, locationDetail, 
 				deadline, meetingDate, totalPeople, 1, null, null);
 		int result = HostService.update(post);
 		
 		if(result > 0) {
 			request.setAttribute("msg", "asdasdasdasdasdasdasd");
-			mv.setViewName("/test_index.jsp");
+			mv.setViewName("../index.jsp");
 			mv.setRedirect(false);
 		} else throw new Exception("asdasd");
 		return mv;
@@ -117,7 +117,7 @@ public class HostController implements Controller {
 		int result = HostService.delete(postNum);
 		if(result > 0) {
 			request.setAttribute("msg", "�궘�젣 �꽦怨�");
-			mv.setViewName("/test_index.jsp");
+			mv.setViewName("../index.jsp");
 			mv.setRedirect(false);
 		} else throw new Exception("�궘�젣 �떎�뙣");		
 		return mv;

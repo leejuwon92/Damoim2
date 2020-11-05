@@ -238,7 +238,13 @@ public class ClientDAOImpl implements ClientDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from join_table jo join post po on jo.post_no = po.post_no where jo.user_no=?";
+		String sql = "select po.post_no, po.user_no, post_title, post_descr, post_content, " + 
+				"po.category_no, po.location_no, po.location_detail, regdate, deadline, meeting_date, " + 
+				"total_people, current_people, thumbnailfile, bannerfile " + 
+				"from join_table jo " + 
+				"join post po " + 
+				"on jo.post_no = po.post_no " + 
+				"where jo.user_no = ?";
 		List<PostDTO> list = new ArrayList<PostDTO>();
 		try {
 			con = DbUtil.getConnection();
@@ -256,10 +262,10 @@ public class ClientDAOImpl implements ClientDAO {
 				String locationDetail = rs.getString(8);
 				String deadline = rs.getString(9);
 				String meetingDate = rs.getString(10);
-				int totalPeople = rs.getInt(11);
-				int currentPeople = rs.getInt(12);
-				String thumbnailFile = rs.getString(13);
-				String bannerFile = rs.getString(14);
+				int totalPeople = rs.getInt(12);
+				int currentPeople = rs.getInt(13);
+				String thumbnailFile = rs.getString(14);
+				String bannerFile = rs.getString(15);
 				list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
 						locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 			}

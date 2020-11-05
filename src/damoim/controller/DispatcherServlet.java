@@ -25,8 +25,6 @@ public class DispatcherServlet extends HttpServlet {
 		System.out.println("init called");
 		map = (Map<String, Controller>)super.getServletContext().getAttribute("map");
 		clzMap = (Map<String, Class<?>>)getServletContext().getAttribute("clzMap");
-		System.out.println(map);
-		System.out.println(clzMap);
 	}
 	
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
