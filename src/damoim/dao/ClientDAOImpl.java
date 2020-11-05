@@ -231,7 +231,49 @@ public class ClientDAOImpl implements ClientDAO {
 		return result;
 	}
 	
-	
+
+	@Override
+	public List<PostDTO> hostSelectMoimByMe(int userNo) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select po.post_no, po.user_no, post_title, post_descr, post_content, " + 
+		            "po.category_no, po.location_no, po.location_detail, regdate, deadline, meeting_date, " + 
+		            "total_people, current_people, thumbnailfile, bannerfile " + 
+		            "from join_table jo " + 
+		            "join post po " + 
+		            "on jo.post_no = po.post_no " + 
+		            "where po.user_no = ?";
+		      List<PostDTO> list = new ArrayList<PostDTO>();
+		      try {
+		         con = DbUtil.getConnection();
+		         ps = con.prepareStatement(sql);
+		         ps.setInt(1, userNo);
+		         rs = ps.executeQuery();
+		         while (rs.next()) {
+		            int postNo = rs.getInt(1);
+		            int dbuserNo = rs.getInt(2);
+		            String postTitle = rs.getString(3);
+		            String postDescr = rs.getString(4);
+		            String postContent = rs.getString(5);
+		            int categoryCode = rs.getInt(6);
+		            int locationCode = rs.getInt(7);
+		            String locationDetail = rs.getString(8);
+		            String deadline = rs.getString(9);
+		            String meetingDate = rs.getString(10);
+		            int totalPeople = rs.getInt(12);
+		            int currentPeople = rs.getInt(13);
+		            String thumbnailFile = rs.getString(14);
+		            String bannerFile = rs.getString(15);
+		            list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
+		                  locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+		         }
+		      } finally {
+		         DbUtil.dbClose(rs, ps, con);
+		      }
+		      return list;
+		   }
+
 
 	@Override
 	public List<PostDTO> clientSelectMoimByMe(int userNo) throws SQLException {

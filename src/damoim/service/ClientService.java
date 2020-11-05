@@ -50,6 +50,11 @@ public class ClientService {
 		return list;
 	}
 	
+	public static List<PostDTO> hostSelectMoimByMe(int userNo)throws SQLException{
+		List <PostDTO> list = dao.hostSelectMoimByMe(userNo);
+		return list;
+	}
+	
 	public static int clientCancleMoim(int postNo,int userNo) throws SQLException{
 		int result = dao.clientCancleMoim(postNo, userNo);
 		return result;
