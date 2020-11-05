@@ -16,43 +16,31 @@
       <!-- Page Heading -->
       <h1 class="my-4">개설한 모임</h1>
       <hr>
-      
-       <div class="row">
-          <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">개설한 모임명</a>
-                </h4>
-                <h5>모임내용입니다</h5>
-              </div>
-            </div>
-          </div>
-
-           <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">개설한 모임명</a>
-                </h4>
-                <h5>모임내용입니다</h5>
-              </div>
-            </div>
-          </div>
-      
-        <div class="col-lg-4 col-md-6 mb-4">
-            <div class="card h-100">
-              <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="#">개설한 모임명</a>
-                </h4>
-                <h5>모임내용입니다</h5>
-              </div>
-            </div>
-          </div>
+       <c:choose>
+        		<c:when test="${empty requestScope.hostList} ">
+        			 개설하신 모임이 없습니다
+        		</c:when>
+        		<c:otherwise>
+        			<c:set var="endLoop" value="false"/>
+        			<c:forEach items="${requestScope.hostList}" var="hostpost" varStatus="i">
+        				<c:if test="${not endLoop }">
+        				<div class="col-lg-4 col-md-6 mb-4">
+        					<div class="card h-100">
+								<a href="#"><img class="card-img-top" src="<%=request.getRealPath("/") %>img/${hostpost.thumbnailFile}" alt=""></a>
+									<div class="card-body">
+										<h4 class="card-title"><a href="#">${hostpost.postTitle }</a></h4>
+										<h5>${hostpost.postDescr }</h5>     
+									</div>
+							</div>
+						</div>
+        				<c:if test="${i.count==3 }">
+        					<c:set var="endLoop" value = "true"/>
+						
+						</c:if>
+						</c:if>
+					</c:forEach>
+        		</c:otherwise>
+        	</c:choose>
           
       <hr>
    
@@ -65,7 +53,9 @@
         			 참가하신 모임이 없습니다
         		</c:when>
         		<c:otherwise>
-        			<c:forEach items="${requestScope.postList}" var="post">
+        			<c:set var="endLoop" value="false"/>
+        			<c:forEach items="${requestScope.postList}" var="post" varStatus="i">
+        			<c:if test="${not endLoop }">
 						<div class="col-lg-4 col-md-6 mb-4">
 							<div class="card h-100">
 								<a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/img/${post.thumbnailFile}" alt=""></a>
@@ -75,6 +65,11 @@
 									</div>
 							</div>
 						</div>
+						<c:if test="${i.count==3 }">
+        					<c:set var="endLoop" value = "true"/>
+						
+						</c:if>
+						</c:if>
 					</c:forEach>
         		</c:otherwise>
         	</c:choose>

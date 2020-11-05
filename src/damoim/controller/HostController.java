@@ -12,7 +12,9 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import damoim.dto.ClientDTO;
+import damoim.dto.JoinDTO;
 import damoim.dto.PostDTO;
+import damoim.service.ClientService;
 import damoim.service.HostService;
 
 public class HostController implements Controller {
@@ -66,8 +68,8 @@ public class HostController implements Controller {
 		PostDTO post = new PostDTO(0, userNo, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, 
 				deadline, meetingDate, totalPeople, 1, thumbnailName, bannerName);
 		int result = HostService.insert(post);
-		// ClientService�쓽 currentPeople 利앷��떆�궎�뒗 硫붿냼�뱶 �샇異쒗븷寃� 	
-		
+		JoinDTO dto = new JoinDTO(0, 0, userNo,categoryCode);
+		ClientService.clientJoinMoim(dto);
 		
 		if(result > 0) {
 			mv.setViewName(request.getContextPath()+"/index.jsp");
