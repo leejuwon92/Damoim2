@@ -1,0 +1,165 @@
+/* Header */
+a {
+	text-decoration: none;
+}
+/* line 3, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-area .header-top {
+	position: relative;
+	padding: 20px 170px;
+	background-color: #000;
+	height: 70px;
+}
+
+/* line 21, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-area .header-bottom {
+	padding: 0px 170px;
+}
+
+.header-area .header-top .header-top-right {
+	position: absolute;
+	right: 10px;
+}
+
+/* line 59, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-area .header-top .header-top-right ul li {
+	display: inline-block;
+}
+
+/* line 61, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-area .header-top .header-top-right ul li a {
+	padding-left: 26px;
+	padding-right: 10px;
+	font-size: 16px;
+	text-transform: capitalize;
+	color: #fff;
+}
+
+.header-bottom {
+	position: relative;
+}
+
+.header-bottom .main-menu {
+	position: absolute;
+	right: 10px;
+}
+/* line 79, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-bottom .main-menu ul li {
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+}
+
+/* line 84, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_headerMenu.scss */
+.header-bottom .main-menu ul li a {
+	font-size: 16px;
+	color: white;
+	display: inline-block;
+	text-transform: capitalize;
+	padding: 39px 18px;
+	display: block;
+	font-size: 16px;
+	-webkit-transition: all 0.3s ease-out 0s;
+	-moz-transition: all 0.3s ease-out 0s;
+	-ms-transition: all 0.3s ease-out 0s;
+	-o-transition: all 0.3s ease-out 0s;
+	transition: all 0.3s ease-out 0s;
+}
+
+/* line 281, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+.header-btn {
+	padding: 25px 28px !important;
+}
+
+/* line 230, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_common.scss */
+.header-bottom .btn {
+	background: #2577fd;
+	-moz-user-select: none;
+	text-transform: capitalize;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 18px;
+	font-weight: 400;
+	letter-spacing: 1px;
+	line-height: 0;
+	margin-bottom: 0;
+	padding: 27px 44px;
+	border-radius: 10px;
+	margin: 10px;
+	cursor: pointer;
+	transition: color 0.4s linear;
+	position: relative;
+	z-index: 1;
+	border: 0;
+	overflow: hidden;
+	margin: 0;
+}
+/* Footer */
+.footer-area{
+	
+}
+
+.footer-area .footer-padding {
+	padding-top: 150px;
+	padding-bottom: 120px;
+	
+}
+
+.footer-area .footer-logo {
+  margin-bottom: 40px;
+  
+}
+
+
+.footer-area .footer-tittle h4 {
+  color: #000;
+  font-size: 20px;
+  margin-bottom: 29px;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-area .footer-tittle ul li {
+  color: #012f5f;
+  margin-bottom: 15px;
+}
+
+.footer-area .footer-tittle ul li a {
+  color: #868c98;
+  font-weight: 300;
+}
+
+.footer-area .footer-tittle ul li a:hover {
+  color: #2577fd;
+  padding-left: 5px;
+}
+
+.footer-area .footer-pera p {
+  color: #868c98;
+  font-size: 16px;
+  margin-bottom: 50px;
+  line-height: 1.8;
+}
+
+.footer-copy-right {
+  padding-top: 50px;
+}
+/* line 90, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_footer.scss */
+.footer-copy-right p {
+  color: #888888;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 2;
+  margin-bottom: 20px;
+}
+
+/* line 96, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_footer.scss */
+.footer-copy-right p i {
+  color: #2577fd;
+}
+
+/* line 99, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_footer.scss */
+.footer-copy-right p a {
+  color: #2577fd;
+}
