@@ -145,8 +145,10 @@ public class ClientController implements Controller {
 		System.out.println("clientCancleMoim call..");
 		ModelAndView mv = new ModelAndView();
 		String postNo = request.getParameter("post_no");
+		System.out.println(postNo);
 		HttpSession session = request.getSession();
 		int userNo = (int)session.getAttribute("session_userNo");
+		System.out.println(userNo);
 		int result = ClientService.clientCancleMoim(Integer.parseInt(postNo),userNo);
 		if(result >0) {
 			mv.setRedirect(true);

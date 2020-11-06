@@ -20,16 +20,29 @@ public class ClientDAOImpl implements ClientDAO {
 	public int clientJoinMoim(JoinDTO joinDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "insert into join_table(join_no,post_no,user_no,category_no) values (join_no.nextval,?,?,?)";
+		String sql = null;
+		
 		int result = 0;
 		try {
 			if(clientJoinCheck(joinDTO.getUserNo(),joinDTO.getPostNo())==false) {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, joinDTO.getPostNo());
-			ps.setInt(2, joinDTO.getUserNo());
-			ps.setInt(3, joinDTO.getCategoryNo());
+			if(joinDTO.getPostNo() != 0) {
+				sql = "insert into join_table(join_no,post_no,user_no,category_no) values (join_no.nextval,?,?,?)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, joinDTO.getPostNo());
+				ps.setInt(2, joinDTO.getUserNo());
+				ps.setInt(3, joinDTO.getCategoryNo());
+			} else {
+				sql = "insert into join_table values(join_no.nextval, "
+						+ "(select post_no from (select post_no from post "
+						+ "where user_no = ? order by post_no desc) where ROWNUM=1 ), ?, ?)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, joinDTO.getUserNo());
+				ps.setInt(2, joinDTO.getUserNo());
+				ps.setInt(3, joinDTO.getCategoryNo());
+			}
+			
 			result = ps.executeUpdate();
 			int result1 = plusPostCurrentPeople(con, joinDTO.getPostNo());
 			if (result1 == 0) {
@@ -260,7 +273,7 @@ public class ClientDAOImpl implements ClientDAO {
 		            String thumbnailFile = rs.getString(14);
 		            String bannerFile = rs.getString(15);
 		            list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-		                  locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+		                  locationDetail, null, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 		         }
 		      } finally {
 		         DbUtil.dbClose(rs, ps, con);
@@ -280,12 +293,14 @@ public class ClientDAOImpl implements ClientDAO {
 				"from join_table jo " + 
 				"join post po " + 
 				"on jo.post_no = po.post_no " + 
-				"where jo.user_no = ?";
+				"where jo.user_no = ? and not po.user_no= ?";
 		List<PostDTO> list = new ArrayList<PostDTO>();
 		try {
 			con = DbUtil.getConnection();
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, userNo);
+			ps.setInt(1, userNo);			
+			ps.setInt(2, userNo);
+
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int postNo = rs.getInt(1);
@@ -303,7 +318,7 @@ public class ClientDAOImpl implements ClientDAO {
 				String thumbnailFile = rs.getString(14);
 				String bannerFile = rs.getString(15);
 				list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-						locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+						locationDetail, null, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);

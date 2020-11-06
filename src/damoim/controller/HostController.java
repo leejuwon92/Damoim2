@@ -65,8 +65,7 @@ public class HostController implements Controller {
 			bannerName = banner.getName();
 		}
 		String thumbnailName = thumbnail.getName();
-		System.out.println(deadline);
-		PostDTO post = new PostDTO(0, 0, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, null, deadline, meetingDate, totalPeople, 0, thumbnailFile, bannerFile); 
+		PostDTO post = new PostDTO(0, userNo, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, null, deadline, meetingDate, totalPeople, 0, thumbnailName, bannerFile); 
 				
 		int result = HostService.insert(post);
 		
