@@ -1,10 +1,12 @@
 package damoim.service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import damoim.dao.UserDAO;
 import damoim.dao.UserDAOImpl;
 import damoim.dto.ClientDTO;
+import damoim.dto.PostDTO;
 
 public class UserService {
 
@@ -77,5 +79,40 @@ public class UserService {
 		String userPwd = userDAO.userSelectPwd(clientDTO);
 		return userPwd;
 	}
-	
+
+
+
+
+
+
+
+
+
+	public static List<PostDTO> userSelectBoardList(int categoryNum, int locationCode, int date) throws SQLException {
+		List<PostDTO> list = userDAO.userSelectBoardList(categoryNum, locationCode, date);
+		return list;
+	}
+
+
+
+
+
+
+
+
+
+	public static PostDTO userSelectBoard(int postNo) throws SQLException {
+			PostDTO postDTO = userDAO.userSelectBoard(postNo);
+			
+			return postDTO;
+	}
+
+
+
+
+
+
+
+
+
 }

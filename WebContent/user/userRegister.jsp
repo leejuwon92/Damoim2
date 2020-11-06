@@ -11,13 +11,17 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var idstate = 0;
+		var namestate = 0;
 		var pwdstate = 0;
 		var emailstate = 0;
-		
-		$("#idCheckBtn").click(function() {
-			if( $("#user_id").val()=="" ){
-				$("idCheckSpan").html("아이디를 입력하세요").css({"font-size" : "15px", "color" : "red"});
-				$("#idCheckSpan").focus();
+		var phonestate = 0;
+		var login_x = "<img src='${pageContext.request.contextPath}/img/user/login/login_x.png' width='25px' height='25px'>"
+		var login_check = "<img src='${pageContext.request.contextPath}/img/user/login/login_check.png' width='25px' height='25px'>"
+		$("#user_id").blur(function(){
+			
+			if( $("#user_id").val()==""){
+				$("#idCheckSpan").html(login_x);
+				idstate = 0;
 				return false;
 			}
 			
@@ -31,10 +35,10 @@
 				success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
 				
 					if(result == 0){//0이면 같을때
-						$("#idCheckSpan").html("아이디가 중복되어 사용하실 수 없습니다.").css({"font-size" : "15px", "color" : "red"});
+						$("#idCheckSpan").html(login_x);
 						idstate = 0;
 					}else{
-						$("#idCheckSpan").html("사용가능한 아이디입니다.").css({"font-size" : "15px", "color" : "blue"});
+						$("#idCheckSpan").html(login_check);
 						idstate = 1;
 					}
 						
@@ -42,23 +46,44 @@
 				error : function(err) {//요청결과가 실패했을 때 호출될 callback함수
 					console.log(err + "예외발생..");
 				}//error
-			});//ajax
-		});//idCheckBtnCheck_click
+			});//ajax 
+			
+		});//user_id_blur
 		
-		$("#user_pwdcheck").keyup(function(){
+		$("#user_name").blur(function(){
+			if( $("#user_name").val()==""){
+				$("#nameCheckSpan").html(login_x);
+				namestate = 0;
+				return false;
+			}
+			
+			$("#nameCheckSpan").html(login_check);
+			namestate = 1;
+		})//user_name_blur
+		
+		
+		$("#user_pwdcheck").blur(function(){
+			if( $("#user_pwd").val()==""){
+				$("#pwdCheckSpan").html(login_x);
+				pwdstate = 0;
+				return false;
+			}
+			
+			
 			if($("#user_pwd").val() == $(this).val()){
-				$("#pwdCheckSpan").html("비밀번호가 일치합니다.").css({"font-size" : "15px", "color" : "blue"});
+				$("#pwdCheckSpan").html(login_check);
 				pwdstate = 1;
 			}else{
-				$("#pwdCheckSpan").html("비밀번호가 일치하지 않습니다.").css({"font-size" : "15px", "color" : "red"});
+				$("#pwdCheckSpan").html(login_x);
 				pwdstate = 0;
 			}
 		});//user_pwdcheck_keyup
 		
-		$("#emailCheckBtn").click(function() {
+		
+		$("#user_email").blur(function() {
 			if( $("#user_email").val()=="" ){
-				$("emailCheckSpan").html("이메일을 입력하세요").css({"font-size" : "15px", "color" : "red"});
-				$("#emailCheckSpan").focus();
+				$("#emailCheckSpan").html(login_x);
+				emailstate = 0;
 				return false;
 			}
 			
@@ -71,10 +96,10 @@
 				},//data 
 				success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
 					if(result == 0){//0이면 같을때
-						$("#emailCheckSpan").html("이메일이 중복되어 사용하실 수 없습니다.").css({"font-size" : "15px", "color" : "red"});
+						$("#emailCheckSpan").html(login_x);
 						emailstate = 0;
 					}else{
-						$("#emailCheckSpan").html("사용가능한 이메일입니다.").css({"font-size" : "15px", "color" : "blue"});
+						$("#emailCheckSpan").html(login_check);
 						emailstate = 1;
 					}
 				},//success
@@ -83,6 +108,20 @@
 				}//error
 			});//ajax
 		});//emailCheckBtnCheck_click
+
+		$("#user_phone").blur(function(){
+			if( $("#user_phone").val()==""){
+				$("#phoneCheckSpan").html(login_x);
+				phonestate = 0;
+				return false;
+			}
+			
+			$("#phoneCheckSpan").html(login_check);
+			phonestate = 1;
+		})//user_name_blur
+		
+		
+		
 		
 		$(document).on("click","#userRegisterBtn",function(){
 			
@@ -92,7 +131,7 @@
 				return false;
 			}
 			
-			if($("#user_name").val() == ""){
+			if(namestate == 0){
 				alert("이름을 입력 해주세요.")
 				$("#user_name").focus();
 				return false;
@@ -110,7 +149,7 @@
 				return false;
 			}
 			
-			if($("#user_phone").val() == ""){
+			if(phonestate == 0){
 				alert("연락처 확인을 해주세요.")
 				$("#user_phone").focus();
 				return false;
@@ -121,38 +160,56 @@
 		
 		
 			
-			
-		
 	}); //ready
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
-	<form id="registerForm" method="post" action="${pageContext.request.contextPath}/front?key=user&mn=userRegister">
-	<h1>회원가입</h1>
-	<br>
-	<h2>
-		아이디:&nbsp;<input type="text" name="userId" id="user_id" size="20" /> 
-		<input type="button" value="아이디중복체크" id="idCheckBtn" />
-		<span id="idCheckSpan"></span>
-		<br> 
-		이름:&nbsp;<input type="text" name="userName" id="user_name" size="20" /><br>
-		비밀번호:&nbsp;<input type="password" name="userPwd" id="user_pwd" size="20" /><br>
-		비밀번호확인:&nbsp;<input type="password" name="pwdcheck" id="user_pwdcheck" />
-		<span id="pwdCheckSpan"></span>
-		<br>
-		이메일:&nbsp;<input type="text" name="userEmail" id="user_email" size="20" />
-		<input type="button" value="이메일 중복 체크" id="emailCheckBtn"/> 
-		<span id="emailCheckSpan"></span>
-		<br> 
-		연락처:&nbsp;<input type="text" name="phoneNo" id="user_phone" size="20" /><br> <br>
-		<a href="#" id="agreement">&lt;약관동의&gt;</a> <br> 
-		<input type="button" value="회원가입" id="userRegisterBtn"/>
-		<input type="button" value="취소" onclick="location.href='index.jsp'" />&nbsp;&nbsp;&nbsp;
-	</h2>
-	</form>
+	
+	
+	<!-- 회원가입 -->
+	<section class="registration_section">
+		<div class="container">
+			<h2>DaMoim Registration </h2>
+  			<p>다모임을 이용해주셔서 감사합니다. 회원가입을 원하시면 아래의 항목을 모두 입력해주세요.</p>
+  			<form id="registerForm" method="post" action="${pageContext.request.contextPath}/front?key=user&mn=userRegister">
+  				<div class="form-group">
+  					<label for="user_id">ID:<span id="idCheckSpan"></span></label>
+  					<input type="text" class="form-control" name="userId" id="user_id"/>
+  				</div>
+  				
+  				<div class="form-group">
+  					<label for="user_name">Name:<span id="nameCheckSpan"></span></label>
+  					<input type="text" class="form-control" name="userName" id="user_name"/>
+  				</div>
+  				
+  				<div class="form-group">
+  					<label for="user_pwd">Password:</label>
+  					<input type="password" class="form-control" name="userPwd" id="user_pwd">
+  				</div>
+  				
+  				<div class="form-group">
+  					<label for="user_pwdcheck">Password Check:<span id="pwdCheckSpan"></span></label>
+  					<input type="password" class="form-control" name="pwdcheck" id="user_pwdcheck" />
+  				</div>
+  				
+  				<div class="form-group">
+  					<label for="user_email">E-mail:<span id="emailCheckSpan"></span></label>
+  					<input type="text" class="form-control" name="userEmail" id="user_email"/>
+  				</div>
 
+				<div class="form-group">
+  					<label for="user_phone">Phone:<span id="phoneCheckSpan"></span></label>
+  					<input type="text" class="form-control" name="phoneNo" id="user_phone"/>
+  				</div>  				
+  				
+  				<input type="button" class="btn btn-primary" value="Submit" id="userRegisterBtn" />
+  				<input type="button" class="btn btn-primary" value="Cancle" onclick="location.href='index.jsp'" />
+  			</form>
+		</div><!-- container -->
+	</section><!-- registration_section -->
+	
 	<hr>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>

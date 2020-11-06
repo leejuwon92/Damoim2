@@ -64,10 +64,10 @@ public class HostController implements Controller {
 		}
 		String thumbnailName = thumbnail.getName();
 		System.out.println(deadline);
-		PostDTO post = new PostDTO(0, 0, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, 
-				deadline, meetingDate, totalPeople, 1, thumbnailName, bannerName);
+		PostDTO post = new PostDTO(0, 0, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, null, deadline, meetingDate, totalPeople, 0, thumbnailFile, bannerFile); 
+				
 		int result = HostService.insert(post);
-		// ClientService�쓽 currentPeople 利앷��떆�궎�뒗 硫붿냼�뱶 �샇異쒗븷寃� 	
+		// ClientService占쎌벥 currentPeople 筌앹빓占쏙옙�뻻占쎄텕占쎈뮉 筌롫뗄�꺖占쎈굡 占쎌깈�빊�뮉釉룟칰占� 	
 		
 		
 		if(result > 0) {
@@ -116,10 +116,10 @@ public class HostController implements Controller {
 		int postNum = Integer.parseInt(request.getParameter("post_no"));
 		int result = HostService.delete(postNum);
 		if(result > 0) {
-			request.setAttribute("msg", "�궘�젣 �꽦怨�");
+			request.setAttribute("msg", "占쎄텣占쎌젫 占쎄쉐�⑨옙");
 			mv.setViewName("/test_index.jsp");
 			mv.setRedirect(false);
-		} else throw new Exception("�궘�젣 �떎�뙣");		
+		} else throw new Exception("占쎄텣占쎌젫 占쎈뼄占쎈솭");		
 		return mv;
 	}
 

@@ -9,16 +9,19 @@ public class PostDTO {
 	private int categoryCode;
 	private int locationCode;
 	private String locationDetail;
+	private String regDate;
 	private String deadline;
 	private String meetingDate;
 	private int totalPeople;
 	private int currentPeople;
 	private String thumbnailFile;
 	private String bannerFile;
-	
+
+	public PostDTO() {}
+
 	public PostDTO(int postNo, int userNo, String postTitle, String postDescr, String postContent, int categoryCode,
-			int locationCode, String locationDetail, String deadline, String meetingDate, int totalPeople,
-			int currentPeople, String thumbnailFile, String bannerFile) {
+			int locationCode, String locationDetail, String regDate, String deadline, String meetingDate,
+			int totalPeople, int currentPeople, String thumbnailFile, String bannerFile) {
 		this.postNo = postNo;
 		this.userNo = userNo;
 		this.postTitle = postTitle;
@@ -27,12 +30,21 @@ public class PostDTO {
 		this.categoryCode = categoryCode;
 		this.locationCode = locationCode;
 		this.locationDetail = locationDetail;
+		this.regDate = regDate;
 		this.deadline = deadline;
 		this.meetingDate = meetingDate;
 		this.totalPeople = totalPeople;
 		this.currentPeople = currentPeople;
 		this.thumbnailFile = thumbnailFile;
 		this.bannerFile = bannerFile;
+	}
+
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
 	}
 
 	public int getPostNo() {
@@ -147,5 +159,45 @@ public class PostDTO {
 		this.bannerFile = bannerFile;
 	}
 	
-	
+	public String categoryNoTocategoryName(int categoryCode) {
+		String categoryName = null;
+		switch (categoryCode) {
+		case 1:
+			categoryName = "댄스";
+			break;
+		case 2:
+			categoryName = "스포츠";
+			break;
+		case 3:
+			categoryName = "독서";
+			break;
+		case 4:
+			categoryName = "음악";
+			break;
+		case 5:
+			categoryName = "외국어";
+			break;
+		case 6:
+			categoryName = "공예";
+			break;
+		case 7:
+			categoryName = "봉사활동";
+			break;
+		case 8:
+			categoryName = "여행";
+			break;
+		case 9:
+			categoryName = "사진";
+			break;
+		case 10:
+			categoryName = "요리";
+			break;
+		case 11:
+			categoryName = "반려동물";
+			break;
+		}
+		
+		return categoryName;
+	}
+
 }

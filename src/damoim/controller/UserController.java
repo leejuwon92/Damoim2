@@ -1,12 +1,14 @@
 package damoim.controller;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import damoim.dto.ClientDTO;
+import damoim.dto.PostDTO;
 import damoim.service.UserService;
 
 public class UserController implements Controller {
@@ -106,4 +108,34 @@ public class UserController implements Controller {
 		return mv;
 	}
 	
+	public ModelAndView userSelectBoardList(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException {
+		
+		ModelAndView mv = new ModelAndView();
+		String url = "/user/postList.jsp";
+		int categoryNum = 0;
+		int locationCode = 0;
+		int date = 0;
+		List<PostDTO> postList = UserService.userSelectBoardList(categoryNum, locationCode, date);
+		
+		request.setAttribute("postList", postList);
+		mv.setViewName(url);
+		return mv;
+	}
+	
+	
+	public ModelAndView userSelectBoard(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException {
+		
+		ModelAndView mv = new ModelAndView();
+		String url = "/user/postDetail.jsp";
+		int postNo = Integer.parseInt(request.getParameter("postNo"));
+		PostDTO postDTO = UserService.userSelectBoard(postNo);
+		
+		String categoryName = postDTO.categoryNoTocategoryName(postDTO.getCategoryCode()); 
+		request.setAttribute("postDTO", postDTO);
+		request.setAttribute("categoryName", categoryName);
+		mv.setViewName(url);
+		return mv;
+	}
 }

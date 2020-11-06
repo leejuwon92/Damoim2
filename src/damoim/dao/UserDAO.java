@@ -42,14 +42,14 @@ public interface UserDAO {
 	 * @param 카테고리, 지역, 날짜
 	 * @return 전체 모임 정보 리턴
 	 */
-	List<PostDTO> userSelectBoardList(int categoryNum, int locationCode, String date);
+	List<PostDTO> userSelectBoardList(int categoryNum, int locationCode, int date) throws SQLException;
 	
 	/**
 	 * 모임 상세보기 기능 
 	 * @param boardNum
 	 * @return 모임 상세 정보 리턴
 	 */
-	PostDTO userSelectBoard(int boardNum);
+	PostDTO userSelectBoard(int postNo) throws SQLException;
 	
 	/**
 	 * 아이디 중복 체크

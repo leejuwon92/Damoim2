@@ -63,8 +63,8 @@ div.button input {
 
 
 	<div class="button" style="text-align: center">
-		<input type="button" value="홈가기" onclick="mainOpen()" /> 
-		<input type="button" value="로그인하기" onclick="loginOpen()" />
+		<input type="button" class="btn btn-primary" value="홈가기" onclick="mainOpen()" /> 
+		<input type="button" class="btn btn-primary" value="로그인하기" onclick="loginOpen()" />
 	</div>
 
 	<hr>
