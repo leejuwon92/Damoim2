@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import damoim.dto.PostDTO;
+import damoim.dto.ReplyDTO;
 import damoim.dto.ClientDTO;
 
 public interface UserDAO {
@@ -64,4 +65,16 @@ public interface UserDAO {
 	 * @return true면 이메일 존재함(이메일 사용불가), false면 존재하지 않음(이메일 사용가능)
 	 */
 	boolean userEmailCheck(String email) throws SQLException;
+
+	/**
+	 * userNo를 이용해서 client의 모든 정보를 불러오는 기능
+	 * @param userNo
+	 */
+	ClientDTO userSelectClient(int userNo) throws SQLException;
+	
+	/**
+	 * postNo를 이용해서 QNA Table의 모든 정보를 불러오는 기능
+	 * @param userNo
+	 */
+	List<ReplyDTO> userSelectReplyList(int postNo) throws SQLException ;
 }

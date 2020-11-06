@@ -260,7 +260,7 @@ public class ClientDAOImpl implements ClientDAO {
 		            String thumbnailFile = rs.getString(14);
 		            String bannerFile = rs.getString(15);
 		            list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-		                  locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+		                  locationDetail, null, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 		         }
 		      } finally {
 		         DbUtil.dbClose(rs, ps, con);
@@ -303,7 +303,7 @@ public class ClientDAOImpl implements ClientDAO {
 				String thumbnailFile = rs.getString(14);
 				String bannerFile = rs.getString(15);
 				list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-						locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+						locationDetail, null, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);

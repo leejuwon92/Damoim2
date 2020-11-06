@@ -7,6 +7,7 @@ import damoim.dao.UserDAO;
 import damoim.dao.UserDAOImpl;
 import damoim.dto.ClientDTO;
 import damoim.dto.PostDTO;
+import damoim.dto.ReplyDTO;
 
 public class UserService {
 
@@ -105,6 +106,28 @@ public class UserService {
 			PostDTO postDTO = userDAO.userSelectBoard(postNo);
 			
 			return postDTO;
+	}
+
+	public static ClientDTO userSelectClient(int userNo) throws SQLException {
+		
+		ClientDTO clientDTO = userDAO.userSelectClient(userNo);
+		
+		return clientDTO;
+	}
+
+
+
+
+
+
+
+
+
+	public static List<ReplyDTO> userSelectReplyList(int postNo) throws SQLException{
+		
+		List<ReplyDTO> list = userDAO.userSelectReplyList(postNo);
+		
+		return list;
 	}
 
 
