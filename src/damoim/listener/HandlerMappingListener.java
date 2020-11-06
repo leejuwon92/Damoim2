@@ -34,7 +34,7 @@ public class HandlerMappingListener implements ServletContextListener {
 		ResourceBundle rb = ResourceBundle.getBundle(fileName);
 		for (String key : rb.keySet()) {
 			String value = rb.getString(key);
-			System.out.println(key + " = " + value);
+			//System.out.println(key + " = " + value);
 
 			// String 형태인 value를 객체로 만든다.
 			try {

@@ -7,7 +7,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/index/indexstyle.css">
 <link rel="stylesheet" href="css/index/bootstrap.min.css">
-
+<script type="text/javascript">
+	console.log(sessionStorage.getItem("session_userNo"));
+</script>
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>

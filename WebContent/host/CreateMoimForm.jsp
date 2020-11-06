@@ -46,14 +46,12 @@ $(document).ready(function(){
 </head>
 <body>
 <%
-	String userNo = (String)session.getAttribute("userNo");
-	String userId = (String)session.getAttribute("userId");
-	if(userNo == null || userId == null) {
+	if(session.getAttribute("session_userNo") == null || session.getAttribute("session_userNo") == null) {
 %>		
 		
 <script>
-alert("로그인 해주세요")
-
+	alert("로그인 해주세요")
+	location.href="${pageContext.request.contextPath}/index.jsp";
 </script>		
 		
 <%

@@ -17,10 +17,24 @@
 		<div class="header-area">
 			<div class="header-top">
 				<div class="header-top-right">
+				<%
+					if(session.getAttribute("session_userNo") == null || 
+							session.getAttribute("session_userId") == null){
+					
+				%>
 					<ul>
 						<li><a href="${pageContext.request.contextPath}/user/userRegister.jsp">회원가입</a></li>
 						<li><a href="${pageContext.request.contextPath}/user/userLogin.jsp">로그인</a></li>
 					</ul>
+					
+				<%} else { %>
+					<ul>
+						<li><a href="${pageContext.request.contextPath}/myPage">마이 페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/Logout.jsp">로그아웃</a></li>
+					</ul>
+				
+				
+				<%} %>
 				</div>
 				<!-- header-top-right -->
 			</div><!--header-top -->
