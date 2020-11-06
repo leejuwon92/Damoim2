@@ -7,8 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.internal.compiler.ast.Clinit;
+
 import damoim.dto.ClientDTO;
 import damoim.dto.PostDTO;
+import damoim.dto.ReplyDTO;
 import damoim.util.DbUtil;
 
 public class UserDAOImpl implements UserDAO {
@@ -330,5 +333,81 @@ public class UserDAOImpl implements UserDAO {
 
 		return result;
 	}
+	
+	/**
+	 * userNo를 이용해서 client의 모든 정보를 불러오는 기능
+	 * @param userNo
+	 */
+	@Override
+	public ClientDTO userSelectClient(int userNo) throws SQLException {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ClientDTO clientDTO = null;
+		String sql = "select * from user_table where user_no = ?";
+		
+		try {// 로드 연결 실행
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, userNo);
+			rs = ps.executeQuery();
+			if (rs.next()) {// 커서를 아래로 이동하면서 데이터를 조회
+				
+				userNo = rs.getInt(1);
+				String userId = rs.getString(2);
+				String userPwd = rs.getString(3);
+				String userName = rs.getString(4);
+				String userEmail = rs.getString(5);
+				String phoneNo = rs.getString(6);
+				
+				clientDTO = new ClientDTO(userNo, userId, userPwd, userName, userEmail, phoneNo);
+			} // if
+		} finally { // 닫기
+			DbUtil.dbClose(rs, ps, con);
+		} // finally
+
+		return clientDTO;
+	}
+	
+	/**
+	 * postNo를 이용해서 QNA Table의 모든 정보를 불러오는 기능
+	 * @param userNo
+	 */
+	@Override
+	public List<ReplyDTO> userSelectReplyList(int postNo) throws SQLException {
+		
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
+		String sql = "select * from qna where post_no = ? order by regdate";
+		
+		try {// 로드 연결 실행
+			con = DbUtil.getConnection();
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, postNo);
+			rs = ps.executeQuery();
+			while (rs.next()) {// 커서를 아래로 이동하면서 데이터를 조회
+				
+				int questionNo = rs.getInt(1);
+				postNo = rs.getInt(2);
+				String replyContent = rs.getString(3);
+				int answerNo = rs.getInt(4);
+				int userNo = rs.getInt(5);
+				String regdate = rs.getString(6);
+			
+				ReplyDTO replyDTO = new ReplyDTO(questionNo, postNo, replyContent, answerNo, userNo, regdate);
+				list.add(replyDTO);
+			
+			} //while
+		} finally { // 닫기
+			DbUtil.dbClose(rs, ps, con);
+		} // finally
+
+		return list;
+		
+	}
+	
 
 }

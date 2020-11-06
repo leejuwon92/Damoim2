@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import damoim.dto.ClientDTO;
 import damoim.dto.PostDTO;
+import damoim.dto.ReplyDTO;
 import damoim.service.UserService;
 
 public class UserController implements Controller {
@@ -131,9 +132,17 @@ public class UserController implements Controller {
 		String url = "/user/postDetail.jsp";
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		PostDTO postDTO = UserService.userSelectBoard(postNo);
-		
 		String categoryName = postDTO.categoryNoTocategoryName(postDTO.getCategoryCode()); 
+		
+		int userNo = postDTO.getUserNo();
+		ClientDTO clientDTO = UserService.userSelectClient(userNo);
+		List<ReplyDTO> replyDTO = UserService.userSelectReplyList(postNo);
+		
+		
 		request.setAttribute("postDTO", postDTO);
+		request.setAttribute("clientDTO", clientDTO);
+		request.setAttribute("question", replyDTO);
+		request.setAttribute("answer", replyDTO);
 		request.setAttribute("categoryName", categoryName);
 		mv.setViewName(url);
 		return mv;
