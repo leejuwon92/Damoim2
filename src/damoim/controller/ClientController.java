@@ -30,10 +30,13 @@ public class ClientController implements Controller {
 		String postNo = request.getParameter("post_no");
 		int userNo = (int)session.getAttribute("session_userNo");
 		String category = request.getParameter("category_no");
-		JoinDTO dto = new JoinDTO(0, Integer.parseInt(postNo), userNo,Integer.parseInt(category) );
+		if(postNo == null) {
+			postNo = "0";
+		}
+		JoinDTO dto = new JoinDTO(0, Integer.parseInt(postNo), userNo, Integer.parseInt(category) );
 		int result= ClientService.clientJoinMoim(dto);
 		if(result > 0) {
-			mv.setViewName(request.getContextPath()+"/index.jsp");
+			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoardList");
 			mv.setRedirect(true);
 		}else throw new SQLException("모임 신청이 실패하였습니다.");
 		return mv;

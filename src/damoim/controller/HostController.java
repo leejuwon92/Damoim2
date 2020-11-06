@@ -119,12 +119,10 @@ public class HostController implements Controller {
 		int postNum = Integer.parseInt(request.getParameter("post_no"));
 		int result = HostService.delete(postNum);
 		if(result > 0) {
-			request.setAttribute("msg", "占쎄텣占쎌젫 占쎄쉐�⑨옙");
-			mv.setViewName("/test_index.jsp");
-			request.setAttribute("msg", "�궘�젣 �꽦怨�");
-			mv.setViewName("../index.jsp");
-			mv.setRedirect(false);
-		} else throw new Exception("占쎄텣占쎌젫 占쎈뼄占쎈솭");		
+			request.setAttribute("msg", "");
+			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoardList");
+			mv.setRedirect(true);
+		} else throw new Exception("모임을 삭제하는데 실패하였습니다");		
 		return mv;
 	}
 
