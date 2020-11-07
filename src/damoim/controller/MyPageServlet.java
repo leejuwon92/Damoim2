@@ -25,7 +25,14 @@ public class MyPageServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if(request.getSession().getAttribute("session_userNo") == null) {
+			request.setAttribute("msg", "로그인 해주세요");
+			request.getRequestDispatcher("user/need_to_Login.jsp").forward(request, response);
+			return;
+		}
+		
 		int userNo = (int)request.getSession().getAttribute("session_userNo");
+		
 		List<PostDTO> hostList = new ArrayList<PostDTO>();
 		List<PostDTO> postList = new ArrayList<PostDTO>();
 		try {
@@ -34,7 +41,7 @@ public class MyPageServlet extends HttpServlet {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		request.getSession().setAttribute("postList", postList);
 		request.setAttribute("hostList", hostList);
 		request.setAttribute("postList", postList);
 		String url = "/client/MyPage_main.jsp";

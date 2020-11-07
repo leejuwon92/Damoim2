@@ -200,4 +200,36 @@ public class PostDTO {
 		return categoryName;
 	}
 
+	public String locationNoTolocationName(int locationCode) {
+		String locationName = null;
+		switch (locationCode) {
+		case 1:
+			locationName = "서울특별시";
+			break;
+		case 2:
+			locationName = "경기도";
+			break;
+		case 3:
+			locationName = "인천광역시";
+			break;
+		case 4:
+			locationName = "충청도";
+			break;
+		case 5:
+			locationName = "강원도";
+			break;
+		case 6:
+			locationName = "전라도";
+			break;
+		case 7:
+			locationName = "경상도";
+			break;
+		case 8:
+			locationName = "제주도";
+			break;
+		}
+
+		return locationName;
+
+	}
 }

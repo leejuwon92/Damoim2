@@ -6,11 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="../css/client/bootstrap.min.css">
 </head>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
  <div class="container">
 <script></script>
       <!-- Page Heading -->
@@ -24,6 +23,7 @@
         			<c:set var="endLoop" value="false"/>
         			<c:forEach items="${requestScope.hostList}" var="hostpost" varStatus="i">
         				<c:if test="${not endLoop }">
+        				<div class="row">
         				<div class="col-lg-4 col-md-6 mb-4">
         					<div class="card h-100">
 								<a href="#"><img class="card-img-top" src="<%=request.getRealPath("/") %>img/${hostpost.thumbnailFile}" alt=""></a>
@@ -32,6 +32,7 @@
 										<h5>${hostpost.postDescr }</h5>     
 									</div>
 							</div>
+						</div>
 						</div>
         				<c:if test="${i.count==3 }">
         					<c:set var="endLoop" value = "true"/>
@@ -96,7 +97,6 @@
  </div>
  </div>
 </div>
-<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

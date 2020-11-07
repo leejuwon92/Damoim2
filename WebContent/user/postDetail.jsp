@@ -20,7 +20,27 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	$(document).on("click", "[value='모임삭제하기']", function(){
+		var session_userNo = '${session_userNo}';
+		if(session_userNo != null) {
+			var postNo = $(this).attr('id');
+			location.href = "${pageContext.request.contextPath }/front?key=host&mn=hostPostDelete&post_no="+postNo;
+		} else {
+			alert("로그인을 해주세요");
+		}
+	});
 	
+	$(document).on("click", "[value='신청하기']", function(){
+		var session_userNo = '${session_userNo}';
+		if(session_userNo == null){
+			alert("로그인을 해주세요");		
+		} else {
+			alert(1);
+			var postNo = $(this).attr('id');
+			var categoryNo = $(this).attr('name');
+			location.href = "${pageContext.request.contextPath }/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;
+		}
+	});
 	
 });//ready
 </script>
@@ -37,6 +57,7 @@ $(document).ready(function(){
 	</div><!-- container -->
 </section><!-- categoryName_section -->
 
+<hr>
 <!-- 게시글의 정보가 들어갈 장소 -->
 <section class="postInfo_section">
 	<div class="container">
@@ -67,8 +88,17 @@ $(document).ready(function(){
 				<td>${postDTO.regDate} ~ ${postDTO.deadline}</td>
 			</tr>
 			<tr>
+			<c:choose>
+			<c:when test="${postDTO.userNo eq session_userNo }">
 				<td colspan="2">
-				<input type="button" class="btn btn-primary" value="신청하기" style="width: 100%" ></td>
+				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" value="모임삭제하기" style="width: 100%" ></td>
+			</c:when>
+			<c:otherwise>
+				<td colspan="2">
+				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" name="${postDTO.categoryCode }" value="신청하기" style="width: 100%" ></td>
+			</c:otherwise>
+			</c:choose>
+				
 			</tr>
 		</table>
 	</div><!-- container -->

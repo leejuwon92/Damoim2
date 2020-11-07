@@ -55,7 +55,7 @@ public class UserController implements Controller {
 			
 			url = request.getContextPath() + "/index.jsp";
 		}else {
-			url = request.getContextPath() + "/user/UserLogin.jsp";
+			url = request.getContextPath() + "/user/failUserSelect.jsp";
 		}
 		
 		ModelAndView mv = new ModelAndView(url, true);
