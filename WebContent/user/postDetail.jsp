@@ -33,10 +33,9 @@ $(document).ready(function(){
 <section class="categoryName_section">
 	<div class="container">
 		<h4>취미 | ${categoryName}</h4>	
+		<hr>
 	</div><!-- container -->
 </section><!-- categoryName_section -->
-
-<hr>
 
 <!-- 게시글의 정보가 들어갈 장소 -->
 <section class="postInfo_section">
