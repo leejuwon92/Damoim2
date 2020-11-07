@@ -39,7 +39,7 @@ public class ClientController implements Controller {
 		JoinDTO dto = new JoinDTO(0, Integer.parseInt(postNo), userNo, Integer.parseInt(category) );
 		int result= ClientService.clientJoinMoim(dto);
 		if(result > 0) {
-			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoardList");
+			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoard&postNo="+postNo);
 			mv.setRedirect(true);
 		} else
 			throw new SQLException("모임 신청이 실패하였습니다.");
@@ -163,15 +163,12 @@ public class ClientController implements Controller {
 		System.out.println("clientCancleMoim call..");
 		ModelAndView mv = new ModelAndView();
 		String postNo = request.getParameter("post_no");
-		System.out.println(postNo);
 		HttpSession session = request.getSession();
-
 		int userNo = (int)session.getAttribute("session_userNo");
-		System.out.println(userNo);
 		int result = ClientService.clientCancleMoim(Integer.parseInt(postNo),userNo);
 		if(result >0) {
 			mv.setRedirect(true);
-			mv.setViewName(request.getContextPath() + "/index.jsp");
+			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoard&postNo="+postNo);
 		} else
 			throw new SQLException("모임 신청 취소가 실패하였습니다.");
 		return mv;

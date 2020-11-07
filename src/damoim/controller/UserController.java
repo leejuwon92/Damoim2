@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import damoim.dto.ClientDTO;
 import damoim.dto.PostDTO;
 import damoim.dto.ReplyDTO;
+import damoim.service.ClientService;
 import damoim.service.UserService;
 
 public class UserController implements Controller {
@@ -129,16 +130,21 @@ public class UserController implements Controller {
 			throws SQLException {
 		
 		ModelAndView mv = new ModelAndView();
+		int sessionUserNo = 0;
 		String url = "/user/postDetail.jsp";
 		int postNo = Integer.parseInt(request.getParameter("postNo"));
 		PostDTO postDTO = UserService.userSelectBoard(postNo);
 		String categoryName = postDTO.categoryNoTocategoryName(postDTO.getCategoryCode()); 
-		
 		int userNo = postDTO.getUserNo();
+		HttpSession session = request.getSession();
+		if(session.getAttribute("session_userNo") != null) {
+			sessionUserNo = (int)session.getAttribute("session_userNo");
+		}
 		ClientDTO clientDTO = UserService.userSelectClient(userNo);
+		boolean checker = ClientService.clientJoinCheck(sessionUserNo, postNo);
 		List<ReplyDTO> replyDTO = UserService.userSelectReplyList(postNo);
 		
-		
+		request.setAttribute("checker", checker);
 		request.setAttribute("postDTO", postDTO);
 		request.setAttribute("clientDTO", clientDTO);
 		request.setAttribute("question", replyDTO);

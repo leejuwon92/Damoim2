@@ -65,4 +65,8 @@ public class ClientService {
 		return result;
 	}
 	
+	public static boolean clientJoinCheck(int userNo, int postNo) throws SQLException {
+		boolean result = dao.clientJoinCheck(userNo, postNo);
+		return result;
+	}
 }

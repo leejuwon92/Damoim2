@@ -20,25 +20,48 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
+	var session_userNo = '${session_userNo}';
 	$(document).on("click", "[value='모임삭제하기']", function(){
-		var session_userNo = '${session_userNo}';
 		if(session_userNo != null) {
-			var postNo = $(this).attr('id');
-			location.href = "${pageContext.request.contextPath }/front?key=host&mn=hostPostDelete&post_no="+postNo;
+			if(confirm('정말로 모임을 삭제하시겠습니까?')){
+				var postNo = $(this).attr('id');
+				location.href = "${pageContext.request.contextPath }/front?key=host&mn=hostPostDelete&post_no="+postNo;
+			} else {
+				return;
+			}
 		} else {
 			alert("로그인을 해주세요");
+			return;
 		}
 	});
 	
 	$(document).on("click", "[value='신청하기']", function(){
-		var session_userNo = '${session_userNo}';
-		if(session_userNo == null){
-			alert("로그인을 해주세요");		
+		console.log(session_userNo);
+		if(session_userNo != null){
+			if(confirm('모임에 신청하시겠습니까?')){
+				var postNo = $(this).attr('id');
+				var categoryNo = $(this).attr('name');
+				location.href = "${pageContext.request.contextPath }/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;	
+			} else {
+				return;
+			}
 		} else {
-			alert(1);
-			var postNo = $(this).attr('id');
-			var categoryNo = $(this).attr('name');
-			location.href = "${pageContext.request.contextPath }/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;
+			alert("로그인을 해주세요");		
+			return;
+		}
+	});
+	
+	$(document).on("click", "[value='신청취소하기']", function(){
+		if(session_userNo != null){
+			if(confirm('정말로 신청 취소하시겠습니까?')){
+				var postNo=$(this).attr('id');
+				location.href = "${pageContext.request.contextPath}/front?key=client&mn=clientCancleMoim&post_no="+postNo;
+			} else {
+				return;
+			}
+		} else {
+			alert("로그인을 해주세요");	
+			return;
 		}
 	});
 	
@@ -89,9 +112,13 @@ $(document).ready(function(){
 			</tr>
 			<tr>
 			<c:choose>
-			<c:when test="${postDTO.userNo eq session_userNo }">
+			<c:when test="${checker == true && postDTO.userNo eq session_userNo }">
 				<td colspan="2">
 				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" value="모임삭제하기" style="width: 100%" ></td>
+			</c:when>
+			<c:when test="${checker == true}">
+				<td colspan="2">
+				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" value="신청취소하기" style="width: 100%" ></td>
 			</c:when>
 			<c:otherwise>
 				<td colspan="2">

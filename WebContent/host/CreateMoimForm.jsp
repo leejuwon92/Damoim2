@@ -133,12 +133,12 @@ $(document).ready(function(){
   				
   				<div class="form-group">
   					<label for="deadline">모집 마감일</label>
-  					<input type="text" class="form-control" name="deadline" id="deadline"/>
+  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline"/>
   				</div>
   				
   				<div class="form-group">
   					<label for="meetingDate">모임일자</label>
-  					<input type="text" class="form-control" name="meetingDate" id="meetingDate"/>
+  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate"/>
   				</div>
 			
 				<div class="form-group">

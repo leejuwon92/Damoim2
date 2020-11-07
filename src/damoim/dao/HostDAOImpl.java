@@ -17,7 +17,7 @@ public class HostDAOImpl implements HostDAO {
 	public int hostCreateMoim(PostDTO postDTO) throws SQLException{
 		String sql = "insert into post values("
 				+ "post_no.nextval, ?, ?, ?, ?, ?, ?, ?, "
-				+ "sysdate, ?, ?, ?, 0, ?, ?)";
+				+ "sysdate, ?, ?, ?, 1, ?, ?)";
 		Connection con = DbUtil.getConnection();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postDTO.getUserNo());
@@ -34,6 +34,7 @@ public class HostDAOImpl implements HostDAO {
 		ps.setString(12, postDTO.getBannerFile());
 		
 		int result = ps.executeUpdate();
+		DbUtil.dbClose(ps, con);
 		return result;
 	}
 
@@ -51,6 +52,7 @@ public class HostDAOImpl implements HostDAO {
 		ps.setInt(6, postDTO.getTotalPeople());
 		ps.setInt(7, postDTO.getPostNo());
 		int result = ps.executeUpdate();
+		DbUtil.dbClose(ps, con);
 		return result;
 	}
 
@@ -61,6 +63,7 @@ public class HostDAOImpl implements HostDAO {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, postNum);
 		int result = ps.executeUpdate();
+		DbUtil.dbClose(ps, con);
 		return result;
 	}
 
@@ -86,6 +89,9 @@ public class HostDAOImpl implements HostDAO {
 			ClientDTO client = new ClientDTO(userNo, userId, userPwd, userName, userEmail, phoneNo);
 			list.add(client);
 		}
+		
+		DbUtil.dbClose(rs, ps, con);;
+
 		return list;
 	}
 
