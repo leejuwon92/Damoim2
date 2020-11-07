@@ -5,42 +5,92 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Insert title here</title>
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/jqgrid/ui.jqgrid.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/jqgrid/ui.jqgrid-bootstrap-ui.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="../css/jqgrid/ui.jqgrid-bootstrap4.css" />
+    <script src="../js/jquery-3.5.1.js"></script>
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/jquery.jqGrid.min.js"></script>
+    <script src="../js/grid.locale-kr.js"></script>
+
+<script type="text/javascript">
+$(function(){
+	var postNo = '${param.post_no}';
+	console.log(postNo);
+	var userList;
+	 function userList(){
+		 $.ajax({
+				type :"get" , //전송방식(get,post,put,delete,)
+				url : "../userList", //서버주소
+				 async:false,
+				 data:{"post_no" : postNo},
+				dataType : "json", //응답데이터의 타입(text,json,html,xml) 기본값 -text
+				success : function(result){//요청결과가 성공했을 때 호출될 callback함수
+					userList=result;
+					console.log(userList);
+				
+				},
+				error : function(err){ //요청결과가 실패했을 때 호출될 함수
+					console.log(err+"예외발생.");
+				}
+			});//ajax끝
+	 }
+	userList();
+	
+	
+	$("#jqGrid").jqGrid({
+
+        data : userList,
+        datatype: "json",
+        colNames: ['NO','ID','NAME','E-MAIL','PHONE'],
+        colModel: [
+
+            { name: 'userNo', index: 'userNo', width: 55, key: true, align: "center" },
+            { name: 'userId', index: 'userId', width: 100, align: "center" },
+            { name: 'userName', index: 'userName', width: 100 },
+            { name: 'userEmail', index: 'userEmail', width: 100 },
+            { name: 'phoneNo', index: 'phoneNo', width: 100 },
+        ],
+
+        height: 480,
+        rowNum: 3,//한페이지에서 볼수있는 데이터 수 
+        rowList: [5, 10, 15],//한번에 볼수 있는거
+        pager: '#jqGridPager',//맨밑에 속성 느낌(페이지 설명)
+        rownumbers: true,
+        
+
+        viewrecords: true,
+        caption: "신청자 명단"
+    });
+});
+	
+	
+
+
+
+</script>
 </head>
 <body>
-	<table>
-		<tr>
-			<th>순서</th>
-			<th>유저번호</th>
-			<th>아이디</th>
-			<th>이름</th>
-			<th>이메일</th>
-			<th>폰</th>
-			<th>비번</th>
-		</tr>
-		<c:choose>
-			<c:when test="${empty requestScope.list}">
-			   	<tr>
-			        <td colspan="7">
-			            <p align="center"><b><span style="font-size:9pt;">등록된 상품이 없습니다.</span></b></p>
-			        </td>
-				</tr>
-			</c:when>
-			<c:otherwise>
-				<c:forEach items="${list }" var="client" varStatus="i">
-					<tr>
-						<td>${i.count }</td>
-						<td>${client.userNo }</td>
-						<td>${client.userId }</td>
-						<td>${client.userName }</td>
-						<td>${client.userEmail }</td>
-						<td>${client.phoneNo }</td>
-						<td>${client.userPwd }</td>
-					</tr>
-				</c:forEach>
-			</c:otherwise>
-		</c:choose>
-		
-	</table>
+
+ <div class="row">
+        <div>
+            <table id="jqGrid"></table>
+            <div id="jqGridPager"></div>
+        </div>
+    </div>
+
+    <div>
+        <select id="selectId">
+            <option value="">All</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+        <span><a href="#" onclick="javascript:search();">Search</a></span>
+    </div>
+
 </body>
 </html>

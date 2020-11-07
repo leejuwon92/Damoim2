@@ -7,14 +7,12 @@
 <title>HomePage</title>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/client/mypageleft.css">
-<style type="text/css">
-</style>
 </head>
 <body>
 
               
             <!-- Menu -->
-            <nav id="menu">
+            <div id="nav">
               <ul>
               <li>
                 <span class="k">회원정보설정</span>
@@ -24,8 +22,8 @@
                 <li>
                   <span class="k">신청내역관리</span>
                   <ul>
-                    <li><a href="${pageContext.request.contextPath}/client/MyCreateMoim.jsp" target="center">개설한 모임</a></li>
-                    <li><a href="${pageContext.request.contextPath}/client/MyJoinMoim.jsp" target="center">신청한 모임</a></li>
+                    <li><a href="${pageContext.request.contextPath}/front?key=client&mn=hostSelectMoimByMe" target="center">개설한 모임</a></li>
+                    <li><a href="${pageContext.request.contextPath}/front?key=client&mn=clientSelectMoimByMe" target="center">신청한 모임</a></li>
                   </ul>
                 </li>
                 <li>
@@ -35,7 +33,7 @@
                   </ul>
                 </li>
               </ul>
-            </nav>
+            </div>
 
 </body>
 </html>

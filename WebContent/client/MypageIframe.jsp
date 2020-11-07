@@ -6,6 +6,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="../js/jquery-3.5.1.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/client/mypageleft.css">
+
 <style>
   table{width: 100%; height:100% ; border:0;
       border-collapse:collapse; 
@@ -33,9 +35,10 @@ function calcHeight()
 <body>
 
 <jsp:include page="../header.jsp"></jsp:include>
+<jsp:include page="../client/left.jsp"></jsp:include>
  <table>
  <tr>
-  <td><jsp:include page="../client/left.jsp"></jsp:include></td>
+
   <td><iframe id="the_iframe" width=90%  onLoad="calcHeight();" src="../client/MyPage_main.jsp" name="center" frameborder="0" scrolling="no" height="1"></iframe></td>
  </tr>
 </table>

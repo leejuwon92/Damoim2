@@ -131,9 +131,9 @@ public class ClientController implements Controller {
 		int userNo = (int) session.getAttribute("session_userNo");
 		List<PostDTO> list = ClientService.clientSelectMoimByMe(userNo);
 		if (list != null) {
-			request.setAttribute("list", list);
+			request.setAttribute("postList", list);
 			mv.setRedirect(false);
-			mv.setViewName(request.getContextPath() + "/client/MyJoinMoim");
+			mv.setViewName("/client/MyJoinMoim.jsp");
 		}
 		return mv;
 	}
@@ -149,9 +149,9 @@ public class ClientController implements Controller {
 		int userNo = (int) session.getAttribute("session_userNo");
 		List<PostDTO> list = ClientService.hostSelectMoimByMe(userNo);
 		if (list != null) {
-			request.setAttribute("list", list);
+			request.setAttribute("postList", list);
 			mv.setRedirect(false);
-			mv.setViewName(request.getContextPath() + "/client/MyCreateMoim");
+			mv.setViewName("/client/MyCreateMoim.jsp");
 		}
 		return mv;
 	}

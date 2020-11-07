@@ -1,14 +1,16 @@
-	li a.current{background-color: #BB8FCE; color: white;}
+	li a.current{background-color: #BB8FCE; color: white; }
 	li a:hover:not(.current){background-color: #A2CE8F; color: white;}
 	  ul{ 
+
 		background-color:none;
 		width:150px;
 		list-style-type: none;
-		margin 0;
+		margin :0 auto;
 		padding: 0;
 	} 
 	
 	li a{  /* 커서를 올리지 않았을 때 색깔&글꼴 */
+
 		display: block;
 		color: #0080ff;
 		padding:10px;
@@ -26,6 +28,7 @@
 	}
 	
 	.k { /*  span태그 안에 부분 변화주기 */
+	
 	font-family: fantasy; 
 	color:#A4A4A4;
 	font-weight:bold;

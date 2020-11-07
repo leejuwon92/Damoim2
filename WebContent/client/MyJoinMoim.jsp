@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/client/bootstrap.min.css">
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.5.1.js"></script>
 <script>
 	$(function(){
 		$(document).on("click", "[name='delete']", function(){
@@ -14,7 +15,7 @@
 		});
 	});
 </script>
-<link rel="stylesheet" href="../css/client/bootstrap.min.css">
+
 </head>
 <body>
 <!-- Page Content -->
@@ -106,7 +107,6 @@
 	          <p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail }</p>
 	          <p>현재신청인원 : ${post.currentPeople }</p>
 	          <p>마감일 : ${post.deadline }</p>
-	          <a class="btn btn-primary" id="${post.postNo }" name='delete' href="../front?key=client&mn=clientCancleMoim&post_no=${post.postNo}">신청취소</a>
 	        </div>
 	      </div>
 	      <!-- /.row -->
