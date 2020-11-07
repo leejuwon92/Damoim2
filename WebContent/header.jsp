@@ -29,7 +29,7 @@
 					
 				<%} else { %>
 					<ul>
-						<li><a href="${pageContext.request.contextPath}/myPage">마이 페이지</a></li>
+						<li><a href="${pageContext.request.contextPath}/client/MypageIframe.jsp">마이 페이지</a></li>
 						<li><a href="${pageContext.request.contextPath}/Logout.jsp">로그아웃</a></li>
 					</ul>
 				

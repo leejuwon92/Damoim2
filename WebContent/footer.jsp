@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- CSS here -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer/headerstyle.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer/footerstyle.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/footer/bootstrap.min.css">
 
 </head>
@@ -25,35 +25,28 @@
 					<!-- footer-tittle -->
 
 					<div class="footer-tittle">
-						<h4>Quick Links</h4>
+						<h4>TEAM NAME</h4>
 						<ul>
-							<li><a href="#">About</a></li>
-							<li><a href="#"> Offers & Discounts</a></li>
-							<li><a href="#"> Get Coupon</a></li>
-							<li><a href="#"> Contact Us</a></li>
+							<li><a href="#">MookJjiBbaLoser</a></li>
 						</ul>
 					</div>
 					<!-- footer-tittle -->
 
 					<div class="footer-tittle">
-						<h4>New Products</h4>
+						<h4>PROJECT MANAGER</h4>
 						<ul>
-							<li><a href="#">Woman Cloth</a></li>
-							<li><a href="#">Fashion Accessories</a></li>
-							<li><a href="#"> Man Accessories</a></li>
-							<li><a href="#"> Rubber made Toys</a></li>
+							<li><a href="#">LEE JUWON</a></li>
 						</ul>
 					</div>
 					<!-- footer-tittle -->
 
 					<div class="footer-tittle">
-						<h4>Support</h4>
+						<h4>TEAM MEMBERS</h4>
 						<ul>
-							<li><a href="#">Frequently Asked Questions</a></li>
-							<li><a href="#">Terms & Conditions</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-							<li><a href="#">Report a Payment Issue</a></li>
+							<li><a href="#">KIM SOEUN</a></li>
+							<li><a href="#">PARK GIRANG</a></li>
+							<li><a href="#">PARK TAEJUN</a></li>
+							<li><a href="#">LEE YONGCHUL</a></li>
 						</ul>
 					</div>
 					<!-- footer-tittle -->

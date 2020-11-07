@@ -6,11 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
 <link rel="stylesheet" href="../css/client/bootstrap.min.css">
 </head>
 <body>
-<jsp:include page="../header.jsp"></jsp:include>
  <div class="container">
 <script></script>
       <!-- Page Heading -->
@@ -96,7 +95,6 @@
  </div>
  </div>
 </div>
-<jsp:include page="../footer.jsp"></jsp:include>
 
 </body>
 </html>

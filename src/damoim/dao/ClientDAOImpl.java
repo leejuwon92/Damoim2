@@ -57,6 +57,8 @@ public class ClientDAOImpl implements ClientDAO {
 			con.commit();
 			DbUtil.dbClose(ps, null);
 		}
+		
+	
 		return result;
 	}
 
@@ -64,14 +66,24 @@ public class ClientDAOImpl implements ClientDAO {
 	public int clientInsertReply(ReplyDTO replyDTO) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "insert into QnA (question_no,post_no,reply_content,answer_no,user_no,regdate) values(reply_no.nextval,?,?,null,?,sysdate)";
+		String sql = "";
 		int result = 0;
 		try {
 			con = DbUtil.getConnection();
-			ps = con.prepareStatement(sql);
-			ps.setInt(1, replyDTO.getPostNo());
-			ps.setString(2, replyDTO.getReplyContent());
-			ps.setInt(3, replyDTO.getUserNo());
+			if(replyDTO.getAnswerNo()==0) {
+				sql = "insert into QnA (question_no,post_no,reply_content,answer_no,user_no,regdate) values(reply_no.nextval,?,?,null,?,sysdate)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, replyDTO.getPostNo());
+				ps.setString(2, replyDTO.getReplyContent());
+				ps.setInt(3, replyDTO.getUserNo());
+			}else {
+				sql = "insert into QnA (question_no,post_no,reply_content,answer_no,user_no,regdate) values(reply_no.nextval,?,?,?,?,sysdate)";
+				ps = con.prepareStatement(sql);
+				ps.setInt(1, replyDTO.getPostNo());
+				ps.setString(2, replyDTO.getReplyContent());
+				ps.setInt(3, replyDTO.getAnswerNo());
+				ps.setInt(4, replyDTO.getUserNo());
+			}
 			result = ps.executeUpdate();
 		} finally {
 			DbUtil.dbClose(ps, con);
@@ -260,7 +272,7 @@ public class ClientDAOImpl implements ClientDAO {
 		            String thumbnailFile = rs.getString(14);
 		            String bannerFile = rs.getString(15);
 		            list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-		                  locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+		                  locationDetail, null,deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 		         }
 		      } finally {
 		         DbUtil.dbClose(rs, ps, con);
@@ -303,7 +315,7 @@ public class ClientDAOImpl implements ClientDAO {
 				String thumbnailFile = rs.getString(14);
 				String bannerFile = rs.getString(15);
 				list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-						locationDetail, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+						locationDetail, null,deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
