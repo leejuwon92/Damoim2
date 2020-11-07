@@ -8,16 +8,12 @@
 <title>Insert title here</title>
 <style>
 </style>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script>
 	$(document).ready(function() {$(document).on("click","#SelectFilterBtn",function() {
 		//alert( $("#category").val() + " : " + $("#category option:selected").text() );
@@ -41,38 +37,28 @@
 			dataType : "json",//응답 데이터의 type(text, html, xml, json(***))
 			data : $("#selectBoxForm").serialize(),//data 
 			success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
-						$("#postListTable").empty();
+						$("#postListDiv").empty();
 						var str = "";
 						$.each(result,function(index,item) {
 							
-							str += "<tr>";
-							str += "<td rowspan='5' width='40%'>"
-							str += "<a href='front?key=user&mn=userSelectBoard&postNo="+ item.postNo+ "'>";
-							str += "<img width='460px' height='330px' src='${pageContext.request.contextPath}/img/sample/" + item.thumbnailFile + "'>";
+							str += "<div class='row'>";
+							str += "<div class='col-md-7'>";
+							str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
+							str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
 							str += "</a>";
-							str += "</td>";
-							str += "<td width='30%'><h4>취미</h4></td>";
-							str += "<td width='30%'><h4>" + item.categoryCode + "</h4></td>";
-							str += "</tr>"
-							str += "<tr>";
-							str += "<td><h4>지역</h4></td>";
-							str += "<td><h4>" + item.locationCode + "</h4></td>";
-							str += "</tr>"
-							str += "<tr>";
-							str += "<td><h4>모임명</h4></td>"
-							str += "<td><h4>" + item.postTitle + "</h4></td>";
-							str += "</tr>";
-							str += "<tr>";
-							str += "<td><h4>참가인원</h4></td>";
-							str += "<td><h4>" + item.currentPeople + " / " + item.totalPeople + "</h4></td>";
-							str += "</tr>";
-							str += "<tr>";
-							str += "<td><h4>마감일</h4></td>";
-							str += "<td><h4> ~ " + item.deadline + "</h4></td>";
-							str += "</tr>";
+							str += "</div>";
+							str += "<div class='col-md-5'>";
+							str += "<h3>" + item.postTitle + "</h3>";
+							str += "<p>모임 설명 : " + item.postDescr + "</p>";
+							str += "<p>모임 장소 : " + item.locationDetail + "</p>";
+							str += "<p>신청 인원 : " + item.currentPeople + " / " + item.totalPeople + "</p>";
+							str += "<p>마감 일정 : ~ " + item.deadline + "</p>";
+							str += "</div>";
+							str += "</div>";
+							str += "<br>"
 							
 						});
-						$("#postListTable").html(str);
+						$("#postListDiv").html(str);
 
 			},//success
 			error : function(err) {//요청결과가 실패했을 때 호출될 callback함수
@@ -161,35 +147,25 @@
 	<!-- 행사검색 게시판 조회 Section -->
 	<section class="postList_section">
 		<div class="container">
-			<table class="table" id="postListTable" style="text-align: center">
+			<div id="postListDiv">
 				<c:forEach items="${requestScope.postList}" var="postlist">
-				<tr>
-					<td rowspan="5" width="40%">
-						<a href="front?key=user&mn=userSelectBoard&postNo=${postlist.postNo}">
-							<img width="460px" height="330px" src="${pageContext.request.contextPath}/img/sample/${postlist.thumbnailFile} ">
-						</a>
-					</td>
-					<td width="30%"><h4>취미</h4></td>
-					<td width="30%"><h4>${postlist.categoryCode}</h4></td>
-				</tr>
-				<tr>
-					<td><h4>지역</h4></td>
-					<td><h4>${postlist.locationCode}</h4></td>
-				</tr>
-				<tr>
-					<td><h4>모임명</h4></td>
-					<td><h4>${postlist.postTitle}</h4></td>
-				</tr>
-				<tr>
-					<td><h4>참가인원</h4></td>
-					<td><h4>${postlist.currentPeople} / ${postlist.totalPeople}</h4></td>
-				</tr>
-				<tr>
-					<td><h4>마감일</h4></td>
-					<td><h4> ~ ${postlist.deadline}</h4></td>
-				</tr>
+					<div class="row">
+						<div class="col-md-7">
+        					<a href="front?key=user&mn=userSelectBoard&postNo=${postlist.postNo}">
+								<img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
+          					</a>
+        				</div><!-- col7 -->
+						<div class="col-md-5">
+        					<h3>${postlist.postTitle}</h3>
+          					<p>모임 설명 : ${postlist.postDescr}</p>
+          					<p>모임 장소 : ${postlist.locationDetail}</p>
+          					<p>신청 인원 : ${postlist.currentPeople} / ${postlist.totalPeople} </p>
+          					<p>마감 일정 : ~ ${postlist.deadline}</p>
+        				</div>
+					</div><!-- row -->
+				<br>
 				</c:forEach>
-			</table>
+			</div>
 		</div><!-- container -->
 	</section><!-- postList_section -->
 	

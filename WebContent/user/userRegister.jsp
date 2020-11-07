@@ -167,6 +167,13 @@
 	<jsp:include page="../header.jsp"></jsp:include>
 	<hr>
 	
+	<div class="container">
+		<div style="text-align: center" >
+			<h2>D&nbsp;A&nbsp;M&nbsp;O&nbsp;I&nbsp;M</h2>
+			<hr width="400px">
+		</div>
+	</div>
+	
 	
 	<!-- 회원가입 -->
 	<section class="registration_section">
