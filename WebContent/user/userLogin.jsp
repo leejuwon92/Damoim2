@@ -5,12 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="../js/jquery-3.5.1.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 	
-	$("#loginBtn").click(function(){
-
+	$(document).on("click","#loginBtn",function(){
+		
 		if($("#userId").val() == ""){
 			alert("아이디를 입력 해주세요.")
 			$("#userId").focus();
@@ -25,18 +26,7 @@ $(document).ready(function(){
 		
 		$("#loginForm").submit();
 		
-		
 	});//loginBtn_click
-
-	$("#userSelectIdBtn").click(function(){
-		$(location).attr("href","userSelectId.jsp");	
-		
-	});//userSelectIdBtn_click
-	
-	$("#userSelectPwdBtn").click(function(){
-		$(location).attr("href","userSelectPwd.jsp");	
-		
-	});//userSelectIdBtn_click
 	
 });//ready
 
@@ -53,7 +43,7 @@ body {
   position: relative;
   margin: 30px auto;
   padding: 20px 20px 20px;
-  width: 310px;
+  width: 550px;
   background: white;
   border-radius: 3px;
   -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.3);
@@ -100,7 +90,7 @@ body {
 }
 
 .login input[type=text], .login input[type=password] {
-  width: 278px;
+  width: 500px;
 }
 
 
@@ -159,20 +149,38 @@ input[type=text]:focus, input[type=password]:focus {
 <jsp:include page="../header.jsp"></jsp:include>
 <hr>
 
-<div class="login">
- <h1>Login to DamoIm</h1>
-  <form method="post"  id="loginForm" action="${pageContext.request.contextPath}/front?key=user&mn=userLogin"">
-		ID:&nbsp;<p><input type="text" id="userId" name="userId" value="" placeholder="Username"></p>
-		Password:&nbsp;<p><input type="password" id="userPwd" name="userPwd" value="" placeholder="Password"></p>
-         </p>
-         <p class="submit"><input type="button"  id="loginBtn" name="commit" value="로그인"></p>
-    
+<div class="container">
+	<div style="text-align: center" >
+		<h2>D&nbsp;A&nbsp;M&nbsp;O&nbsp;I&nbsp;M</h2>
+		<hr width="400px">
+	</div>
+</div>
+<!-- 로그인하기 -->
+<section class="login_section" style="margin: 50px 0px">
+	<div class="container">
+		<div class="login">
+ 			<h1>Login to DamoIm</h1>
+			<form method="post" id="loginForm" action="${pageContext.request.contextPath}/front?key=user&mn=userLogin">
+				<div class="form-group">
+  					<label for="userId">ID:</label><br>
+  					<input type="text" id="userId" name="userId" value="" placeholder="UserID"/>
+  				</div>
+  				
+  				<div class="form-group">
+  					<label for="userPwd">PassWord:</label><br>
+  					<input type="password" id="userPwd" name="userPwd" value="" placeholder="Password">
+  				</div>
+				<a class="lost_pass" href="${pageContext.request.contextPath}/user/userForgetIdPwd.jsp">forget ID or PassWord?</a>
+				<hr>
+				<p class="submit">
+				<input type="button" class="btn btn-primary" id="loginBtn" name="loginBtn" value="Login" style="padding: 5px 50px">
+				</p>
+			</form><!-- loginForm  -->
+		</div><!-- login -->
+	</div><!-- container -->
+</section><!-- login_section -->
  
-	</form>
-	<hr>
-	<input type="button" value="아이디 찾기" id="userSelectIdBtn"/>
-	<input type="button" value="비밀번호 찾기" id="userSelectPwdBtn"/>		
-</div>	
+
 <hr>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
