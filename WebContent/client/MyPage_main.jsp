@@ -23,6 +23,7 @@
         			<c:set var="endLoop" value="false"/>
         			<c:forEach items="${requestScope.hostList}" var="hostpost" varStatus="i">
         				<c:if test="${not endLoop }">
+        				<div class="row">
         				<div class="col-lg-4 col-md-6 mb-4">
         					<div class="card h-100">
 								<a href="#"><img class="card-img-top" src="<%=request.getRealPath("/") %>img/${hostpost.thumbnailFile}" alt=""></a>
@@ -31,6 +32,7 @@
 										<h5>${hostpost.postDescr }</h5>     
 									</div>
 							</div>
+						</div>
 						</div>
         				<c:if test="${i.count==3 }">
         					<c:set var="endLoop" value = "true"/>

@@ -48,7 +48,7 @@
 						<nav>
 							<ul id="navigation">
 								<li><a href="${pageContext.request.contextPath}/front?key=user&mn=userSelectBoardList" class="btn header-btn">행사검색</a></li>
-								<li><a href="#" class="btn header-btn">신청내역 조회</a></li>
+								<li><a href="${pageContext.request.contextPath}/client/MyJoinMoim.jsp" class="btn header-btn">신청내역 조회</a></li>
 								<li><a href="${pageContext.request.contextPath}/host/CreateMoimForm.jsp" class="btn header-btn">행사개설</a></li>
 							</ul>
 						</nav>  
