@@ -24,7 +24,6 @@ public class ClientDAOImpl implements ClientDAO {
 		
 		int result = 0;
 		try {
-			if(clientJoinCheck(joinDTO.getUserNo(),joinDTO.getPostNo())==false) {
 			con = DbUtil.getConnection();
 			con.setAutoCommit(false);
 			if(joinDTO.getPostNo() != 0) {
@@ -47,8 +46,7 @@ public class ClientDAOImpl implements ClientDAO {
 			int result1 = plusPostCurrentPeople(con, joinDTO.getPostNo());
 			if (result1 == 0) {
 				con.rollback();
-				}
-			}else throw new SQLException("이미 신청중인 모임입니다");
+			}
 		} finally {
 			con.commit();
 			DbUtil.dbClose(ps, con);

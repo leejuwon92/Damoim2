@@ -153,47 +153,47 @@ public class UserDAOImpl implements UserDAO {
 		try {// 로드 연결 실행
 			con = DbUtil.getConnection();
 			if (categoryNum == 0 && locationCode == 0 && date == 0) {
-				sql = "select * from post";
+				sql = "select * from post order by regdate desc";
 				ps = con.prepareStatement(sql);
 				// ps.setInt(1, categoryNum);
 				// ps.setInt(2, locationCode);
 				// ps.setInt(3, date);
 			}else if(categoryNum != 0 && locationCode == 0 && date == 0) {
-				sql = "select * from post where category_no = ?";
+				sql = "select * from post where category_no = ? order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				
 			}else if(categoryNum == 0 && locationCode != 0 && date == 0) {
-				sql = "select * from post where location_no = ?";
+				sql = "select * from post where location_no = ? order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, locationCode);
 				
 			}else if(categoryNum == 0 && locationCode == 0 && date != 0) {
-				sql = "select * from post where deadline > (sysdate-?)";
+				sql = "select * from post where deadline > (sysdate-?) order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, date);
 				
 			}else if(categoryNum != 0 && locationCode != 0 && date == 0) {
-				sql = "select * from post where category_no = ? and location_no = ?";
+				sql = "select * from post where category_no = ? and location_no = ? order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, locationCode);
 				
 			}else if(categoryNum != 0 && locationCode == 0 && date != 0) {
-				sql = "select * from post where category_no = ? and deadline > (sysdate-?)";
+				sql = "select * from post where category_no = ? and deadline > (sysdate-?) order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, date);
 				
 			}else if(categoryNum == 0 && locationCode != 0 && date != 0) {
-				sql = "select * from post where location_no = ? and deadline > (sysdate-?)";
+				sql = "select * from post where location_no = ? and deadline > (sysdate-?) order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, locationCode);
 				ps.setInt(2, date);
 				
 				
 			}else if(categoryNum != 0 && locationCode != 0 && date != 0) {
-				sql = "select * from post where category_no = ? and location_no = ? and deadline > (sysdate-?) ";
+				sql = "select * from post where category_no = ? and location_no = ? and deadline > (sysdate-?) order by regdate desc";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, locationCode);
