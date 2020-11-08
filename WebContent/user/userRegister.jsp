@@ -165,7 +165,6 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<hr>
 	
 	<div class="container">
 		<div style="text-align: center" >
@@ -210,14 +209,14 @@
   					<label for="user_phone">Phone:<span id="phoneCheckSpan"></span></label>
   					<input type="text" class="form-control" name="phoneNo" id="user_phone"/>
   				</div>  				
-  				
-  				<input type="button" class="btn btn-primary" value="Submit" id="userRegisterBtn" />
-  				<input type="button" class="btn btn-primary" value="Cancle" onclick="location.href='index.jsp'" />
+  				<div style="text-align: right;">
+  					<input type="button" class="btn btn-primary" value="Submit" id="userRegisterBtn" />
+  					<input type="button" class="btn btn-primary" value="Cancle" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" />
+  				</div>
   			</form>
 		</div><!-- container -->
 	</section><!-- registration_section -->
 	
-	<hr>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -24,14 +24,6 @@ public class UserService {
 		return result;
 	} 
 
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
 	 * 아이디 중복 체크
 	 * @param id
@@ -67,40 +59,16 @@ public class UserService {
 		return userId;
 	}
 
-
-
-
-
-
-
-
-
 	public static String userSelectPwd(ClientDTO clientDTO) throws SQLException{
 		
 		String userPwd = userDAO.userSelectPwd(clientDTO);
 		return userPwd;
 	}
 
-
-
-
-
-
-
-
-
 	public static List<PostDTO> userSelectBoardList(int categoryNum, int locationCode, int date) throws SQLException {
 		List<PostDTO> list = userDAO.userSelectBoardList(categoryNum, locationCode, date);
 		return list;
 	}
-
-
-
-
-
-
-
-
 
 	public static PostDTO userSelectBoard(int postNo) throws SQLException {
 			PostDTO postDTO = userDAO.userSelectBoard(postNo);
@@ -115,22 +83,18 @@ public class UserService {
 		return clientDTO;
 	}
 
-
-
-
-
-
-
-
-
 	public static List<ReplyDTO> userSelectReplyList(int postNo) throws SQLException{
 		
 		List<ReplyDTO> list = userDAO.userSelectReplyList(postNo);
-		
 		return list;
 	}
 
-
+	public static List<PostDTO> indexBoardList(int indexCode) throws SQLException{
+		
+		List<PostDTO> list = userDAO.indexBoardList(indexCode);
+		
+		return list;
+	}
 
 
 

@@ -77,4 +77,13 @@ public interface UserDAO {
 	 * @param userNo
 	 */
 	List<ReplyDTO> userSelectReplyList(int postNo) throws SQLException ;
+	
+	/**
+	 * Index의 배너들을 불러오는 기능
+	 * index Code가 1이면 배너
+	 * index Code가 2이면 BestMoim목록
+	 * index Code가 3이면 Today'sMoim 목록
+	 * @param indexCode
+	 */
+	List<PostDTO> indexBoardList(int indexCode) throws SQLException;
 }

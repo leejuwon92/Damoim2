@@ -11,17 +11,9 @@
 }
 
 </style>
-<!-- CSS here -->
-<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -68,15 +60,15 @@ $(document).ready(function(){
 	%>
 	
 	<div class="headerTop">
-		<div class="container-fluid" style="background-color: black">
+		<div class="container-fluid" style="background-color: rgb(38,38,38);">
 			<div class="row">
 				<div class="col-xl-1"></div>
 				<div class="col-xl-10">
 					<div style="text-align: right">
 						<input type="button" class="btn btn-dark" value="회원가입" id="registerBtn"
-						style=" border-color: black; background-color: black; font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
+						style=" border-color: rgb(38,38,38); background-color: rgb(38,38,38); font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
 						<input type="button" class="btn btn-dark" value="로그인" id="loginBtn"
-						style=" border-color: black; background-color: black; font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
+						style=" border-color: rgb(38,38,38); background-color: rgb(38,38,38);;font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
 					</div>
 				</div>
 				<div class="col-xl-1"></div>
@@ -87,15 +79,15 @@ $(document).ready(function(){
 	<%} else { %>
 	
 	<div class="headerTop">
-		<div class="container-fluid" style="background-color: black">
+		<div class="container-fluid" style="background-color: rgb(38,38,38);">
 			<div class="row">
 				<div class="col-xl-1"></div>
 				<div class="col-xl-10">
 					<div style="text-align: right">
 						<input type="button" class="btn btn-dark" value="마이페이지" id="myPageBtn"
-						style=" border-color: black; background-color: black; font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
+						style=" border-color: rgb(38,38,38); background-color: rgb(38,38,38); font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
 						<input type="button" class="btn btn-dark" value="로그아웃" id="logOutBtn"
-						style=" border-color: black; background-color: black; font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
+						style=" border-color: rgb(38,38,38); background-color: rgb(38,38,38); font-size: 16px; width: 150px; height: 70px; border-radius: 15px">
 					</div>
 				</div>
 				<div class="col-xl-1"></div>
@@ -110,7 +102,7 @@ $(document).ready(function(){
 		<div class="row justify-content-end">
 				<div class="col-xl-1"></div>
 				<div class="col-xl-3">
-					<a href="${pageContext.request.contextPath}/index.jsp"> 
+					<a href="${pageContext.request.contextPath}/start.jsp"> 
 						<img src="${pageContext.request.contextPath}/img/header/damoim_logo.png" alt="">
 						
 					</a>

@@ -228,7 +228,6 @@ public class UserDAOImpl implements UserDAO {
 		} // finally
 
 		return list;
-
 	}
 
 	@Override
@@ -407,6 +406,65 @@ public class UserDAOImpl implements UserDAO {
 
 		return list;
 		
+	}
+	
+	/**
+	 * Index의 배너들을 불러오는 기능
+	 * index Code가 1이면 배너
+	 * index Code가 2이면 BestMoim목록
+	 * index Code가 3이면 Today'sMoim 목록
+	 * @param indexCode
+	 */
+	@Override
+	public List<PostDTO> indexBoardList(int indexCode) throws SQLException {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<PostDTO> list = new ArrayList<PostDTO>();
+		String sql = null;
+		try {// 로드 연결 실행
+			con = DbUtil.getConnection();
+			
+			if(indexCode == 1) {
+				sql = "select * from post where bannerfile is not null";
+				ps = con.prepareStatement(sql);
+			}
+			else if(indexCode == 2) {
+				sql = "select * from post order by current_people desc";
+				ps = con.prepareStatement(sql);
+			}	
+			else if(indexCode == 3) {
+				sql = "select * from post where deadline>sysdate order by deadline";
+				ps = con.prepareStatement(sql);
+			}
+			
+			rs = ps.executeQuery();
+			while (rs.next()) {// 커서를 아래로 이동하면서 데이터를 조회
+				int postNo = rs.getInt(1);
+				int userNo = rs.getInt(2);
+				String postTitle = rs.getString(3);
+				String postDescr = rs.getString(4);
+				String postContent = rs.getString(5);
+				int categoryCode = rs.getInt(6);
+				int locationCode = rs.getInt(7);
+				String locationDetail = rs.getString(8);
+				String regDate = rs.getString(9);
+				String deadline = rs.getString(10);
+				String meetingDate = rs.getString(11);
+				int totalPeople = rs.getInt(12);
+				int currentPeople = rs.getInt(13);
+				String thumbnailFile = rs.getString(14);
+				String bannerFile = rs.getString(15);
+				PostDTO postDTO = new PostDTO(postNo, userNo, postTitle, postDescr, postContent, categoryCode,
+						locationCode, locationDetail, regDate, deadline, meetingDate, totalPeople, currentPeople,
+						thumbnailFile, bannerFile);
+				list.add(postDTO);
+			} // while
+		} finally { // 닫기
+			DbUtil.dbClose(rs, ps, con);
+		} // finally
+
+		return list;
 	}
 	
 
