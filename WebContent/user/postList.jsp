@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,60 +14,138 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.js" integrity="sha512-uzuo1GprrBscZGr+iQSv8+YQQsKY+rSHJju0FruVsGHV2CZNZPymW/4RkxoHxAxw3Lo5UQaxDMF8zINUfAsGeg==" crossorigin="anonymous"></script>
 <script>
-	$(document).ready(function() {$(document).on("click","#SelectFilterBtn",function() {
-		//alert( $("#category").val() + " : " + $("#category option:selected").text() );
-		$("#selSearchOpt").text("");
-		var str = "";
-		if ($("#category").val() != 0) {
-			str += $("#category option:selected").text()+ "      ";
-		}
-
-		if ($("#location").val() != 0) {str += $("#location option:selected").text()+ "      ";
-		}
-
-		if ($("#date").val() != 0) {str += $("#date option:selected").text()+ "      ";
-		}
-
-		$("#selSearchOpt").text(str).css({"font-size" : "20px", "color" : "blue"})
-
-		$.ajax({
-			type : "post", //전송방식(get,post,put,delete)
-			url : "${pageContext.request.contextPath}/boardListServlet", //서버주소
-			dataType : "json",//응답 데이터의 type(text, html, xml, json(***))
-			data : $("#selectBoxForm").serialize(),//data 
-			success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
-						$("#postListDiv").empty();
+	jQuery(function($) {
+		$('#pagination').twbsPagination({
+		    totalPages: 10,	// 총 페이지 번호 수
+		    visiblePages: 7,	// 하단에서 한번에 보여지는 페이지 번호 수
+		    startPage : 1, // 시작시 표시되는 현재 페이지
+		    initiateStartPageClick: true,	// 플러그인이 시작시 페이지 버튼 클릭 여부 (default : true)
+		    first : "첫 페이지",	// 페이지네이션 버튼중 처음으로 돌아가는 버튼에 쓰여 있는 텍스트
+		    prev : "이전 페이지",	// 이전 페이지 버튼에 쓰여있는 텍스트
+		    next : "다음 페이지",	// 다음 페이지 버튼에 쓰여있는 텍스트
+		    last : "마지막 페이지",	// 페이지네이션 버튼중 마지막으로 가는 버튼에 쓰여있는 텍스트
+		    nextClass : "page-item next",	// 이전 페이지 CSS class
+		    prevClass : "page-item prev",	// 다음 페이지 CSS class
+		    lastClass : "page-item last",	// 마지막 페이지 CSS calss
+		    firstClass : "page-item first",	// 첫 페이지 CSS class
+		    pageClass : "page-item",	// 페이지 버튼의 CSS class
+		    activeClass : "active",	// 클릭된 페이지 버튼의 CSS class
+		    disabledClass : "disabled",	// 클릭 안된 페이지 버튼의 CSS class
+		    anchorClass : "page-link",	//버튼 안의 앵커에 대한 CSS class
+		    
+		    onPageClick: function (event, page) {
+		    	redraw(page);	
+		    }
+		});
+		
+		var flag = true;
+    	
+		function redraw(page) {
+			$("postListDiv").empty();
+			if(flag){
+				flag = false;
+				$.ajax({
+					type: "post",
+					url : "moimList",
+					data: {"page" : page, "pageSize" : 8, 
+						"category_no":$("#category option:selected").val(),
+						"location_no":$("#location option:selected").val(),
+						"date":$("#date option:selected").val()
+					},
+					dataType:"json",
+					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+					success: function(result){
+						$("#pagination").twbsPagination("changeTotalPages", result[0], page);
 						var str = "";
-						$.each(result,function(index,item) {
-							
-							str += "<div class='row'>";
-							str += "<div class='col-md-7'>";
-							str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
-							str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
-							str += "</a>";
-							str += "</div>";
-							str += "<div class='col-md-5'>";
-							str += "<h3>" + item.postTitle + "</h3>";
-							str += "<p>모임 설명 : " + item.postDescr + "</p>";
-							str += "<p>모임 장소 : " + item.locationDetail + "</p>";
-							str += "<p>신청 인원 : " + item.currentPeople + " / " + item.totalPeople + "</p>";
-							str += "<p>마감 일정 : ~ " + item.deadline + "</p>";
-							str += "</div>";
-							str += "</div>";
-							str += "<br>"
-							
-						});
+						if(result[1].length == 0){
+							str += "<h1 color = 'Brown'>해당하는 모임 정보가 없습니다</h1><br><br>";
+						} else {
+							for(var i in result[1]){
+								str += "<div class='row'>";
+								str += "<div class='col-md-7'>";
+								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + result[1][i].postNo + "'>";
+								str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
+								str += "</a>";
+								str += "</div>";
+								str += "<div class='col-md-5'>";
+								str += "<h3>" + result[1][i].postTitle + "</h3>";
+								str += "<p>모임 설명 : " + result[1][i].postDescr + "</p>";
+								str += "<p>모임 장소 : " + result[1][i].locationDetail + "</p>";
+								str += "<p>신청 인원 : " + result[1][i].currentPeople + " / " + result[1][i].totalPeople + "</p>";
+								str += "<p>마감 일정 : ~ " + result[1][i].deadline + "</p>";
+								str += "</div>";
+								str += "</div>";
+								str += "<br>"
+							}
+						}
+						
 						$("#postListDiv").html(str);
-
-			},//success
-			error : function(err) {//요청결과가 실패했을 때 호출될 callback함수
-			console.log(err + "예외발생..");
-			}//error
-		});//ajax
-
-	});//SelectFilterBtn_click
+					},
+					complete: function(){	// 이부분 중요
+						flag = true;	//호출 완료되면 flag 값을 사용가능하게 변경
+					}
+				}); 
+			}
+		} // redraw end
+		
+		redraw(1);
+		
+		$(document).on("click","#SelectFilterBtn",function() {
+			//alert( $("#category").val() + " : " + $("#category option:selected").text() );
+			$("#selSearchOpt").text("");
+			var str = "";
+			if ($("#category").val() != 0) {
+				str += $("#category option:selected").text()+ "      ";
+			}
+	
+			if ($("#location").val() != 0) {str += $("#location option:selected").text()+ "      ";
+			}
+	
+			if ($("#date").val() != 0) {str += $("#date option:selected").text()+ "      ";
+			}
+	
+			$("#selSearchOpt").text(str).css({"font-size" : "20px", "color" : "blue"})
+		
+			redraw(1);
+			
+			/* $.ajax({
+				type : "post", //전송방식(get,post,put,delete)
+				url : "${pageContext.request.contextPath}/boardListServlet", //서버주소
+				dataType : "json",//응답 데이터의 type(text, html, xml, json(***))
+				data : $("#selectBoxForm").serialize(),//data 
+				success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
+							$("#postListDiv").empty();
+							var str = "";
+							$.each(result,function(index,item) {
+								
+								str += "<div class='row'>";
+								str += "<div class='col-md-7'>";
+								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
+								str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
+								str += "</a>";
+								str += "</div>";
+								str += "<div class='col-md-5'>";
+								str += "<h3>" + item.postTitle + "</h3>";
+								str += "<p>모임 설명 : " + item.postDescr + "</p>";
+								str += "<p>모임 장소 : " + item.locationDetail + "</p>";
+								str += "<p>신청 인원 : " + item.currentPeople + " / " + item.totalPeople + "</p>";
+								str += "<p>마감 일정 : ~ " + item.deadline + "</p>";
+								str += "</div>";
+								str += "</div>";
+								str += "<br>"
+								
+							});
+							$("#postListDiv").html(str);
+	
+				},//success
+				error : function(err) {//요청결과가 실패했을 때 호출될 callback함수
+				console.log(err + "예외발생..");
+				}//error
+			});//ajax */
+	
+		});//SelectFilterBtn_click
 
 	});//ready
 </script>
@@ -148,7 +227,7 @@
 	<section class="postList_section">
 		<div class="container">
 			<div id="postListDiv">
-				<c:forEach items="${requestScope.postList}" var="postlist">
+				<%-- <c:forEach items="${requestScope.postList}" var="postlist">
 					<div class="row">
 						<div class="col-md-7">
         					<a href="front?key=user&mn=userSelectBoard&postNo=${postlist.postNo}">
@@ -164,25 +243,15 @@
         				</div>
 					</div><!-- row -->
 				<br>
-				</c:forEach>
+				</c:forEach> --%>
 			</div>
 		</div><!-- container -->
 	</section><!-- postList_section -->
 	
 	<div class="container">
-		<div class="row">
-			<div class="col">
-				<ul class="pagination" style="justify-content: center;">
-					<li class="page-item"><a class="page-link" href="#">Previous</a></li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item"><a class="page-link" href="#">4</a></li>
-					<li class="page-item"><a class="page-link" href="#">5</a></li>
-					<li class="page-item"><a class="page-link" href="#">Next</a></li>
-				</ul>
-			</div>
-		</div>
+    	<nav aria-label="Page navigation">
+    	    <ul class="pagination" id="pagination"></ul>
+   		</nav>
 	</div>
 
 	<hr>
