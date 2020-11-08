@@ -73,7 +73,7 @@ public class HostController implements Controller {
 		ClientService.clientJoinMoim(dto);
 		
 		if(result > 0) {
-			mv.setViewName(request.getContextPath()+"/index.jsp");
+			mv.setViewName(request.getContextPath()+"/start.jsp");
 			mv.setRedirect(true);
 		} else throw new Exception("asdasd");
 		return mv;
@@ -107,7 +107,7 @@ public class HostController implements Controller {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "asdasdasdasdasdasdasd");
-			mv.setViewName("../index.jsp");
+			mv.setViewName("../start.jsp");
 			mv.setRedirect(false);
 		} else throw new Exception("asdasd");
 		return mv;

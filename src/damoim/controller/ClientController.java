@@ -58,9 +58,11 @@ public class ClientController implements Controller {
 		String replyContent = request.getParameter("reply_content");
 		int userNo = (int) session.getAttribute("session_userNo");
 		String answerNo = request.getParameter("answer_no");
+		
 		ReplyDTO dto = null;
 		if(answerNo==null) {
 			dto = new ReplyDTO(0, Integer.parseInt(postNo), replyContent, 0, userNo, null);
+			mv.setViewName("/front?key=user&mn=userSelectBoard&postNo=" + postNo);
 			
 		}else {
 			dto = new ReplyDTO(0, Integer.parseInt(postNo), replyContent,Integer.parseInt(answerNo), userNo, null);

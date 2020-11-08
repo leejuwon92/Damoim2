@@ -211,7 +211,7 @@
   				</div>  				
   				<div style="text-align: right;">
   					<input type="button" class="btn btn-primary" value="Submit" id="userRegisterBtn" />
-  					<input type="button" class="btn btn-primary" value="Cancle" onclick="location.href='${pageContext.request.contextPath}/index.jsp'" />
+  					<input type="button" class="btn btn-primary" value="Cancle" onclick="location.href='${pageContext.request.contextPath}/start.jsp'" />
   				</div>
   			</form>
 		</div><!-- container -->

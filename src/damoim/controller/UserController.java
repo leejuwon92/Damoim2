@@ -54,7 +54,7 @@ public class UserController implements Controller {
 			session.setAttribute("session_userNo", userNo);
 			session.setAttribute("session_userId", userId);
 			
-			url = request.getContextPath() + "/index.jsp";
+			url = request.getContextPath() + "/start.jsp";
 		}else {
 			url = request.getContextPath() + "/user/failUserSelect.jsp";
 		}

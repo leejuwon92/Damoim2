@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +42,7 @@ $(document).ready(function(){
 			if(confirm('모임에 신청하시겠습니까?')){
 				var postNo = $(this).attr('id');
 				var categoryNo = $(this).attr('name');
-				location.href = "${pageContext.request.contextPath }/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;	
+				location.href = "${pageContext.request.contextPath}/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;	
 			} else {
 				return;
 			}
@@ -65,88 +66,145 @@ $(document).ready(function(){
 		}
 	});
 	
-});//ready
+	$("#questionBtn").click(function(){
+	
+		if( $("#qnaTextArea").val() == "" ){
+			alert("내용을 입력해주세요.");
+			$("#qnaTextArea").focus();
+			return false;
+		}
+		
+		$("#qnaForm").submit();
+		
+	});//questionBtn_click
+	
+	$(document).on("click","#replyBtn",function(){
+		str = "";
+		str += "<table class='table table-borderless' style='margin-top: 10px'>"
+		str += "<tr>"
+		str += "<td width='85%'>";
+		str += "<textarea style='width: 100%; height: 50px' id='qnaTextArea' name='reply_content'></textarea>";		
+		str += "</td>"	
+		str += "<td width='15%'>";
+		str += "<input type='text' name='post_no' value='${postDTO.postNo}' hidden='hidden'>";
+		str += "<input type='text' name='session_userNo' value='${session_userNo}' hidden='hidden'>";
+		str += "<input type='button' class='btn btn-primary' value='질문하기' id='questionBtn'";
+		str += "style='padding: 14px 30px 14px 30px'>";		
+		str += "</td>";
+		str += "</tr>";
+		str += "</table>";
+		/* 
+		$(this).parents().parents().parents().parents().parents().parents().append(str)
+		 */
+		
+		
+	})//replyBtn_click
+	
+});//click
 </script>
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<hr>
 
 <!-- 게시글의 카테고리 이름 section -->
-<section class="categoryName_section">
+<section class="categoryName_section" style="margin-top: 10px">
 	<div class="container">
 		<h4>취미 | ${categoryName}</h4>	
-		<hr>
+		<hr width="300px" align="left">
 	</div><!-- container -->
 </section><!-- categoryName_section -->
 
-<hr>
 <!-- 게시글의 정보가 들어갈 장소 -->
 <section class="postInfo_section">
 	<div class="container">
 		<div style="text-align: center">
-		<h3><b>${postDTO.postTitle}</b></h3>
+			<h3><b>${postDTO.postTitle}</b></h3>
+			<hr>
 		</div>
-		<table class="table table-borderless">
-			<tr>
-				<td rowspan="5" class = "thumbnail">
-					<img class="img-thumbnail"  alt="" 
-					src="${pageContext.request.contextPath}/img/sample/${postDTO.thumbnailFile}"
-					width="50%" height="50%">
-				</td>
-			
-				<td>일시</td>
-				<td>${postDTO.meetingDate}</td>
-			</tr>
-			<tr>
-				<td>장소</td>
-				<td>${postDTO.locationDetail}</td>
-			</tr>
-			<tr>
-				<td>신청인원</td>
-				<td>${postDTO.currentPeople} / ${postDTO.totalPeople} </td>
-			</tr>
-			<tr>
-				<td>신청시간</td>
-				<td>${postDTO.regDate} ~ ${postDTO.deadline}</td>
-			</tr>
-			<tr>
-			<c:choose>
-			<c:when test="${checker == true && postDTO.userNo eq session_userNo }">
-				<td colspan="2">
-				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" value="모임삭제하기" style="width: 100%" ></td>
-			</c:when>
-			<c:when test="${checker == true}">
-				<td colspan="2">
-				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" value="신청취소하기" style="width: 100%" ></td>
-			</c:when>
-			<c:otherwise>
-				<td colspan="2">
-				<input type="button" class="btn btn-primary" id="${postDTO.postNo }" name="${postDTO.categoryCode }" value="신청하기" style="width: 100%" ></td>
-			</c:otherwise>
-			</c:choose>
+		<div class="row">
+			<div class="col-xl-6">
+				<img class="img-thumbnail"  src="${pageContext.request.contextPath}/img/thumbnailimg/${postDTO.thumbnailFile}">
+			</div><!-- col-6 -->
+			<div class="col-xl-6">
 				
-			</tr>
-		</table>
+				<div class="row" style="padding: 19px">
+					<div class="col-xl-4" >
+						장소
+					</div>
+					<div class="col-xl-8">
+						${postDTO.locationDetail}
+					</div>
+				</div>
+				
+				<div class="row" style="padding: 19px">
+					<div class="col-xl-4">
+						모임일
+					</div>
+					<div class="col-xl-8">
+						<fmt:parseDate value="${postDTO.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd HH:mm:ss" />
+    					<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd"/>
+					</div>
+				</div>
+				
+				<div class="row" style="padding: 19px">
+					<div class="col-xl-4">
+						신청인원
+					</div>
+					<div class="col-xl-8">
+						${postDTO.currentPeople} / ${postDTO.totalPeople}
+					</div>
+				</div>
+				
+				<div class="row" style="padding: 19px">
+					<div class="col-xl-4">
+						신청기간
+					</div>
+					<div class="col-xl-8">
+						<fmt:parseDate value="${postDTO.regDate}" var="regDate" pattern="yyyy-MM-dd HH:mm:ss" />
+    					<fmt:formatDate value="${regDate}" pattern="yyyy-MM-dd"/>
+    					&nbsp; ~ &nbsp; 
+    					<fmt:parseDate value="${postDTO.deadline}" var="deadline" pattern="yyyy-MM-dd HH:mm:ss" />
+    					<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd"/>
+					</div>
+				</div>
+				
+				<div class="row" style="padding: 19px">
+					<div class="col-xl-12">
+						<c:choose>
+							<c:when test="${checker == true && postDTO.userNo eq session_userNo }">
+								<input type="button" class="btn btn-primary" id="${postDTO.postNo }" 
+								value="모임삭제하기" style="width: 100%" >
+							</c:when>
+							<c:when test="${checker == true}">
+								<input type="button" class="btn btn-primary" id="${postDTO.postNo }" 
+								value="신청취소하기" style="width: 100%" >
+							</c:when>
+							<c:otherwise>
+								<input type="button" class="btn btn-primary" id="${postDTO.postNo }" 
+								name="${postDTO.categoryCode }" value="신청하기" style="width: 100%" >
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+			</div><!-- col-6 -->
+		</div><!-- row -->
 	</div><!-- container -->
 </section><!-- categoryName_section -->
 
 <!-- 게시글의 내용이 들어갈 장소 -->
-<section class="postContents_section">
+<section class="postContents_section" style="margin-top: 20px">
 	<div class="container">
-		<hr>
 		<h4>상세정보</h4>
-		<hr>
+		<hr width="300px" align="left">
 		${postDTO.postContent}
 	</div><!-- container -->
 </section><!-- postContents_section -->
 
 <!-- 게시글의 장소정보가 들어갈 장소 -->
-<section class="postLocationInfo_section">
+<section class="postLocationInfo_section" style="margin-top: 20px">
 	<div class="container">
-		<hr>
 		<h4>모임장소</h4>
-		<hr>
+		<hr width="300px" align="left">
 		<table class="table table-borderless">
 			<tr>
 				<td>
@@ -162,52 +220,76 @@ $(document).ready(function(){
 </section><!-- postContents_section -->
 
   <!-- 게시글의 질문답변이 들어갈 장소 -->
-<section class="postQnA_section">
+<section class="postQnA_section" style="margin-top: 20px">
 	<div class="container">
-		<hr>
 		<h4>Q&nbsp;&amp;&nbsp;A</h4>
-		<hr>
+		<hr width="300px" align="left">
 		<table class="table table-borderless">
 			<thead class="thead-light">
 				<tr>
-					<th width="70%" style="text-align: center">내용</th>
-					<th width="15%" style="text-align: center">작성자</th>
-					<th width="15%" style="text-align: center">작성일</th>
+					<th width="66%" style="text-align: center">내용</th>
+					<th width="22%" style="text-align: center">작성자</th>
+					<th width="22%" style="text-align: center">작성일</th>
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${requestScope.question}" var="question">
-					<c:if test="${question.answerNo==0}">
-						<tr>
-							<td>${question.replyContent}</td>
-							<td>${question.userNo}</td>
-							<td>${question.regdate}</td>
-						</tr>
-					</c:if>
-					<c:forEach items="${requestScope.answer}" var="answer">
-						<c:if test="${question.questionNo == answer.answerNo}">
-							<tr>
-								<td><span style="margin: 10px">ㄴ</span>${answer.replyContent}</td>
-								<td>${answer.userNo}</td>
-								<td>${answer.regdate}</td>
-							</tr>
-						</c:if>
-					</c:forEach>
-				</c:forEach>
-			</tbody>
-			</table>
+		</table>
+		<c:forEach items="${requestScope.question}" var="question">
+			<c:if test="${question.answerNo==0}">
+				<div class="row" style="padding: 10px">
+					<div class="col-xl-8">
+						<div>
+							<div class="row">
+								<div class="col-xl-10">
+									${question.replyContent}
+								</div>
+								<div class="col-xl-2">
+									<a href="#" id="replyBtn" style="color: gray;">답변하기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xl-2" style="text-align: center">
+						${question.userNo}
+					</div>
+					<div class="col-xl-2" style="text-align: center">
+						${question.regdate}
+					</div>
+				</div>
+			</c:if>
+			<c:forEach items="${requestScope.answer}" var="answer">
+				<c:if test="${question.questionNo == answer.answerNo}">
+					<div class="row">
+						<div class="col-xl-8">
+							<div style="margin-left:30px">
+								${answer.replyContent}
+							</div>
+						</div>
+						<div class="col-xl-2" >
+							${answer.userNo}
+						</div>
+						<div class="col-xl-2">
+							${answer.regdate}
+						</div>
+					</div>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
 			
-			<table class="table table-borderless">
+		<form id="qnaForm" method="post" action="${pageContext.request.contextPath}/front?key=client&mn=clientInsertReply">
+			<table class="table table-borderless" style="margin-top: 10px">
 				<tr>
 					<td width="85%">
-						<textarea style="width: 100%; height: 50px"></textarea>		
+						<textarea style="width: 100%; height: 50px" id="qnaTextArea" name="reply_content"></textarea>		
 					</td>	
 					<td width="15%">
-						<input type="button" class="btn btn-primary" value="질문하기"
-						style="padding: 14px 30px 14px 30px " >		
+						<input type="text" name="post_no" value="${postDTO.postNo}" hidden="hidden">
+						<input type="text" name="session_userNo" value="${session_userNo}" hidden="hidden">
+						<input type="button" class="btn btn-primary" value="질문하기" id="questionBtn" 
+						style="padding: 14px 30px 14px 30px">		
 					</td>
 				</tr>
 			</table>
+		</form>
 			
 	</div><!-- container -->
 </section><!-- postContents_section -->
@@ -215,9 +297,8 @@ $(document).ready(function(){
  <!-- 게시글의 호스트정보가 들어갈 장소 -->
 <section class="postHostInfo_section">
 	<div class="container">
-		<hr>
 		<h4>문의하기</h4>
-		<hr>
+		<hr width="300px" align="left">
 		<table class="table table-borderless">
 			<thead class="thead-light">
 			<tr>
@@ -266,7 +347,7 @@ $(document).ready(function(){
 	searchPlace();
 	
 	function searchPlace(){
-		var keyword = ${postDTO.locationDetail};
+		var keyword = "${postDTO.locationDetail}";
 
 		// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
 		ps.keywordSearch(keyword, placesSearchCB); 

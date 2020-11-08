@@ -13,7 +13,7 @@ $(document).ready(function(){
 	});
 	
 	$("#toMain").click(function(){
-		$(location).attr("href","${pageContext.request.contextPath}/index.jsp");
+		$(location).attr("href","${pageContext.request.contextPath}/start.jsp");
 	});
 });
 </script>

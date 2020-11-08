@@ -42,7 +42,7 @@ div.button input {
 <script type="text/javascript">
 	//홈가기 이동
 	function mainOpen() {
-		location.href = "${pageContext.request.contextPath}/index.jsp";
+		location.href = "${pageContext.request.contextPath}/start.jsp";
 	}
 	//로그인 이동
 	function loginOpen() {

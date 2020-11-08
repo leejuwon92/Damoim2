@@ -41,10 +41,6 @@ public class MakeIndexServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
 		String url = "/index.jsp";
 		request.getRequestDispatcher(url).forward(request, response);
 	}
