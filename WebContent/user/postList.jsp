@@ -109,41 +109,6 @@
 			$("#selSearchOpt").text(str).css({"font-size" : "20px", "color" : "blue"})
 		
 			redraw(1);
-			
-			/* $.ajax({
-				type : "post", //전송방식(get,post,put,delete)
-				url : "${pageContext.request.contextPath}/boardListServlet", //서버주소
-				dataType : "json",//응답 데이터의 type(text, html, xml, json(***))
-				data : $("#selectBoxForm").serialize(),//data 
-				success : function(result) {//요청결과가 성공했을 때 호출될 callback함수
-							$("#postListDiv").empty();
-							var str = "";
-							$.each(result,function(index,item) {
-								
-								str += "<div class='row'>";
-								str += "<div class='col-md-7'>";
-								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
-								str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
-								str += "</a>";
-								str += "</div>";
-								str += "<div class='col-md-5'>";
-								str += "<h3>" + item.postTitle + "</h3>";
-								str += "<p>모임 설명 : " + item.postDescr + "</p>";
-								str += "<p>모임 장소 : " + item.locationDetail + "</p>";
-								str += "<p>신청 인원 : " + item.currentPeople + " / " + item.totalPeople + "</p>";
-								str += "<p>마감 일정 : ~ " + item.deadline + "</p>";
-								str += "</div>";
-								str += "</div>";
-								str += "<br>"
-								
-							});
-							$("#postListDiv").html(str);
-	
-				},//success
-				error : function(err) {//요청결과가 실패했을 때 호출될 callback함수
-				console.log(err + "예외발생..");
-				}//error
-			});//ajax */
 	
 		});//SelectFilterBtn_click
 

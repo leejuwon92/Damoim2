@@ -56,7 +56,10 @@ public class HostController implements Controller {
 		int locationCode = Integer.parseInt(mr.getParameter("location"));
 		String locationDetail = mr.getParameter("locationDetail");
 		String deadline = mr.getParameter("deadline");
+		System.out.println(deadline);
 		String meetingDate = mr.getParameter("meetingDate");
+		System.out.println(meetingDate);
+
 		int totalPeople = Integer.parseInt(mr.getParameter("totalPeople"));
 		String bannerName = "";
 		File thumbnail = mr.getFile("thumbnailFile");

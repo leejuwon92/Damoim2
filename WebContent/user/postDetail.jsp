@@ -17,19 +17,20 @@
 	width: 200px;
 }
 </style>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2625792f1e6e1fac26d00f60d91116c&libraries=services"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2625792f1e6e1fac26d00f60d91116c&libraries=services"></script>
 <script>
 $(document).ready(function(){
 	var session_userNo = '${session_userNo}';
+	var session_userId = '${session_userId}';
 	$(document).on("click", "[value='모임삭제하기']", function(){
-		if(session_userNo != null) {
+		if(session_userNo != "") {
 			if(confirm('정말로 모임을 삭제하시겠습니까?')){
 				var postNo = $(this).attr('id');
 				location.href = "${pageContext.request.contextPath }/front?key=host&mn=hostPostDelete&post_no="+postNo;
 			} else {
 				return;
-			}
+			} 
 		} else {
 			alert("로그인을 해주세요");
 			return;
@@ -37,15 +38,12 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "[value='신청하기']", function(){
-		console.log(session_userNo);
-		if(session_userNo != null){
+		if(session_userNo != ""){
 			if(confirm('모임에 신청하시겠습니까?')){
 				var postNo = $(this).attr('id');
 				var categoryNo = $(this).attr('name');
 				location.href = "${pageContext.request.contextPath}/front?key=client&mn=clientJoinMoim&post_no="+postNo+"&category_no="+categoryNo;	
-			} else {
-				return;
-			}
+			} else return;
 		} else {
 			alert("로그인을 해주세요");		
 			return;
@@ -53,7 +51,7 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", "[value='신청취소하기']", function(){
-		if(session_userNo != null){
+		if(session_userNo != ""){
 			if(confirm('정말로 신청 취소하시겠습니까?')){
 				var postNo=$(this).attr('id');
 				location.href = "${pageContext.request.contextPath}/front?key=client&mn=clientCancleMoim&post_no="+postNo;
