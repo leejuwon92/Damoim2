@@ -14,9 +14,11 @@
     <script src="../js/jquery-1.11.0.min.js"></script>
     <script src="../js/jquery.jqGrid.min.js"></script>
     <script src="../js/grid.locale-kr.js"></script>
-
 <script type="text/javascript">
 $(function(){
+
+	출처: https://pjsprogram.tistory.com/47 [행배]
+	
 	var postNo = '${param.post_no}';
 	console.log(postNo);
 	var userList;
@@ -30,7 +32,6 @@ $(function(){
 				success : function(result){//요청결과가 성공했을 때 호출될 callback함수
 					userList=result;
 					console.log(userList);
-				
 				},
 				error : function(err){ //요청결과가 실패했을 때 호출될 함수
 					console.log(err+"예외발생.");
@@ -43,7 +44,7 @@ $(function(){
 	$("#jqGrid").jqGrid({
 
         data : userList,
-        datatype: "json",
+        datatype: "local",
         colNames: ['NO','ID','NAME','E-MAIL','PHONE'],
         colModel: [
 
@@ -53,12 +54,13 @@ $(function(){
             { name: 'userEmail', index: 'userEmail', width: 100 },
             { name: 'phoneNo', index: 'phoneNo', width: 100 },
         ],
-
-        height: 480,
-        rowNum: 3,//한페이지에서 볼수있는 데이터 수 
-        rowList: [5, 10, 15],//한번에 볼수 있는거
-        pager: '#jqGridPager',//맨밑에 속성 느낌(페이지 설명)
-        rownumbers: true,
+		align:"right",
+		width: 1000,
+        height: 400,
+        rowNum: 30,//한페이지에서 볼수있는 데이터 수 
+        rowList: [30,60],//한번에 볼수 있는거
+       	emptyrecords:"신청자가 존재하지 않습니다.",
+        rownumber: true,
         
 
         viewrecords: true,
@@ -74,23 +76,14 @@ $(function(){
 </head>
 <body>
 
- <div class="row">
+ <div class="row" id ="grid" align="center">
         <div>
             <table id="jqGrid"></table>
-            <div id="jqGridPager"></div>
+           
         </div>
     </div>
 
-    <div>
-        <select id="selectId">
-            <option value="">All</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-        </select>
-        <span><a href="#" onclick="javascript:search();">Search</a></span>
-    </div>
+   
 
 </body>
 </html>

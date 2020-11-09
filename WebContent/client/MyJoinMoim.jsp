@@ -1,6 +1,8 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,7 +37,7 @@
 	    	  <!-- Project One -->
 		      <div class="row">
 		        <div class="col-md-7">
-		          <a href="#">
+		          <a href="${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo=${post.postNo}">
 		            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
 		          </a>
 		        </div>
@@ -80,7 +82,8 @@
         </li>
       </ul>
 
-  
+  	<jsp:useBean id="now" class="java.util.Date"/>
+  	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
     <!-- /.container -->
      <hr color="black">
      <h4 class="my-4">지난 나의 모임</h4>
@@ -92,11 +95,15 @@
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</c:when>
 			<c:otherwise>	
+			
 			<c:forEach items="${postList}" var="post"> 
+			<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"></fmt:parseDate>
+			<fmt:formatDate value="${meetindDate}" pattern="yyyy-MM-dd" var="date"/>
+			<c:if test="${today}<=${date}">
 	    	  <!-- Project One -->
 		      <div class="row">
 		        <div class="col-md-7">
-		          <a href="#">
+		          <a href="${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo=${post.postNo}">
 		            <img class="img-fluid rounded mb-3 mb-md-0" src="http://placehold.it/700x300" alt="">
 		          </a>
 		        </div>
@@ -111,6 +118,7 @@
 	      </div>
 	      <!-- /.row -->
 	      <hr>
+	       </c:if>
    		 </c:forEach>
 		</c:otherwise>
     </c:choose>

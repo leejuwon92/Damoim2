@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,8 @@
       		<!-- Project One -->
       		<div class="row">
         	 <div class="col-md-7">
-          	   <a href="#">
-                <img class="img-fluid rounded mb-3 mb-md-0" src="${pageContext.request.contextPath}/img/sample/logo.png" alt="">
+          	   <a href="${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo=${post.postNo}">
+                <img class="img-fluid rounded mb-3 mb-md-0" src="${post.thumbnailFile}" alt="">
                </a>
              </div>
              <div class="col-md-5">
@@ -38,8 +39,8 @@
           <p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
           <p>현재신청인원 : ${post.currentPeople}</p>
           <p>마감일 : ${post.deadline}</p>
-          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}">신청자 보기</a>
-          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/UpdateMoimForm.jsp">수정하기</a>
+          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}" target="center">신청자 보기</a>
+          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/UpdateMoimForm.jsp" target="center">수정하기</a>
           <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/front?key=host&mn=hostPostDelete&post_no=${post.postNo}">삭제하기</a>
         </div>
       </div>
@@ -76,7 +77,8 @@
         </li>
       </ul>
 
-  
+  	<jsp:useBean id="now" class="java.util.Date"/>
+  	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
     <!-- /.container -->
      <hr color="black">
      <h4 class="my-4">지난 나의 모임</h4>
@@ -89,11 +91,14 @@
 		</c:when>
 			<c:otherwise>	
 			<c:forEach items="${postList}" var="post"> 
+			<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"></fmt:parseDate>
+			<fmt:formatDate value="${meetindDate}" pattern="yyyy-MM-dd" var="date"/>
+			<c:if test="${today}<=${date}">
 	    	  <!-- Project One -->
 		      <div class="row">
 		        <div class="col-md-7">
-		          <a href="#">
-		            <img class="img-fluid rounded mb-3 mb-md-0" src="${pageContext.request.contextPath}/img/sample/logo.png" alt="">
+		          <a href="${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo=${post.postNo}">
+		            <img class="img-fluid rounded mb-3 mb-md-0" src="${post.thumbnailFile}" alt="">
 		          </a>
 		        </div>
 		        <div class="col-md-5">
@@ -107,6 +112,7 @@
 	      </div>
 	      <!-- /.row -->
 	      <hr>
+	      </c:if>
    		 </c:forEach>
 		</c:otherwise>
     </c:choose>
