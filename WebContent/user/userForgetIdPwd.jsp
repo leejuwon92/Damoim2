@@ -175,9 +175,8 @@ $(document).ready(function(){
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<hr>
 
-<div class="container">
+<div class="container" style="margin-top: 30px">
 	<div style="text-align: center" >
 		<h2>D&nbsp;A&nbsp;M&nbsp;O&nbsp;I&nbsp;M</h2>
 		<hr width="400px">
@@ -255,7 +254,6 @@ $(document).ready(function(){
 			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- forget_section -->
-<hr>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>
