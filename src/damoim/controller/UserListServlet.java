@@ -23,7 +23,8 @@ import net.sf.json.JSONObject;
 public class UserListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-System.out.println("HostController list called");
+		response.setContentType("text/html; charset=UTF-8");
+		System.out.println("HostController list called");
 		
 		int boardNum = Integer.parseInt(request.getParameter("post_no"));
 		List<ClientDTO> list = new ArrayList<ClientDTO>();

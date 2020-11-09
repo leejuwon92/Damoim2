@@ -1,17 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.category1_section{
-  font-family: 'Rubik', sans-serif;
-}
-
-</style>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -24,6 +16,7 @@
 </head>
 <body>
 	<jsp:include page="header.jsp"></jsp:include>
+	<hr>
 	
 	<!-- Banner -->
 	<section class="banner">
@@ -34,29 +27,19 @@
    				<li data-target="#demo" data-slide-to="0" class="active"></li>
     			<li data-target="#demo" data-slide-to="1"></li>
     			<li data-target="#demo" data-slide-to="2"></li>
-    			<li data-target="#demo" data-slide-to="3"></li>
   			</ul>
-
+  
 			<!-- The slideshow -->
   			<div class="carousel-inner">
-  				<c:forEach items="${requestScope.bannerList}" var="bannerlist" varStatus="index" >
-  					<c:choose>
-  						<c:when test="${index.count == 1}">
-  							<div class="carousel-item active">
-  								<a href="front?key=user&mn=userSelectBoard&postNo=${bannerlist.postNo}">
-      								<img src="${pageContext.request.contextPath}/img/bannerimg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
-      							</a>
-    						</div>
-  						</c:when >
-  						<c:when test="${index.count != 1}">
-  							<div class="carousel-item ">
-  								<a href="front?key=user&mn=userSelectBoard&postNo=${bannerlist.postNo}">
-      								<img src="${pageContext.request.contextPath}/img/bannerimg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
-      							</a>
-    						</div>
-  						</c:when>
-  					</c:choose>
-  				</c:forEach>
+    			<div class="carousel-item active">
+      				<img src="img/bannerimg/sample_banner.jpg" alt="Los Angeles" width="1920" height="400">
+    			</div>
+    			<div class="carousel-item">
+      				<img src="img/bannerimg/sample_banner.jpg" alt="Chicago" width="1920" height="400">
+    			</div>
+    			<div class="carousel-item">
+      				<img src="img/bannerimg/sample_banner.jpg" alt="New York" width="1920" height="400">
+    			</div>
   			</div>
   
  		 	<!-- Left and right controls -->
@@ -73,7 +56,7 @@
 	<hr>
 	<div class="container">
 		<div style="text-align: left" >
-			<h2>Best MoIm</h2>
+			<h2>Best Moim</h2>
 			<hr width="300px" align="left">
 		</div>
 	</div>
@@ -82,22 +65,41 @@
 	<section class="category1_section">
 		<div class="container">
 			<div class="row">
-			
-				<c:forEach items="${requestScope.bestList}" var="bestlist" varStatus="index" >
-					<div class="col-xl-3">
-						<a href="front?key=user&mn=userSelectBoard&postNo=${bestlist.postNo}">
-      						<img src="${pageContext.request.contextPath}/img/thumbnailimg/${bestlist.thumbnailFile}" width="280px" height="150px">
-      					</a>
-      					<hr>
-      					<h5 style="text-align: center;"><b>${bestlist.postTitle}</b></h5>
-      					<div style="text-align: right">
-      						<fmt:parseDate value="${bestlist.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd HH:mm:ss" />
-      						모임일 : <fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd"/><br>
-      						장소 : ${bestlist.locationDetail}
-      					</div>
-      				</div>
-  				</c:forEach>
-			
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
 			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- category1_section -->
@@ -106,7 +108,7 @@
 	
 	<div class="container">
 		<div style="text-align: left" >
-			<h2>Today's MoIm</h2>
+			<h2>Today's Moim</h2>
 			<hr width="300px" align="left">
 		</div>
 	</div>
@@ -115,27 +117,47 @@
 	<section class="category2_section">
 		<div class="container">
 			<div class="row">
-			
-					<c:forEach items="${requestScope.todayList}" var="todayList" varStatus="index" >
-					<div class="col-xl-3">
-						<a href="front?key=user&mn=userSelectBoard&postNo=${todayList.postNo}">
-      						<img src="${pageContext.request.contextPath}/img/thumbnailimg/${todayList.thumbnailFile}" width="280px" height="150px">
-      					</a>
-      					<hr>
-      					<h5 style="text-align: center;"><b>${todayList.postTitle}</b></h5>
-      					<div style="text-align: right">
-      						<fmt:parseDate value="${todayList.meetingDate}" var="todaymeetingDate" pattern="yyyy-MM-dd HH:mm:ss" />
-      						모임일 : <fmt:formatDate value="${todaymeetingDate}" pattern="yyyy-MM-dd"/><br>
-      						장소 : ${todayList.locationDetail}
-      					</div>
-      				</div>
-  				</c:forEach>
-  				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
+				
+				<div class="col-xl-3">
+					<img src="img/packages/g1.jpg" alt="package-place" width="280px" height="150px">
+					<h4>제목 <span> 제목~~~~ </span></h4>
+					<h4>소개 <span> 소개~~~~ </span></h4>
+					<h4>장소 <span> 장소~~~~ </span></h4>
+					<h4>인원 <span> 인원~~~~ </span></h4>
+					<h4>마감일 <span> 마감일~~~~ </span></h4>
+				</div><!-- col3 -->
 			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- category2_section -->
 	
 	
-	<jsp:include page="footer.jsp"></jsp:include> 
+	<hr>
+	<jsp:include page="footer.jsp"></jsp:include>
 </body>
 </html>
