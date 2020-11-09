@@ -53,8 +53,7 @@
 		</div>
 	</section><!-- Banner -->
 	
-	<hr>
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 		<div style="text-align: left" >
 			<h2>Best Moim</h2>
 			<hr width="300px" align="left">
@@ -104,9 +103,8 @@
 		</div><!-- container -->
 	</section><!-- category1_section -->
 	
-	<hr>
 	
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 		<div style="text-align: left" >
 			<h2>Today's Moim</h2>
 			<hr width="300px" align="left">
@@ -155,7 +153,8 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</section><!-- category2_section -->
-	
+	<br><br>
+
 	
 	<hr>
 	<jsp:include page="footer.jsp"></jsp:include>

@@ -82,9 +82,11 @@ public class ClientController implements Controller {
 		System.out.println("clientDeleteReply call..");
 		ModelAndView mv = new ModelAndView();
 		String questionNo = request.getParameter("question_no");
+		String postNo = request.getParameter("post_no");
+		
 		int result = ClientService.clientDeleteReply(Integer.parseInt(questionNo));
 		if (result > 0) {
-
+			mv.setViewName("/front?key=user&mn=userSelectBoard&postNo="+postNo);
 		} else
 			throw new SQLException("댓글이 정상적으로 삭제되지 않았습니다.");
 		return mv;

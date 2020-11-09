@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
@@ -66,15 +67,17 @@
 								str += "<div class='row'>";
 								str += "<div class='col-md-7'>";
 								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + result[1][i].postNo + "'>";
-								str += "<img class='img-fluid rounded mb-3 mb-md-0' src='http://placehold.it/700x300' alt=''>";
+								str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + result[1][i].thumbnailFile + "' alt='' width='580px' height='290px' >";
 								str += "</a>";
 								str += "</div>";
 								str += "<div class='col-md-5'>";
 								str += "<h3>" + result[1][i].postTitle + "</h3>";
-								str += "<p>모임 설명 : " + result[1][i].postDescr + "</p>";
-								str += "<p>모임 장소 : " + result[1][i].locationDetail + "</p>";
-								str += "<p>신청 인원 : " + result[1][i].currentPeople + " / " + result[1][i].totalPeople + "</p>";
-								str += "<p>마감 일정 : ~ " + result[1][i].deadline + "</p>";
+								str += "<p><b>모임 설명</b> : " + result[1][i].postDescr + "</p>";
+								str += "<p><b>모임 장소</b> : " + result[1][i].locationDetail + "</p>";
+								str += "<p><b>모임 일정</b> : " + formatDate(result[1][i].meetingDate) + "</p>";								
+								str += "<p><b>신청 인원</b>: " + result[1][i].currentPeople + " / " + result[1][i].totalPeople + "</p>";
+								str += "<p><b>마감 일정</b> : ~ " + formatDate(result[1][i].deadline) + "</p>";
+								
 								str += "</div>";
 								str += "</div>";
 								str += "<br>"
@@ -147,6 +150,19 @@
 	
 		});//SelectFilterBtn_click
 
+		function formatDate(date_str){
+			var dateFirstSplit = date_str.split(' ');
+			var dateSplit = dateFirstSplit[0].split('-')
+			var yyyy = dateSplit[0];
+			var mm = dateSplit[1];
+			var dd = dateSplit[2];
+			var str = yyyy + "-" + mm + "-" + dd; 
+			
+			return str;
+		}
+		
+		
+		
 	});//ready
 </script>
 </head>
@@ -160,6 +176,7 @@
 			<form method="post" id="selectBoxForm">
 				<table class="table-borderless">
 					<tr>
+					
 						<td width="65%" rowspan="2"><h2>검색필터</h2></td>
 						<td width="10%">
 							<select class="form-control" name="category" id="category">
