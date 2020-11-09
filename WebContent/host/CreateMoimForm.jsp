@@ -133,7 +133,6 @@ jQuery(function($){
 	        			address_str += strArr[j] + " ";
 	        		}
 	        	}
-	        	
 	            kakao.maps.event.addListener(marker, 'mouseover', function() {
 	                displayInfowindow(marker, title);
 	            });
