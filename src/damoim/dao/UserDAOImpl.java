@@ -153,47 +153,47 @@ public class UserDAOImpl implements UserDAO {
 		try {// 로드 연결 실행
 			con = DbUtil.getConnection();
 			if (categoryNum == 0 && locationCode == 0 && date == 0) {
-				sql = "select * from post order by regdate desc";
+				sql = "select * from post where deadline>=sysdate order by deadline";
 				ps = con.prepareStatement(sql);
 				// ps.setInt(1, categoryNum);
 				// ps.setInt(2, locationCode);
 				// ps.setInt(3, date);
 			}else if(categoryNum != 0 && locationCode == 0 && date == 0) {
-				sql = "select * from post where category_no = ? order by regdate desc";
+				sql = "select * from post where category_no = ? order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				
 			}else if(categoryNum == 0 && locationCode != 0 && date == 0) {
-				sql = "select * from post where location_no = ? order by regdate desc";
+				sql = "select * from post where location_no = ? and deadline>=sysdate order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, locationCode);
 				
 			}else if(categoryNum == 0 && locationCode == 0 && date != 0) {
-				sql = "select * from post where deadline > (sysdate-?) order by regdate desc";
+				sql = "select * from post where deadline >= (sysdate-?) order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, date);
 				
 			}else if(categoryNum != 0 && locationCode != 0 && date == 0) {
-				sql = "select * from post where category_no = ? and location_no = ? order by regdate desc";
+				sql = "select * from post where category_no = ? and location_no = ? deadline>=sysdate order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, locationCode);
 				
 			}else if(categoryNum != 0 && locationCode == 0 && date != 0) {
-				sql = "select * from post where category_no = ? and deadline > (sysdate-?) order by regdate desc";
+				sql = "select * from post where category_no = ? and deadline >= (sysdate-?) order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, date);
 				
 			}else if(categoryNum == 0 && locationCode != 0 && date != 0) {
-				sql = "select * from post where location_no = ? and deadline > (sysdate-?) order by regdate desc";
+				sql = "select * from post where location_no = ? and deadline >= (sysdate-?) order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, locationCode);
 				ps.setInt(2, date);
 				
 				
 			}else if(categoryNum != 0 && locationCode != 0 && date != 0) {
-				sql = "select * from post where category_no = ? and location_no = ? and deadline > (sysdate-?) order by regdate desc";
+				sql = "select * from post where category_no = ? and location_no = ? and deadline >= (sysdate-?) order by deadline";
 				ps = con.prepareStatement(sql);
 				ps.setInt(1, categoryNum);
 				ps.setInt(2, locationCode);
@@ -380,7 +380,7 @@ public class UserDAOImpl implements UserDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<ReplyDTO> list = new ArrayList<ReplyDTO>();
-		String sql = "select * from qna where post_no = ? order by regdate";
+		String sql = "select question_no, post_no, reply_content, answer_no, b.user_no, regdate,user_id from user_table a join qna b on a.user_no = b.user_no where b.post_no = ? order by regdate";
 		
 		try {// 로드 연결 실행
 			con = DbUtil.getConnection();
@@ -395,8 +395,9 @@ public class UserDAOImpl implements UserDAO {
 				int answerNo = rs.getInt(4);
 				int userNo = rs.getInt(5);
 				String regdate = rs.getString(6);
-			
+				String userID = rs.getString(7);
 				ReplyDTO replyDTO = new ReplyDTO(questionNo, postNo, replyContent, answerNo, userNo, regdate);
+				replyDTO.setUserID(userID);
 				list.add(replyDTO);
 			
 			} //while
@@ -434,7 +435,7 @@ public class UserDAOImpl implements UserDAO {
 				ps = con.prepareStatement(sql);
 			}	
 			else if(indexCode == 3) {
-				sql = "select * from post where deadline>sysdate order by deadline";
+				sql = "select * from post where deadline>=sysdate order by deadline";
 				ps = con.prepareStatement(sql);
 			}
 			

@@ -44,8 +44,9 @@ public class HostController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		int maxSize = 1024*1024*100; // 100mb
 		String encoding = "UTF-8";
-		
-		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
+		String saveDir = "Z:/VOL2/2nd_Mini/uploadImg";
+		//MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
+		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
 		System.out.println("HostController insert called...........");
 		String postTitle = mr.getParameter("postTitle");
 		String postDescr = mr.getParameter("postDescr");
@@ -117,13 +118,16 @@ public class HostController implements Controller {
 	}
 	
 	public ModelAndView hostPostDelete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
 		System.out.println("HostController delete called");
 		ModelAndView mv = new ModelAndView();
 		int postNum = Integer.parseInt(request.getParameter("post_no"));
 		int result = HostService.delete(postNum);
 		if(result > 0) {
 			request.setAttribute("msg", "");
-			mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoardList");
+			//mv.setViewName(request.getContextPath()+"/front?key=user&mn=userSelectBoardList");
+			
+			mv.setViewName(request.getContextPath()+"/urlchange.jsp");
 			mv.setRedirect(true);
 		} else throw new Exception("모임을 삭제하는데 실패하였습니다");		
 		return mv;

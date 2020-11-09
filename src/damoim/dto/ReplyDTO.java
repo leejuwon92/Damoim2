@@ -7,6 +7,8 @@ public class ReplyDTO {
 	private int answerNo;
 	private int userNo;
 	private String regdate;
+	private String userID;
+	
 	public ReplyDTO(int questionNo, int postNo, String replyContent, int answerNo, int userNo, String regdate) {
 		this.questionNo = questionNo;
 		this.postNo = postNo;
@@ -51,6 +53,13 @@ public class ReplyDTO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
+	public String getUserID() {
+		return userID;
+	}
+	public void setUserID(String userID) {
+		this.userID = userID;
+	}
+	
 	
 	
 }

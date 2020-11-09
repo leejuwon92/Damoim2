@@ -17,7 +17,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-
+	
+	var session_userNo = '${session_userNo}';
+	
 	$("#registerBtn").click(function(){
 		$(location).attr("href", "${pageContext.request.contextPath}/user/userRegister.jsp");
 	});
@@ -37,13 +39,21 @@ $(document).ready(function(){
 	$("#searchMoimBtn").click(function(){
 		$(location).attr("href", "${pageContext.request.contextPath}/front?key=user&mn=userSelectBoardList");	
 	});
-	
-	$("#searchMyMoimBtn").click(function(){
-		$(location).attr("href", "${pageContext.request.contextPath}/client/MyJoinMoim.jsp");	
-	});
+		
 	
 	$("#openMoimBtn").click(function(){
 		$(location).attr("href", "${pageContext.request.contextPath}/host/CreateMoimForm.jsp");	
+	});
+	
+	$(document).on("click","#searchMyMoimBtn",function(){
+		if(session_userNo ==null||session_userNo==""){
+			alert("로그인을 해주세요");
+			return;
+			}else {
+				//alert(session_userNo);
+				$(location).attr("href", "${pageContext.request.contextPath}/client/MypageIframe.jsp");
+				return;
+			}
 	});
 	
 	

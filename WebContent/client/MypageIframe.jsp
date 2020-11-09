@@ -15,8 +15,18 @@
   th,td{border: 0px gray solid;}
  
  table td:first-child {
-	width:15%;
+	margin-top:20px;
+	margin-left:20px;
+ 	position:absolute;
+	height: 100%;
 }
+table td.gt(0){
+display:inline;
+position:relative;
+width:100vh;
+margin-left: 300px;
+}
+
 </style>
 <script type="text/javascript">
 function calcHeight() 
@@ -34,15 +44,15 @@ function calcHeight()
 </head>
 <body>
 
-<jsp:include page="../header.jsp"></jsp:include>
-<jsp:include page="../client/left.jsp"></jsp:include>
+<jsp:include page="../header.jsp"/>
+
  <table>
  <tr>
-
-  <td><iframe id="the_iframe" width=90%  onLoad="calcHeight();" src="../client/MyPage_main.jsp" name="center" frameborder="0" scrolling="no" height="1"></iframe></td>
+<TD><jsp:include page="../client/left.jsp"/><TD>
+  <td id="second"><iframe id="the_iframe" width="100%" onLoad="calcHeight();" src="../client/MyPage_main.jsp" name="center" frameborder="0" scrolling="no" height="1"></iframe></td>
  </tr>
 </table>
-<jsp:include page="../footer.jsp"></jsp:include>
+<jsp:include page="../footer.jsp"/>
 
 
 </body>
