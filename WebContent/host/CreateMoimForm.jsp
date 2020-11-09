@@ -271,7 +271,6 @@ jQuery(function($){
 	
 	 
 	 $("#submit").click(function(){
-		 alert()
 		 $("#createForm").submit();
 	 });
 	
@@ -298,7 +297,7 @@ jQuery(function($){
 	<section class="OpenMoim_section">
 		<div class="container">
 			<h2>DaMoim 모임 개설</h2>
-			<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostInsert" id="createForm" onSubmit='return checkValid()'>
+			<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostInsert" id="createForm" onSubmit=''>
 				<div class="form-group">
   					<label for="postTitle">모임명</label>
   					<input type="text" class="form-control" name="postTitle" id="postTitle"/>
@@ -343,6 +342,23 @@ jQuery(function($){
     				</select>
   				</div>
   				
+  				
+  				
+  				<div class="form-group">
+  					<label for="deadline">모집 마감일</label>
+  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline"/>
+  				</div>
+  				
+  				<div class="form-group pmd-textfield pmd-textfield-floating-label">
+  					<label for="meetingDate">모임일자</label>
+  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate"/>
+  				</div>
+			
+				<div class="form-group">
+  					<label for="totalPeople">참가인원</label>
+  					<input type="text" class="form-control" name="totalPeople" id="totalPeople"/>
+  				</div>
+				
   				<div class="form-group">
   					<label for="category">장소</label>
   					<select name="location" id="location" name="location" class="custom-select">
@@ -379,27 +395,11 @@ jQuery(function($){
 						</div>
 					</div>
   				</div>
-  				
-  				<div class="form-group">
-  					<label for="deadline">모집 마감일</label>
-  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline"/>
-  				</div>
-  				
-  				<div class="form-group pmd-textfield pmd-textfield-floating-label">
-  					<label for="meetingDate">모임일자</label>
-  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate"/>
-  				</div>
-			
-				<div class="form-group">
-  					<label for="totalPeople">참가인원</label>
-  					<input type="text" class="form-control" name="totalPeople" id="totalPeople"/>
-  				</div>
-				
+  				<br><br><br>
 				<div class="form-group">
 					<input type="button" class="btn btn-primary" id= "submit" value="개설하기">	
   					<input type="button" class="btn btn-primary" value="취소">
   				</div>
-					
 			</form>	<!-- form -->	
 		</div><!-- container -->
 	</section><!-- OpenMoim_section -->
@@ -415,7 +415,6 @@ jQuery(function($){
 	.catch( error => {
     console.error( error );
 } );
-
 </script>
 </body>
 </html>

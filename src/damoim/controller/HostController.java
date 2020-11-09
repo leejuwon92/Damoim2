@@ -57,10 +57,8 @@ public class HostController implements Controller {
 		int locationCode = Integer.parseInt(mr.getParameter("location"));
 		String locationDetail = mr.getParameter("locationDetail");
 		String deadline = mr.getParameter("deadline");
-		System.out.println(deadline);
 		String meetingDate = mr.getParameter("meetingDate");
-		System.out.println(meetingDate);
-
+		
 		int totalPeople = Integer.parseInt(mr.getParameter("totalPeople"));
 		String bannerName = "";
 		File thumbnail = mr.getFile("thumbnailFile");
@@ -70,7 +68,7 @@ public class HostController implements Controller {
 		}
 		String thumbnailName = thumbnail.getName();
 		PostDTO post = new PostDTO(0, userNo, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, null, deadline, meetingDate, totalPeople, 0, thumbnailName, bannerFile); 
-				
+			
 		int result = HostService.insert(post);
 		
 		JoinDTO dto = new JoinDTO(0, 0, userNo,categoryCode);
@@ -92,11 +90,7 @@ public class HostController implements Controller {
 		HttpSession session = request.getSession();
 		int userNo = (int)session.getAttribute("session_userNo");
 		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
-		String postNum = mr.getParameter("post_no");
-		if(postNum == null) {
-			postNum = "1";
-		}
-		int postNo = Integer.parseInt(postNum);
+		int postNo = Integer.parseInt(mr.getParameter("post_no"));
 		String postDescr = mr.getParameter("postDescr");
 		String postContent =mr.getParameter("editordata");
 		int locationCode = Integer.parseInt(mr.getParameter("location"));
@@ -111,9 +105,9 @@ public class HostController implements Controller {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "asdasdasdasdasdasdasd");
-			mv.setViewName("../start.jsp");
-			mv.setRedirect(false);
-		} else throw new Exception("asdasd");
+			mv.setViewName(request.getContextPath()+"/start.jsp");
+			mv.setRedirect(true);
+		} else throw new Exception();
 		return mv;
 	}
 	
