@@ -210,7 +210,7 @@ $(document).ready(function(){
 						
 							<hr>
 							<p class="submit">
-								<input type="button" class="btn btn-primary"  id="selectIdBtn" value="Find ID" style="padding: 5px 50px">
+								<input type="button" class="btn btn-outline-primary"  id="selectIdBtn" value="Find ID" style="padding: 5px 50px">
 							</p>
 						</form><!-- selectIdForm  -->
 					</div><!-- forget_id -->
@@ -245,7 +245,7 @@ $(document).ready(function(){
 							
 							<hr>
 							<p class="submit">
-								<input type="button" class="btn btn-primary"  id="selectPwdBtn" value="Find PWD" style="padding: 5px 50px">
+								<input type="button" class="btn btn-outline-primary"  id="selectPwdBtn" value="Find PWD" style="padding: 5px 50px">
 							</p>
 						</form><!-- selectIdForm  -->
 						</div><!-- forget_pwd -->

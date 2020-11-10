@@ -172,7 +172,7 @@ input[type=text]:focus, input[type=password]:focus {
 				<a class="lost_pass" href="${pageContext.request.contextPath}/user/userForgetIdPwd.jsp">forget ID or PassWord?</a>
 				<hr>
 				<p class="submit">
-				<input type="button" class="btn btn-primary" id="loginBtn" name="loginBtn" value="Login" style="padding: 5px 50px">
+				<input type="button" class="btn btn-outline-primary" id="loginBtn" name="loginBtn" value="Login" style="padding: 5px 50px">
 				</p>
 			</form><!-- loginForm  -->
 		</div><!-- login -->

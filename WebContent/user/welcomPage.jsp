@@ -54,20 +54,18 @@ div.button input {
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<hr>
-	<div class="a">
+	<div class="a" style="margin: 50px 0px">
 		<h1>WELCOME to DamoIm</h1>
 	</div>
 	<div class="b"></div>
 	<img src="${pageContext.request.contextPath}/img/welcome/welcome.jpg" alt="">
 
 
-	<div class="button" style="text-align: center">
-		<input type="button" class="btn btn-primary" value="홈가기" onclick="mainOpen()" /> 
-		<input type="button" class="btn btn-primary" value="로그인하기" onclick="loginOpen()" />
+	<div class="button" style="text-align: center" >
+		<input type="button" class="btn btn-outline-primary" value="홈가기" onclick="mainOpen()" /> 
+		<input type="button" class="btn btn-outline-primary" value="로그인하기" onclick="loginOpen()" />
 	</div>
-
-	<hr>
+	<div style="margin-bottom: 50px"></div>
 	<jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

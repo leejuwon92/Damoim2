@@ -187,7 +187,7 @@ $(document).ready(function(){
 	<section class="chart_section">
 		<div class="container_fluid">
 			<!-- Head Title -->
-			<div style="text-align: left" >
+			<div style="text-align: left; margin-top: 40px" >
 				<h3><b>나의 모임 한눈에 보기</b></h3>
 				<hr width="400px" align="left">
 			</div>

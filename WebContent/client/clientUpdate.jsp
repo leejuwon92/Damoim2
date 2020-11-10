@@ -161,47 +161,47 @@
 </head>
 <body>
 
-	<hr>
-	
 	<!-- 회원정보 수정 -->
 	<section class="registration_section">
-		<div class = "container">
-			<h2>회원 정보 수정</h2>
-	<form id="updateForm" method="post" action="${pageContext.request.contextPath}/front?key=client&mn=clientUpdateClientInform">
-		<div class="form-group">
-			<label for="user_name">Name:<span id="nameCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="userName" id="user_name" value="${client.userName }"/>
-		</div>
+		<div class = "container-fluid">
+			<!-- Head Title -->
+			<div style="text-align: left; margin-top: 35px" >
+				<h3><b>회원 정보 수정</b></h3>
+				<hr width="300px" align="left">
+			</div>
+			<form id="updateForm" method="post" action="${pageContext.request.contextPath}/front?key=client&mn=clientUpdateClientInform">
+				<div class="form-group">
+					<label for="user_name">Name:<span id="nameCheckSpan"></span></label>
+		  			<input type="text" class="form-control" name="userName" id="user_name" value="${client.userName }"/>
+				</div>
+				
+				<div class="form-group">
+		  			<label for="user_pwd">Password:</label>
+		  			<input type="password" class="form-control" name="userPwd" id="user_pwd"/>
+		  		</div>
+		  		
+				<div class="form-group">
+		  			<label for="user_pwdcheck">Password Check:<span id="pwdCheckSpan"></span></label>
+		  			<input type="password" class="form-control" name="pwdcheck" id="user_pwdcheck" />
+		  		</div>
+		  		
+		  		
+				<div class="form-group">
+		  			<label for="user_email">E-mail:<span id="emailCheckSpan"></span></label>
+		  			<input type="text" class="form-control" name="userEmail" id="user_email" value="${client.userEmail}"/>
+		  		</div>
 		
-		<div class="form-group">
-  			<label for="user_pwd">Password:</label>
-  			<input type="password" class="form-control" name="userPwd" id="user_pwd"/>
-  		</div>
-  		
-		<div class="form-group">
-  			<label for="user_pwdcheck">Password Check:<span id="pwdCheckSpan"></span></label>
-  			<input type="password" class="form-control" name="pwdcheck" id="user_pwdcheck" />
-  		</div>
-  		
-  		
-		<div class="form-group">
-  			<label for="user_email">E-mail:<span id="emailCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="userEmail" id="user_email" value="${client.userEmail}"/>
-  		</div>
-
-		<div class="form-group">
-  			<label for="user_phone">Phone:<span id="phoneCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="phoneNo" id="user_phone" value="${client.phoneNo}"/>
-  		</div>  
-  		
-  		<input type="button" class="btn btn-primary" value="수정하기" id="userUpdateBtn" />
-  		<input type="button" class="btn btn-primary" value="취소하기" onclick="location.href='index.jsp'" />
-		
-
-		</form>
-	</div>
-	</section>
-	<hr>
+				<div class="form-group">
+		  			<label for="user_phone">Phone:<span id="phoneCheckSpan"></span></label>
+		  			<input type="text" class="form-control" name="phoneNo" id="user_phone" value="${client.phoneNo}"/>
+		  		</div>  
+		  		<div style="text-align: left">
+		  			<input type="button" class="btn btn-outline-primary" value="수정하기" id="userUpdateBtn" />
+		  			<input type="button" class="btn btn-outline-primary" value="취소하기" onclick="location.href='start.jsp'" />
+				</div>
+			</form>
+		</div><!-- container-fluid -->
+	</section><!-- registration_section -->
 
 	</body>
 </html>

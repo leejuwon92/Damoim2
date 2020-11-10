@@ -35,7 +35,7 @@ $(document).ready(function(){
 <body>
 	<section class="answer_section">
 		<div class="container_fluid">
-			<h4>답변하기  </h4>
+			<h4>Answer</h4>
 			<hr width="300px" align="left">
 			
 			<form id="answerForm" method="post" action="${pageContext.request.contextPath}/front?key=client&mn=clientInsertReply&answer_no=${param.questionNo}">
@@ -48,7 +48,7 @@ $(document).ready(function(){
 						<input type="text" name="post_no" value="${param.post_no}" hidden="hidden">
 						<input type="text" name="session_userNo" value="${param.session_userNo}" hidden="hidden">
 						<input type="text" name="answer_no" value="${param.questionNo}" hidden="hidden">
-						<input type="button" class="btn btn-primary" value="답변하기" id="answerBtn" 
+						<input type="button" class="btn btn-outline-primary" value="답변하기" id="answerBtn" 
 						style="padding: 14px 30px 14px 30px">		
 					</td>
 				</tr>

@@ -196,7 +196,7 @@ public class ClientController implements Controller {
 		int result = ClientService.clientUpdateClientInform(dto);
 		if (result > 0) {
 			mv.setRedirect(true);
-			mv.setViewName(request.getContextPath() + "/client/MyPage_main.jsp");
+			mv.setViewName(request.getContextPath() + "/client/MypageIframe.jsp");
 		} else
 			throw new SQLException("정보가 정상적으로 수정되지 않았습니다.");
 		return mv;

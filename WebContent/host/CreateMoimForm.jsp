@@ -288,7 +288,6 @@
 </head>
 <body>
 <jsp:include page="../header.jsp"></jsp:include>
-<hr>
 
 <%
 	if(session.getAttribute("session_userNo") == null || session.getAttribute("session_userNo") == null) {
@@ -305,7 +304,11 @@
 		
 	<section class="OpenMoim_section">
 		<div class="container">
-			<h2>DaMoim 모임 개설</h2>
+			<!-- Head Title -->
+			<div style="text-align: left; margin-top: 35px" >
+				<h3><b>DaMoim 모임 개설</b></h3>
+				<hr width="300px" align="left">
+			</div>
 			<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostInsert" id="createForm" onSubmit=''>
 				<div class="form-group">
   					<label for="postTitle">모임명</label>
@@ -404,10 +407,12 @@
 						</div>
 					</div>
   				</div>
-  				<br><br><br>
-				<div class="form-group">
-					<input type="button" class="btn btn-primary" id= "submit" value="개설하기">	
-  					<input type="button" class="btn btn-primary" value="취소">
+  				<hr>
+  				<br>
+				<div class="form-group" style="text-align: right">
+					
+					<input type="button" class="btn btn-outline-primary" id= "submit" value="개설하기">	
+  					<input type="button" class="btn btn-outline-primary" value="취소">
   				</div>
 			</form>	<!-- form -->	
 		</div><!-- container -->
@@ -415,7 +420,6 @@
 		
 <% } %>
 
-<hr>
 <jsp:include page="../footer.jsp"></jsp:include>
 
 <script type="text/javascript">

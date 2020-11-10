@@ -133,15 +133,13 @@
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<hr>
 
 	<!-- 행사검색 게시판 검색필터 Section -->
 	<section class="searchFilter_section">
-		<div class="container">
+		<div class="container" style="margin-top: 30px">
 			<form method="post" id="selectBoxForm">
 				<table class="table-borderless">
 					<tr>
-					
 						<td width="65%" rowspan="2"><h2>검색필터</h2></td>
 						<td width="10%">
 							<select class="form-control" name="category" id="category">
@@ -183,7 +181,7 @@
 					</tr>
 					<tr>
 						<td colspan="3">
-							<input type="button" class="btn btn-primary" value="조회하기" id="SelectFilterBtn"
+							<input type="button" class="btn btn-outline-primary" value="조회하기" id="SelectFilterBtn"
 							style="padding: 5px 171px;"> 
 						</td>
 					</tr>
@@ -236,7 +234,6 @@
    		</nav>
 	</div>
 
-	<hr>
 	<jsp:include page="../footer.jsp"></jsp:include>\
 </body>
 </html>
