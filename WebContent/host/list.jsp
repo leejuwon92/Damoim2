@@ -16,9 +16,6 @@
     <script src="../js/grid.locale-kr.js"></script>
 <script type="text/javascript">
 $(function(){
-
-	출처: https://pjsprogram.tistory.com/47 [행배]
-	
 	var postNo = '${param.post_no}';
 	console.log(postNo);
 	var userList;

@@ -8,49 +8,17 @@
 <title>Insert title here</title>
 <style type="text/css">
 
-html,body{
-margin:0;
-padding:0;
-height: 100vh;
-overflow: hidden;
-}
-div{
- padding: 10px; height: auto;overflow: auto;
 
-}
 </style>
-<link rel="stylesheet" href="../css/client/bootstrap.min.css">
-<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <script type="text/javascript">
 $(function(){
 	var userNo = '${session_userNo}';
-	 function joinList(){
-		 $.ajax({
-				type :"get" , //전송방식(get,post,put,delete,)
-				url : "../joinMain", //서버주소
-				 async:false,
-				dataType : "json", //응답데이터의 타입(text,json,html,xml) 기본값 -text
-				success : function(result){//요청결과가 성공했을 때 호출될 callback함수
-					var str="";
-					$.each(result,function(index,item){
-						if(index<=2){
-							str+="<div class='row'><div class='col-md-7'>";
-		   					str+="<a href='${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo="+item.postNo+"'><img class='img-fluid rounded mb-3 mb-md-0' src='${pageContext.request.contextPath}/img/";
-		   					str+=item.thumbnailFile+ "' alt=''></a></div>";
-		   					str+="<div class='col-md-5'><h4>";
-								str+=item.postTitle+"</h4><h5>";
-								str+=item.postDescr+"</h5></div></div>";
-						}
-						
-					});
-					$("#createMoim").after(str);
-				},
-				error : function(err){ //요청결과가 실패했을 때 호출될 함수
-					console.log(err+"예외발생.");
-				}
-			});//ajax끝
-	 }
-	joinList();
 	
 	function createList(){
 		 $.ajax({
@@ -62,16 +30,25 @@ $(function(){
 					var str="";
 					$.each(result,function(index,item){
 						if(index<=2){
-						str+="<div class='row'><div class='col-md-7'>";
-   					str+="<a href='${pageContext.request.contextPath}/front/key=user&mn=userSelectBoard?postNo="+item.postNo+"'><img class='img-fluid rounded mb-3 mb-md-0' src='${pageContext.request.contextPath}/img/";
-   					str+=item.thumbnailFile+ "' alt=''></a></div>";
-   					str+="<div class='col-md-5'><h4>";
-						str+=item.postTitle+"</h4><h5>";
-						str+=item.postDescr+"</h5></div></div>";
+							
+							str += "<div class='row' style='padding: 20px'>";
+							str += "<div class='col-xl-5'>";
+							str += "<a href='${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
+							str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
+							str += "</a>";
+							str += "</div>";
+							str += "<div class='col-xl-7'>";
+							str += "<div style='text-align: left;'><h5><b>제목 : " + item.postTitle + "</b></h5></div>";
+							str += "<br>"
+							str += "<div style='text-align: left;'><h5><b>설명 : " + item.postDescr + "</b></h5></div>";
+							str += "</div>";
+							str += "<hr>";
+							str += "</div>";
 						}
 						
 					});
-					$("#joinMoim").after(str);
+					
+					$("#createMoim").append(str);
 				},
 				error : function(err){ //요청결과가 실패했을 때 호출될 함수
 					console.log(err+"예외발생.");
@@ -80,27 +57,63 @@ $(function(){
 	 }
 	createList();
 	
-	
+	 function joinList(){
+		 $.ajax({
+				type :"get" , //전송방식(get,post,put,delete,)
+				url : "../joinMain", //서버주소
+				async:false,
+				dataType : "json", //응답데이터의 타입(text,json,html,xml) 기본값 -text
+				success : function(result){//요청결과가 성공했을 때 호출될 callback함수
+					var str="";
+					$.each(result,function(index,item){
+						if(index<=2){
+							$("#joinMoim").empty();
+							
+							str += "<div class='row' style='padding: 20px'>";
+							str += "<div class='col-xl-5'>";
+							str += "<a href='${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
+							str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
+							str += "</a>";
+							str += "</div>";
+							str += "<div class='col-xl-7'>";
+							str += "<div style='text-align: left;'><h5><b>제목 : " + item.postTitle + "</b></h5></div>";
+							str += "<br>"
+							str += "<div style='text-align: left;'><h5><b>설명 : " + item.postDescr + "</b></h5></div>";
+							str += "</div>";
+							str += "<hr>";
+							str += "</div>";
+						}
+					});
+					$("#joinMoim").append(str);
+				},
+				error : function(err){ //요청결과가 실패했을 때 호출될 함수
+					console.log(err+"예외발생.");
+				}
+			});//ajax끝
+	 }
+	joinList();
 	
 })
 
 </script>
 </head>
 <body>
- <div class="container">
-      <!-- Page Heading -->
-      <h1 class="my-4" id="createMoim">개설한 모임</h1>
-      <hr>
+	<section class="mypageMain_section">
+		<div class="container-fluid">	
+		
+			<div style="text-align: left; margin-top: 35px" >
+				<h3><b>개설한 모임</b></h3>
+				<hr width="300px" align="left">
+			</div>
+			<div id="createMoim"></div>
+			
+			<div style="text-align: left; margin-top: 35px" >
+				<h3><b>신청한 모임</b></h3>
+				<hr width="300px" align="left">
+			</div>
+			<div id="joinMoim"></div>
+		</div><!-- container -->
+	</section><!-- mypageMain_section -->
       
-      <hr>
-   
-       <!-- Page Heading -->
-      <h1 class="my-4" id="joinMoim">신청한 모임</h1>
-        <hr>
-        	
-      
- </div>
-
-
 </body>
 </html>

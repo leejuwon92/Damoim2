@@ -170,12 +170,12 @@
 	<form id="updateForm" method="post" action="${pageContext.request.contextPath}/front?key=client&mn=clientUpdateClientInform">
 		<div class="form-group">
 			<label for="user_name">Name:<span id="nameCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="userName" id="user_name"/>
+  			<input type="text" class="form-control" name="userName" id="user_name" value="${client.userName }"/>
 		</div>
 		
 		<div class="form-group">
   			<label for="user_pwd">Password:</label>
-  			<input type="password" class="form-control" name="userPwd" id="user_pwd">
+  			<input type="password" class="form-control" name="userPwd" id="user_pwd"/>
   		</div>
   		
 		<div class="form-group">
@@ -186,12 +186,12 @@
   		
 		<div class="form-group">
   			<label for="user_email">E-mail:<span id="emailCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="userEmail" id="user_email"/>
+  			<input type="text" class="form-control" name="userEmail" id="user_email" value="${client.userEmail}"/>
   		</div>
 
 		<div class="form-group">
   			<label for="user_phone">Phone:<span id="phoneCheckSpan"></span></label>
-  			<input type="text" class="form-control" name="phoneNo" id="user_phone"/>
+  			<input type="text" class="form-control" name="phoneNo" id="user_phone" value="${client.phoneNo}"/>
   		</div>  
   		
   		<input type="button" class="btn btn-primary" value="수정하기" id="userUpdateBtn" />
@@ -200,8 +200,8 @@
 
 		</form>
 	</div>
-</section>
+	</section>
 	<hr>
 
-</body>
+	</body>
 </html>

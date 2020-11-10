@@ -16,6 +16,7 @@ import damoim.dto.JoinDTO;
 import damoim.dto.PostDTO;
 import damoim.service.ClientService;
 import damoim.service.HostService;
+import damoim.service.UserService;
 
 public class HostController implements Controller {
 
@@ -124,6 +125,14 @@ public class HostController implements Controller {
 			mv.setViewName(request.getContextPath()+"/urlchange.jsp");
 			mv.setRedirect(true);
 		} else throw new Exception("모임을 삭제하는데 실패하였습니다");		
+		return mv;
+	}
+	
+	public ModelAndView hostMoimUpdateData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mv = new ModelAndView("/host/UpdateMoimForm.jsp", false);
+		int postNo = Integer.parseInt(request.getParameter("post_no"));
+		PostDTO dto = UserService.userSelectBoard(postNo);
+		request.setAttribute("post", dto);
 		return mv;
 	}
 
