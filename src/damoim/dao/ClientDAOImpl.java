@@ -123,7 +123,8 @@ public class ClientDAOImpl implements ClientDAO {
 	public int[] clientSelectChart(int clientNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "select category_no from join_table where user_no=?";
+		String sql = "select category_no from join_table jo join post po on jo.post_no"
+				+ "= po.post_no where jo.user_no!=po.user_no and jo.user_no = ?";
 		ResultSet rs = null;
 		int count1 = 0;
 		int count2 = 0;
