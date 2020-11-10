@@ -67,7 +67,7 @@
 								str += "<div class='row'>";
 								str += "<div class='col-md-7'>";
 								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + result[1][i].postNo + "'>";
-								str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + result[1][i].thumbnailFile + "' alt='' width='580px' height='290px' >";
+								str += "<img src='${pageContext.request.contextPath}/img/uploadImg/" + result[1][i].thumbnailFile + "' alt='' width='580px' height='290px' >";
 								str += "</a>";
 								str += "</div>";
 								str += "<div class='col-md-5'>";

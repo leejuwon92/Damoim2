@@ -34,7 +34,7 @@ $(function(){
 							str += "<div class='row' style='padding: 20px'>";
 							str += "<div class='col-xl-5'>";
 							str += "<a href='${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
-							str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
+							str += "<img src='${pageContext.request.contextPath}/img/uploadImg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
 							str += "</a>";
 							str += "</div>";
 							str += "<div class='col-xl-7'>";
@@ -72,7 +72,7 @@ $(function(){
 							str += "<div class='row' style='padding: 20px'>";
 							str += "<div class='col-xl-5'>";
 							str += "<a href='${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";
-							str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
+							str += "<img src='${pageContext.request.contextPath}/img/uploadImg/" + item.thumbnailFile + "' alt='' width='450px' height='150px'>";
 							str += "</a>";
 							str += "</div>";
 							str += "<div class='col-xl-7'>";
