@@ -16,6 +16,7 @@ import damoim.dto.JoinDTO;
 import damoim.dto.PostDTO;
 import damoim.service.ClientService;
 import damoim.service.HostService;
+import damoim.service.UserService;
 
 public class HostController implements Controller {
 
@@ -57,10 +58,8 @@ public class HostController implements Controller {
 		int locationCode = Integer.parseInt(mr.getParameter("location"));
 		String locationDetail = mr.getParameter("locationDetail");
 		String deadline = mr.getParameter("deadline");
-		System.out.println(deadline);
 		String meetingDate = mr.getParameter("meetingDate");
-		System.out.println(meetingDate);
-
+		
 		int totalPeople = Integer.parseInt(mr.getParameter("totalPeople"));
 		String bannerName = "";
 		File thumbnail = mr.getFile("thumbnailFile");
@@ -70,7 +69,7 @@ public class HostController implements Controller {
 		}
 		String thumbnailName = thumbnail.getName();
 		PostDTO post = new PostDTO(0, userNo, postTitle, postDescr, postContent, categoryCode, locationCode, locationDetail, null, deadline, meetingDate, totalPeople, 0, thumbnailName, bannerFile); 
-				
+			
 		int result = HostService.insert(post);
 		
 		JoinDTO dto = new JoinDTO(0, 0, userNo,categoryCode);
@@ -92,11 +91,7 @@ public class HostController implements Controller {
 		HttpSession session = request.getSession();
 		int userNo = (int)session.getAttribute("session_userNo");
 		MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
-		String postNum = mr.getParameter("post_no");
-		if(postNum == null) {
-			postNum = "1";
-		}
-		int postNo = Integer.parseInt(postNum);
+		int postNo = Integer.parseInt(mr.getParameter("post_no"));
 		String postDescr = mr.getParameter("postDescr");
 		String postContent =mr.getParameter("editordata");
 		int locationCode = Integer.parseInt(mr.getParameter("location"));
@@ -111,9 +106,9 @@ public class HostController implements Controller {
 		
 		if(result > 0) {
 			request.setAttribute("msg", "asdasdasdasdasdasdasd");
-			mv.setViewName("../start.jsp");
-			mv.setRedirect(false);
-		} else throw new Exception("asdasd");
+			mv.setViewName(request.getContextPath()+"/start.jsp");
+			mv.setRedirect(true);
+		} else throw new Exception();
 		return mv;
 	}
 	
@@ -130,6 +125,14 @@ public class HostController implements Controller {
 			mv.setViewName(request.getContextPath()+"/urlchange.jsp");
 			mv.setRedirect(true);
 		} else throw new Exception("모임을 삭제하는데 실패하였습니다");		
+		return mv;
+	}
+	
+	public ModelAndView hostMoimUpdateData(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mv = new ModelAndView("/host/UpdateMoimForm.jsp", false);
+		int postNo = Integer.parseInt(request.getParameter("post_no"));
+		PostDTO dto = UserService.userSelectBoard(postNo);
+		request.setAttribute("post", dto);
 		return mv;
 	}
 

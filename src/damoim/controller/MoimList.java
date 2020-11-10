@@ -41,7 +41,9 @@ public class MoimList extends HttpServlet {
 	 	} catch (SQLException e) { 
 	 		e.printStackTrace(); 
 	 	}
-	 	
+	 	for(PostDTO post:postList) {
+			System.out.println(post.getPostDescr());
+		}
 		response.setContentType("text/html;charset=UTF-8"); 
 	 	response.getWriter().print(json);
 	}
