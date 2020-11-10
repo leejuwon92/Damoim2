@@ -14,6 +14,7 @@ import damoim.dto.JoinDTO;
 import damoim.dto.PostDTO;
 import damoim.dto.ReplyDTO;
 import damoim.service.ClientService;
+import damoim.service.UserService;
 import net.sf.json.JSONArray;
 
 public class ClientController implements Controller {
@@ -198,6 +199,15 @@ public class ClientController implements Controller {
 			mv.setViewName(request.getContextPath() + "/client/MyPage_main.jsp");
 		} else
 			throw new SQLException("정보가 정상적으로 수정되지 않았습니다.");
+		return mv;
+	}
+	
+	public ModelAndView clientUpdateData(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException {
+		ModelAndView mv = new ModelAndView("/client/clientUpdate.jsp", false);
+		int sessionUserNo = (int)request.getSession().getAttribute("session_userNo");
+		ClientDTO dto = UserService.userSelectClient(sessionUserNo);
+		request.setAttribute("client", dto);
 		return mv;
 	}
 }

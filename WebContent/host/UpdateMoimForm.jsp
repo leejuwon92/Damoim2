@@ -6,31 +6,31 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<script type="text/javascript" src="../js/jquery-3.5.1.js"></script>
+<!-- jQuery cdn -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<!-- bootstrap cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- ckEditor CDN -->
 <script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
-<!-- datepicker -->
+<!-- datepicker cdn	 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js"></script>
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="../css/host/bootstrap.min.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/host/bootstrap.min.css">
 
 <!-- map API -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2625792f1e6e1fac26d00f60d91116c&libraries=services"></script>
-<link rel="stylesheet" href="../css/host/map.css" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/host/map.css" type="text/css" />
 
 <script type="text/javascript">
-
-
 jQuery(function($){	
-	$('#deadline', '#meetingDate').datepicker({
+	$('#deadline, #meetingDate').datepicker({
         calendarWeeks: false,
         todayHighlight: true,
         autoclose: true,
@@ -293,10 +293,10 @@ jQuery(function($){
 <h2>DaMoim 모임 수정</h2>
 <form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostUpdate" id="createForm" onSubmit=''>
 
-    <input type="hidden" id="post_no" name="post_no" value="<%=request.getParameter("post_no")%>"/>
+    <input type="hidden" id="post_no" name="post_no" value="${post.postNo }"/>
     <div class="form-group">
   					<label for="postDescr">모임 간단 소개</label>
-  					<input type="text" class="form-control" name="postDescr" id="postDescr"/>
+  					<input type="text" class="form-control" name="postDescr" id="postDescr" value="${post.postDescr }"/>
   				</div>
 	<br>
 	
@@ -308,45 +308,45 @@ jQuery(function($){
 	<br>
     <div class="form-group">
   					<label for="deadline">모집 마감일</label>
-  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline"/>
+  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline" value="${post.deadline }"/>
   	</div>
 	<div class="form-group pmd-textfield pmd-textfield-floating-label">
   					<label for="meetingDate">모임일자</label>
-  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate"/>
+  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate" value="${post.meetingDate }"/>
   	</div>
   				
 	<div class="form-group">
   					<label for="totalPeople">참가인원</label>
-  					<input type="text" class="form-control" name="totalPeople" id="totalPeople"/>
+  					<input type="text" class="form-control" name="totalPeople" id="totalPeople" value="${post.totalPeople }"/>
     </div>
      <br>
     
     <div class="form-group">
-  					<label for="category">장소</label>
-	  <select name="location" id="location" name="location" class="custom-select">
-    <option value="0">--지역을 선택하세요 --</option>
-      <option value="1">서울시</option>
-      <option value="2">경기도</option>
-      <option value="3">인천시</option>
-      <option value="4">충청도</option>
-      <option value="5">강원도</option>
-      <option value="6">전라도</option>
-      <option value="7">경상도</option>
-      <option value="8">제주도</option>
-    </select>
+  			<label for="category">장소</label>
+	  		<select name="location" id="location" name="location" class="custom-select" value="${post.locationCode }">
+	    		<option value="0">--지역을 선택하세요 --</option>
+			    <option value="1">서울시</option>
+			    <option value="2">경기도</option>
+			    <option value="3">인천시</option>
+			    <option value="4">충청도</option>
+			    <option value="5">강원도</option>
+			    <option value="6">전라도</option>
+			    <option value="7">경상도</option>
+			    <option value="8">제주도</option>
+		    </select>
 	
 	<br>
     <div class="form-group">
 		<label for="locationDetail">상세주소</label>
 		<p>
-		<input type="text" class="form-control" name="locationDetail" id="locationDetail"/>
+		<input type="text" class="form-control" name="locationDetail" id="locationDetail" value="${post.locationDetail }"/>
 		<div class="map_wrap">
 	    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 		    	<div id="menu_wrap" class="bg_white">
 		       		<div class="option">
 		            	<div>
 		                	<form onsubmit="searchPlaces(); return false;">
-		                  	키워드 : <input type="text" value="한국소프트웨어기술진흥협회" id="keyword" size="15"> 
+		                  	키워드 : <input type="text" value="${post.locationDetail }" id="keyword" size="15"> 
 		                    <button type="button" id="search">검색하기</button> 
 		                	</form>
 		            	</div>

@@ -17,7 +17,7 @@
               <li>
                 <span class="k">회원정보설정</span>
                 <ul>
-                <li><a href="${pageContext.request.contextPath}/client/clientUpdate.jsp" target="center">회원정보수정</a></li>
+                <li><a href="${pageContext.request.contextPath}/front?key=client&mn=clientUpdateData" target="center">회원정보수정</a></li>
                 </ul>
                 <li>
                   <span class="k">신청내역관리</span>

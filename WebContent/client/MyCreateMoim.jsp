@@ -40,7 +40,7 @@
           <p>현재신청인원 : ${post.currentPeople}</p>
           <p>마감일 : ${post.deadline}</p>
           <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}" target="center">신청자 보기</a>
-          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/UpdateMoimForm.jsp?post_no=${post.postNo}" target="center">수정하기</a>
+          <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/front?key=host&mn=hostMoimUpdateData&post_no=${post.postNo}" target="center">수정하기</a>
           <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/front?key=host&mn=hostPostDelete&post_no=${post.postNo}">삭제하기</a>
         </div>
       </div>

@@ -86,9 +86,7 @@ public class UserController implements Controller {
 	}
 	
 	public ModelAndView userSelectPwd(HttpServletRequest request, HttpServletResponse response) throws SQLException {
-		
 		ModelAndView mv = new ModelAndView();
-		
 		String userId = request.getParameter("id");
 		String userName = request.getParameter("name");
 		String userEmail = request.getParameter("email");
