@@ -123,7 +123,7 @@ public class ClientDAOImpl implements ClientDAO {
 	public int[] clientSelectChart(int clientNo) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String sql = "select category_no from join_table jo join post po on jo.post_no"
+		String sql = "select po.category_no from join_table jo join post po on jo.post_no"
 				+ "= po.post_no where jo.user_no!=po.user_no and jo.user_no = ?";
 		ResultSet rs = null;
 		int count1 = 0;
@@ -147,27 +147,27 @@ public class ClientDAOImpl implements ClientDAO {
 				int cateCount = rs.getInt(1);
 				switch (cateCount) {
 				case 1:
-					count1++;
+					count1++; break;
 				case 2:
-					count2++;
+					count2++; break;
 				case 3:
-					count3++;
+					count3++; break;
 				case 4:
-					count4++;
+					count4++; break;
 				case 5:
-					count5++;
+					count5++; break;
 				case 6:
-					count6++;
+					count6++; break;
 				case 7:
-					count7++;
+					count7++; break;
 				case 8:
-					count8++;
+					count8++; break;
 				case 9:
-					count9++;
+					count9++; break;
 				case 10:
-					count10++;
+					count10++; break;
 				case 11:
-					count11++;
+					count11++; break;
 				}
 				result[0] = count1;
 				result[1] = count2;
@@ -215,27 +215,27 @@ public class ClientDAOImpl implements ClientDAO {
 				int cateCount = rs.getInt(1);
 				switch (cateCount) {
 				case 1:
-					count1++;
+					count1++; break;
 				case 2:
-					count2++;
+					count2++; break;
 				case 3:
-					count3++;
+					count3++; break;
 				case 4:
-					count4++;
+					count4++; break;
 				case 5:
-					count5++;
+					count5++; break;
 				case 6:
-					count6++;
+					count6++; break;
 				case 7:
-					count7++;
+					count7++; break;
 				case 8:
-					count8++;
+					count8++; break;
 				case 9:
-					count9++;
+					count9++; break;
 				case 10:
-					count10++;
+					count10++; break;
 				case 11:
-					count11++;
+					count11++; break;
 				}
 				result[0] = count1;
 				result[1] = count2;

@@ -38,9 +38,9 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${postList}" var="post">
-						<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
-						<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>	
-						<c:if test="${today < date}">	
+						<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
+						<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>	
+						<c:if test="${today ge date}">	
 							<!-- Project One -->				
 							<div class="row">
 								<div class="col-xl-5">
@@ -54,7 +54,7 @@
           							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode)}</p>
           							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
           							<p>현재신청인원 : ${post.currentPeople}</p>
-          							<p>마감일 : ${date}</p>
+          							<p>모임일 : ${date}</p>
           							<%-- <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}" target="center">신청자 보기</a> --%>
           							<input type="button" class="btn btn-outline-primary" id="${post.postNo}"  value="신청자보기">
           							<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/front?key=host&mn=hostMoimUpdateData&post_no=${post.postNo}">수정하기</a>
@@ -82,8 +82,8 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${postList}" var="post">
-							<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>	
+							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>	
 							<c:if test="${today > date}">		
 								<!-- Project two -->
 								<div class="row">
@@ -98,7 +98,7 @@
 	          							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode) }</p>
 	          							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
 	          							<p>현재신청인원 : ${post.currentPeople}</p>
-	         							<p>마감일 : ${date}</p>
+	         							<p>모임일 : ${date}</p>
 								 	</div><!-- col-7 -->
 								</div><!-- row -->
 							</c:if>		

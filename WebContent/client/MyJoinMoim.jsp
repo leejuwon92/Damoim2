@@ -46,8 +46,8 @@
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${postList}" var="post">
-							<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>
+							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>
 							<c:if test="${today < date}">
 							<!-- Project One -->				
 							<div class="row">
@@ -62,7 +62,7 @@
           							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode)}</p>
           							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
           							<p>현재신청인원 : ${post.currentPeople}</p>
-          							<p>마감일 : ${date}</p>
+          							<p>모임일 : ${date}</p>
           							<a class="btn btn-outline-primary" id="${post.postNo }" name='delete' href="../front?key=client&mn=clientCancleMoim&post_no=${post.postNo}">신청취소</a>	
 								</div><!-- col-7 -->
 							</div><!-- row -->	
@@ -87,8 +87,8 @@
 					</c:when>
 					<c:otherwise> --%>
 						<c:forEach items="${postList}" var="post">
-							<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>
+							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>
 							<c:if test="${today > date}">	
 								<!-- Project two -->
 								<div class="row">
@@ -103,7 +103,7 @@
 	          							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode) }</p>
 	          							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
 	          							<p>현재신청인원 : ${post.currentPeople}</p>
-	         							<p>마감일 : ${date}</p>
+	         							<p>모임일 : ${date}</p>
 								 	</div><!-- col-7 -->
 								</div><!-- row -->
 							</c:if>		
