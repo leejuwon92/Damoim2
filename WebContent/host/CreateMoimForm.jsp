@@ -271,7 +271,6 @@ jQuery(function($){
 	
 	 
 	 $("#submit").click(function(){
-		 alert()
 		 $("#createForm").submit();
 	 });
 	
@@ -298,7 +297,8 @@ jQuery(function($){
 	<section class="OpenMoim_section">
 		<div class="container">
 			<h2>DaMoim 모임 개설</h2>
-			<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostInsert" id="createForm" onSubmit='return checkValid()'>
+			<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostInsert" id="createForm">
+			 <!-- onSubmit='return checkValid()' -->
 				<div class="form-group">
   					<label for="postTitle">모임명</label>
   					<input type="text" class="form-control" name="postTitle" id="postTitle"/>

@@ -1,36 +1,42 @@
-	li a.current{background-color: #BB8FCE; color: white; }
-	li a:hover:not(.current){background-color: #A2CE8F; color: white;}
-	  ul{ 
+.mypageFrame_section li a.current {
+	background-color: #BB8FCE;
+	color: white;
+}
 
-		background-color:none;
-		width:150px;
-		list-style-type: none;
-		margin :0 auto;
-		padding: 0;
-	} 
-	
-	li a{  /* 커서를 올리지 않았을 때 색깔&글꼴 */
+.mypageFrame_section li a:hover:not(.current) {
+	background-color: #A2CE8F;
+	color: white;
+}
 
-		display: block;
-		color: #0080ff;
-		padding:10px;
-		text-align:center;
-		text-decoration:none;
-		font-weight:bold;
-		font-size : 17px;
-		font-family:fantasy;
-	}
-	
+.mypageFrame_section ul {
+	background-color: none;
+	width: 150px;
+	list-style-type: none;
+	margin: 0 auto;
+	padding: 0;
+}
 
-	li a:hover:not(.current){	/*커서 올렸을 때 background  */
-		background-color: #f5f5dc;
-		color:#000080;
-	}
-	
-	.k { /*  span태그 안에 부분 변화주기 */
-	
-	font-family: fantasy; 
-	color:#A4A4A4;
-	font-weight:bold;
+.mypageFrame_section li a { /* 커서를 올리지 않았을 때 색깔&글꼴 */
+	display: block;
+	color: #0080ff;
+	padding: 10px;
+	text-align: center;
+	text-decoration: none;
+	font-weight: bold;
 	font-size: 17px;
-	}
+	font-family: fantasy;
+}
+
+.mypageFrame_section li a:hover:not(.current) {
+	/*커서 올렸을 때 background  */
+	background-color: #f5f5dc;
+	color: #000080;
+}
+
+.mypageFrame_section .k { /*  span태그 안에 부분 변화주기 */
+	font-family: fantasy;
+	color: #A4A4A4;
+	font-weight: bold;
+	font-size: 17px;
+	padding: 20px;
+}
