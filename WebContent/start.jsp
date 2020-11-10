@@ -8,7 +8,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-		location.href = "${pageContext.request.contextPath}/makeIndex";
+		location.href = "makeIndex";
 	</script>
 </body>
 </html>

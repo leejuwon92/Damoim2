@@ -31,8 +31,8 @@ public class MoimList extends HttpServlet {
 	 	try { 
 	 		postList = UserService.userSelectBoardList(categoryNum, locationCode, date); 
 			int totalPage = postList.size()/pageSize;
-			if(postList.size() / pageSize > 0 || totalPage == 0) { 
-				totalPage++; // 
+			if(postList.size() % pageSize > 0) { 
+				totalPage++; 
 			}
 			int fromIndex = (page - 1) * pageSize;//pageSize;
 			List<PostDTO> partedPostList = postList.subList(fromIndex, Math.min(fromIndex+pageSize, postList.size()));
@@ -41,9 +41,7 @@ public class MoimList extends HttpServlet {
 	 	} catch (SQLException e) { 
 	 		e.printStackTrace(); 
 	 	}
-	 	for(PostDTO post:postList) {
-			System.out.println(post.getPostDescr());
-		}
+	 	
 		response.setContentType("text/html;charset=UTF-8"); 
 	 	response.getWriter().print(json);
 	}

@@ -23,6 +23,8 @@
 </script>
 </head>
 <body>
+	<jsp:useBean id="now" class="java.util.Date"/>
+  	<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
 	<section class="myJoinMoim_section">
 		<div class="container-fluid">
 			<!-- Head Title -->
@@ -37,13 +39,16 @@
 			</div>
 			<div class="myJoinMoim_current">
 				<c:choose>
-					<c:when test="${empty postList}">
+					<c:when test="${empty postList }">
 						<div style="padding-bottom: 300px">
 							참가한 모임이 없습니다.
 						</div>
 					</c:when>
 					<c:otherwise>
 						<c:forEach items="${postList}" var="post">
+							<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>
+							<c:if test="${today < date}">
 							<!-- Project One -->				
 							<div class="row">
 								<div class="col-xl-5">
@@ -57,11 +62,12 @@
           							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode)}</p>
           							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
           							<p>현재신청인원 : ${post.currentPeople}</p>
-          							<p>마감일 : ${post.deadline}</p>
+          							<p>마감일 : ${date}</p>
           							<a class="btn btn-primary" id="${post.postNo }" name='delete' href="../front?key=client&mn=clientCancleMoim&post_no=${post.postNo}">신청취소</a>	
 								</div><!-- col-7 -->
 							</div><!-- row -->	
       						<hr>
+      						</c:if>
       					</c:forEach>
         	 		</c:otherwise>
 				</c:choose>
@@ -71,20 +77,19 @@
 				<h4><b>지난 나의 모임</b></h4>
 			</div>
 			<div class="myJoinMoim_past">
-				<jsp:useBean id="now" class="java.util.Date"/>
-  				<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-			
-				<c:choose>
+				
+  				
+				<%-- <c:choose>
 					<c:when test="${empty postList}">
 						<div style="padding-bottom: 300px">
 							참가한 지난 모임이 없습니다.
 						</div>
 					</c:when>
-					<c:otherwise>
+					<c:otherwise> --%>
 						<c:forEach items="${postList}" var="post">
-							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
-							<fmt:formatDate value="${meetindDate}" pattern="yyyy-MM-dd" var="date"/>				
-							<c:if test="${today}<=${date}">		
+							<fmt:parseDate value="${post.deadline}" var="deadline" pattern="yyyy-MM-dd"/>
+							<fmt:formatDate value="${deadline}" pattern="yyyy-MM-dd" var="date"/>
+							<c:if test="${today > date}">	
 								<!-- Project two -->
 								<div class="row">
 									<div class="col-xl-5">
@@ -92,19 +97,19 @@
 											<img src="${pageContext.request.contextPath}/img/thumbnailimg/${post.thumbnailFile}" width='450px' height='280px' >
 										</a>	
 								 	</div><!-- col-5 -->
-									<div class="col-xl-7">>
+									<div class="col-xl-7">
 										<h3>${post.postTitle }</h3>
 	          							<p>모임 간단설명 : ${post.postDescr}</p>
 	          							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode) }</p>
 	          							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
 	          							<p>현재신청인원 : ${post.currentPeople}</p>
-	         							<p>마감일 : ${post.deadline}</p>
+	         							<p>마감일 : ${date}</p>
 								 	</div><!-- col-7 -->
 								</div><!-- row -->
 							</c:if>		
       					</c:forEach>
-        	 		</c:otherwise>
-				</c:choose>
+        	 	<%-- 	</c:otherwise>
+				</c:choose> --%>
 			
 			</div><!-- myJoinMoim_past -->
 		</div><!-- container-fluid -->

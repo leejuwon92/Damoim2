@@ -321,14 +321,15 @@ public class ClientDAOImpl implements ClientDAO {
 				int categoryCode = rs.getInt(6);
 				int locationCode = rs.getInt(7);
 				String locationDetail = rs.getString(8);
-				String deadline = rs.getString(9);
-				String meetingDate = rs.getString(10);
+				String regdate = rs.getString(9);
+				String deadline = rs.getString(10);
+				String meetingDate = rs.getString(11);
 				int totalPeople = rs.getInt(12);
 				int currentPeople = rs.getInt(13);
 				String thumbnailFile = rs.getString(14);
 				String bannerFile = rs.getString(15);
 				list.add(new PostDTO(postNo, dbuserNo, postTitle, postDescr, postContent, categoryCode, locationCode,
-						locationDetail, null, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
+						locationDetail, regdate, deadline, meetingDate, totalPeople, currentPeople, thumbnailFile, bannerFile));
 			}
 		} finally {
 			DbUtil.dbClose(rs, ps, con);
