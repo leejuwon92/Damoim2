@@ -287,44 +287,46 @@ jQuery(function($){
 </script>
 </head>
 <body>
+<jsp:include page="../header.jsp"></jsp:include>
 
-<hr>
 <div class="container">
-<h2>DaMoim 모임 수정</h2>
-<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostUpdate" id="createForm" onSubmit=''>
-
-    <input type="hidden" id="post_no" name="post_no" value="${post.postNo }"/>
-    <div class="form-group">
-  					<label for="postDescr">모임 간단 소개</label>
-  					<input type="text" class="form-control" name="postDescr" id="postDescr" value="${post.postDescr }"/>
-  				</div>
-	<br>
+	<div style="text-align: left; margin-top: 35px" >
+		<h3><b>DaMoim 모임 수정</b></h3>
+		<hr width="300px" align="left">
+	</div>
 	
-	<div class="form-group">
-  					<label for="editor">모임 정보</label>
-  					 <textarea name="editordata" id="editor">
- 					</textarea>
-  	</div>
-	<br>
-    <div class="form-group">
-  					<label for="deadline">모집 마감일</label>
-  					<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline" value="${post.deadline }"/>
-  	</div>
-	<div class="form-group pmd-textfield pmd-textfield-floating-label">
-  					<label for="meetingDate">모임일자</label>
-  					<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate" value="${post.meetingDate }"/>
-  	</div>
+	<form method="post" enctype="multipart/form-data" action= "../front?key=host&mn=hostPostUpdate" id="createForm" onSubmit=''>
+    	<input type="hidden" id="post_no" name="post_no" value="${post.postNo }"/>
+    	<div class="form-group">
+			<label for="postDescr">모임 간단 소개</label>
+			<input type="text" class="form-control" name="postDescr" id="postDescr" value="${post.postDescr }"/>
+		</div>
+		<br>
+		<div class="form-group">
+			<label for="editor">모임 정보</label>
+		 	<textarea name="editordata" id="editor"></textarea>
+  		</div>
+		<br>
+    	<div class="form-group">
+			<label for="deadline">모집 마감일</label>
+			<input type="text" autocomplete="off" class="form-control" name="deadline" id="deadline" value="${post.deadline }"/>
+		</div>
+		<br>
+		<div class="form-group pmd-textfield pmd-textfield-floating-label">
+			<label for="meetingDate">모임일자</label>
+			<input type="text" autocomplete="off" class="form-control" name="meetingDate" id="meetingDate" value="${post.meetingDate }"/>
+	  	</div>
   				
-	<div class="form-group">
-  					<label for="totalPeople">참가인원</label>
-  					<input type="text" class="form-control" name="totalPeople" id="totalPeople" value="${post.totalPeople }"/>
-    </div>
-     <br>
+		<div class="form-group">
+			<label for="totalPeople">참가인원</label>
+			<input type="text" class="form-control" name="totalPeople" id="totalPeople" value="${post.totalPeople }"/>
+    	</div>
+     	<br>
     
-    <div class="form-group">
-  			<label for="category">장소</label>
-	  		<select name="location" id="location" name="location" class="custom-select" value="${post.locationCode }">
-	    		<option value="0">--지역을 선택하세요 --</option>
+    	<div class="form-group">
+ 			<label for="category">장소</label>
+  			<select name="location" id="location" name="location" class="custom-select" value="${post.locationCode }">
+		  		<option value="0">--지역을 선택하세요 --</option>
 			    <option value="1">서울시</option>
 			    <option value="2">경기도</option>
 			    <option value="3">인천시</option>
@@ -333,45 +335,47 @@ jQuery(function($){
 			    <option value="6">전라도</option>
 			    <option value="7">경상도</option>
 			    <option value="8">제주도</option>
-		    </select>
-	
-	<br>
-    <div class="form-group">
-		<label for="locationDetail">상세주소</label>
-		<p>
-		<input type="text" class="form-control" name="locationDetail" id="locationDetail" value="${post.locationDetail }"/>
-		<div class="map_wrap">
-	    	<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+	    	</select>
+	    </div>
+		<br>
+		
+    	<div class="form-group">
+			<label for="locationDetail">상세주소</label>
+			<p>
+			<input type="text" class="form-control" name="locationDetail" id="locationDetail" value="${post.locationDetail }"/>
+			<div class="map_wrap">
+	    		<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
 		    	<div id="menu_wrap" class="bg_white">
 		       		<div class="option">
 		            	<div>
 		                	<form onsubmit="searchPlaces(); return false;">
-		                  	키워드 : <input type="text" value="${post.locationDetail }" id="keyword" size="15"> 
-		                    <button type="button" id="search">검색하기</button> 
+		                  		키워드 : <input type="text" value="${post.locationDetail }" id="keyword" size="15"> 
+		                    	<button type="button" id="search">검색하기</button> 
 		                	</form>
 		            	</div>
 		        	</div>
-		        <hr>
-		        <ul id="placesList"></ul>
-		        <div id="pagination"></div>
+		        	<hr>
+		        	<ul id="placesList"></ul>
+		     	<div id="pagination"></div>
+				</div>
 			</div>
+  		</div>
+		<br><hr>
+		<div style="text-align: left">
+			<input type="submit" class="btn btn-outline-primary" value="수정하기">
+			<input type="button" class="btn btn-outline-primary" value="취소">
 		</div>
-  	</div>
-	
-	<span>필수항목을 입력해 주세요</span>
-	<br><br>
-	<input type="button" class="btn btn-primary" value="취소">
-	<input type="submit" class="btn btn-primary" value="수정하기">
-	
+	</div>
 </form>
-</div>
+
+<jsp:include page="../footer.jsp"></jsp:include>
+
 <script type="text/javascript">
 	ClassicEditor
 	.create( document.querySelector( '#editor' ) )
 	.catch( error => {
     console.error( error );
 } );
-
 </script>
 </body>
 </html>

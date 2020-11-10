@@ -124,7 +124,6 @@ $(document).ready(function(){
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<hr>
 	
 	<div class="container">
 		<div style="text-align: center" >
@@ -141,14 +140,13 @@ $(document).ready(function(){
  				<br>
 				<hr>
 				<p class="submit">
-				<input type="button" class="btn btn-primary" id="backBtn" name="backBtn" value="뒤로가기" 
+				<input type="button" class="btn btn-outline-primary" id="backBtn" name="backBtn" value="뒤로가기" 
 				style="padding: 5px 5px">
 				</p>
 		</div><!-- successId -->
 	</div><!-- container -->
 </section><!-- successId_Select -->
 	
-<hr>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

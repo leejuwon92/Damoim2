@@ -7,6 +7,15 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/client/mypageleft.css">
+
+<!-- ckEditor CDN -->
+<script src="https://cdn.ckeditor.com/ckeditor5/23.1.0/classic/ckeditor.js"></script>
+
+<!-- map API -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d2625792f1e6e1fac26d00f60d91116c&libraries=services"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/host/map.css" type="text/css" />
+
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -17,7 +26,7 @@
 		//회원정보 수정
 		$(document).on("click","#updateClientInfo",function(){
 			$("#mypage_rigth").empty();
-			$("#mypage_rigth").load("${pageContext.request.contextPath}/client/clientUpdate.jsp");
+			$("#mypage_rigth").load("${pageContext.request.contextPath}/front?key=client&mn=clientUpdateData");
 			
 		});//"#updateClientInfo"_click
 		
@@ -42,6 +51,14 @@
 			
 		});//"#updateClientInfo"_click
 		
+		//개설한모임 ->신청자보기
+		$(document).on("click","input[value=신청자보기]",function(){
+			$("#mypage_rigth").empty();
+			var post_no = $(this).attr('id');
+			
+			$("#mypage_rigth").load("${pageContext.request.contextPath}/host/list.jsp?post_no="+post_no);
+			
+		});//"#updateClientInfo"_click
 		
 	});//ready
 </script>

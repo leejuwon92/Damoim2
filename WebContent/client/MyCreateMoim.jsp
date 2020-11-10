@@ -55,9 +55,10 @@
           							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
           							<p>현재신청인원 : ${post.currentPeople}</p>
           							<p>마감일 : ${date}</p>
-          							<a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}" target="center">신청자 보기</a>
-          							<a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/UpdateMoimForm.jsp" target="center">수정하기</a>
-	          						<a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/front?key=host&mn=hostPostDelete&post_no=${post.postNo}">삭제하기</a>	
+          							<%-- <a class="btn btn-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/host/list.jsp?post_no=${post.postNo}" target="center">신청자 보기</a> --%>
+          							<input type="button" class="btn btn-outline-primary" id="${post.postNo}"  value="신청자보기">
+          							<a class="btn btn-outline-primary"  href="${pageContext.request.contextPath}/front?key=host&mn=hostMoimUpdateData&post_no=${post.postNo}">수정하기</a>
+	          						<a class="btn btn-outline-primary" id="${post.postNo}" href="${pageContext.request.contextPath}/front?key=host&mn=hostPostDelete&post_no=${post.postNo}">삭제하기</a>	
 								</div><!-- col-7 -->
 							</div><!-- row -->	
       						<hr>

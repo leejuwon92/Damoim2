@@ -192,15 +192,15 @@ $(document).ready(function(){
 							<c:choose>
 								<c:when
 									test="${checker == true && postDTO.userNo eq session_userNo }">
-									<input type="button" class="btn btn-primary"
+									<input type="button" class="btn btn-outline-primary"
 										id="${postDTO.postNo }" value="모임삭제하기" style="width: 100%">
 								</c:when>
 								<c:when test="${checker == true}">
-									<input type="button" class="btn btn-primary"
+									<input type="button" class="btn btn-outline-primary"
 										id="${postDTO.postNo }" value="신청취소하기" style="width: 100%">
 								</c:when>
 								<c:otherwise>
-									<input type="button" class="btn btn-primary"
+									<input type="button" class="btn btn-outline-primary"
 										id="${postDTO.postNo }" name="${postDTO.categoryCode }"
 										value="신청하기" style="width: 100%">
 								</c:otherwise>
@@ -318,7 +318,7 @@ $(document).ready(function(){
 							value="${postDTO.postNo}" hidden="hidden"> <input
 							type="text" name="session_userNo" value="${session_userNo}"
 							hidden="hidden"> <input type="button"
-							class="btn btn-primary" value="질문하기" id="questionBtn"
+							class="btn btn-outline-primary" value="질문하기" id="questionBtn"
 							style="padding: 14px 30px 14px 30px"></td>
 					</tr>
 				</table>
@@ -364,8 +364,6 @@ $(document).ready(function(){
 	</section>
 	<!-- postContents_section -->
 
-
-	<hr>
 	<jsp:include page="../footer.jsp"></jsp:include>\
 
 	<script>

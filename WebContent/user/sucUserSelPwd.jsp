@@ -129,10 +129,9 @@ $(document).ready(function(){
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
-	<hr>
 	
 	<div class="container">
-		<div style="text-align: center" >
+		<div style="text-align: center; margin: 35px 0px" >
 			<h2>D&nbsp;A&nbsp;M&nbsp;O&nbsp;I&nbsp;M</h2>
 			<hr width="400px">
 		</div>
@@ -149,16 +148,15 @@ $(document).ready(function(){
 				</ul>
 				<hr>
 				<p class="submit">
-				<input type="button" class="btn btn-primary" id="LoginBtn" name="LoginBtn" value="로그인" 
+				<input type="button" class="btn btn-outline-primary" id="LoginBtn" name="LoginBtn" value="로그인" 
 				style="padding: 5px 5px">
-				<input type="button" class="btn btn-primary" id="findIdBtn" name="findIdBtn" value="아이디찾기" 
+				<input type="button" class="btn btn-outline-primary" id="findIdBtn" name="findIdBtn" value="아이디찾기" 
 				style="padding: 5px 5px">
 				</p>
 		</div><!-- successId -->
 	</div><!-- container -->
 </section><!-- successId_Select -->
 	
-<hr>
 <jsp:include page="../footer.jsp"></jsp:include>
 </body>
 </html>

@@ -61,26 +61,28 @@ $(function(){
         
 
         viewrecords: true,
-        caption: "신청자 명단"
     });
 });
 	
-	
-
-
 
 </script>
 </head>
 <body>
-
- <div class="row" id ="grid" align="center">
-        <div>
-            <table id="jqGrid"></table>
-           
-        </div>
-    </div>
-
-   
+	<section class="clientList_section">
+		<div class="container_fluid">
+			<!-- Head Title -->
+			<div style="text-align: left; margin-top: 35px" >
+				<h3><b>Moim 신청자 목록</b></h3>
+				<hr width="300px" align="left">
+			</div>
+		
+			<div class="row" id ="grid" align="center">
+        		<div>
+            		<table id="jqGrid"></table>
+                </div>
+    		</div>
+		</div><!-- container_fluid -->
+	</section><!-- clientList_section -->
 
 </body>
 </html>
