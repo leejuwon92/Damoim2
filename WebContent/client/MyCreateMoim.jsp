@@ -45,7 +45,7 @@
 							<div class="row">
 								<div class="col-xl-5">
 									<a href="${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=${post.postNo}">
-										<img src="${pageContext.request.contextPath}/img/thumbnailimg/${post.thumbnailFile}" width='450px' height='280px' >
+										<img src="${pageContext.request.contextPath}/img/uploadImg/${post.thumbnailFile}" width='450px' height='280px' >
 									</a>			
 								</div><!-- col-5 -->
 								<div class="col-xl-7">
@@ -89,7 +89,7 @@
 								<div class="row">
 									<div class="col-xl-5">
 										<a href="${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=${post.postNo}">
-											<img src="${pageContext.request.contextPath}/img/thumbnailimg/${post.thumbnailFile}" width='450px' height='280px' >
+											<img src="${pageContext.request.contextPath}/img/uploadImg/${post.thumbnailFile}" width='450px' height='280px' >
 										</a>	
 								 	</div><!-- col-5 -->
 									<div class="col-xl-7">

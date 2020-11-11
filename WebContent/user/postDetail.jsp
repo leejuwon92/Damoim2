@@ -148,7 +148,7 @@ $(document).ready(function(){
 			</div>
 			<div class="row">
 				<div class="col-xl-6">
-					<img src="${pageContext.request.contextPath}/img/thumbnailimg/${postDTO.thumbnailFile}"
+					<img src="${pageContext.request.contextPath}/img/uploadImg/${postDTO.thumbnailFile}"
 					width="540px" height="300px">
 				</div>
 				<!-- col-6 -->

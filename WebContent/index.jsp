@@ -44,14 +44,14 @@
   						<c:when test="${index.count == 1}">
   							<div class="carousel-item active">
   								<a href="front?key=user&mn=userSelectBoard&postNo=${bannerlist.postNo}">
-      								<img src="${pageContext.request.contextPath}/img/bannerimg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
+      								<img src="${pageContext.request.contextPath}/img/uploadImg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
       							</a>
     						</div>
   						</c:when >
   						<c:when test="${index.count != 1}">
   							<div class="carousel-item ">
   								<a href="front?key=user&mn=userSelectBoard&postNo=${bannerlist.postNo}">
-      								<img src="${pageContext.request.contextPath}/img/bannerimg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
+      								<img src="${pageContext.request.contextPath}/img/uploadImg/${bannerlist.bannerFile}" alt="" width="1920" height="400">
       							</a>
     						</div>
   						</c:when>
@@ -85,7 +85,7 @@
 				<c:forEach items="${requestScope.bestList}" var="bestlist" varStatus="index" >
 					<div class="col-xl-3">
 						<a href="front?key=user&mn=userSelectBoard&postNo=${bestlist.postNo}">
-      						<img src="${pageContext.request.contextPath}/img/thumbnailimg/${bestlist.thumbnailFile}" width="280px" height="150px">
+      						<img src="${pageContext.request.contextPath}/img/uploadImg/${bestlist.thumbnailFile}" width="280px" height="150px">
       					</a>
       					<hr>
       					<h5 style="text-align: center;"><b>${bestlist.postTitle}</b></h5>
@@ -117,7 +117,7 @@
 					<c:forEach items="${requestScope.todayList}" var="todayList" varStatus="index" >
 					<div class="col-xl-3">
 						<a href="front?key=user&mn=userSelectBoard&postNo=${todayList.postNo}">
-      						<img src="${pageContext.request.contextPath}/img/thumbnailimg/${todayList.thumbnailFile}" width="280px" height="150px">
+      						<img src="${pageContext.request.contextPath}/img/uploadImg/${todayList.thumbnailFile}" width="280px" height="150px">
       					</a>
       					<hr>
       					<h5 style="text-align: center;"><b>${todayList.postTitle}</b></h5>

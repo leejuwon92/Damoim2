@@ -60,14 +60,14 @@
 					success: function(result){
 						$("#pagination").twbsPagination("changeTotalPages", result[0], page);
 						var str = "";
-						if(result[1].length == 0){
+						if(result[1] == null){
 							str += "<h1 color = 'Brown'>해당하는 모임 정보가 없습니다</h1><br><br>";
 						} else {
 							for(var i in result[1]){
 								str += "<div class='row'>";
 								str += "<div class='col-md-7'>";
 								str += "<a href='front?key=user&mn=userSelectBoard&postNo=" + result[1][i].postNo + "'>";
-								str += "<img src='${pageContext.request.contextPath}/img/thumbnailimg/" + result[1][i].thumbnailFile + "' alt='' width='580px' height='290px' >";
+								str += "<img src='${pageContext.request.contextPath}/img/uploadImg/" + result[1][i].thumbnailFile + "' alt='' width='580px' height='290px' >";
 								str += "</a>";
 								str += "</div>";
 								str += "<div class='col-md-5'>";
