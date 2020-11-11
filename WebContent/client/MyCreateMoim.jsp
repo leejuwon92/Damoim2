@@ -40,7 +40,7 @@
 						<c:forEach items="${postList}" var="post">
 						<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
 						<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>	
-						<c:if test="${today ge date}">	
+						<c:if test="${today <= date}">	
 							<!-- Project One -->				
 							<div class="row">
 								<div class="col-xl-5">

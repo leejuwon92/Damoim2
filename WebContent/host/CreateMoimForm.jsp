@@ -412,7 +412,7 @@
 				<div class="form-group" style="text-align: right">
 					
 					<input type="button" class="btn btn-outline-primary" id= "submit" value="개설하기">	
-  					<input type="button" class="btn btn-outline-primary" value="취소">
+  					<input type="button" class="btn btn-outline-primary" value="취소" onclick="location.href='${pageContext.request.contextPath}/start.jsp'">
   				</div>
 			</form>	<!-- form -->	
 		</div><!-- container -->

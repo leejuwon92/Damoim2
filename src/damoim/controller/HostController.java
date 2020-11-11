@@ -45,7 +45,7 @@ public class HostController implements Controller {
 		ModelAndView mv = new ModelAndView();
 		int maxSize = 1024*1024*100; // 100mb
 		String encoding = "UTF-8";
-		String saveDir = "Z:/VOL2/2nd_Mini/uploadImg";
+		String saveDir = request.getServletContext().getRealPath("/")+"img/uploadImg";
 		//MultipartRequest mr = new MultipartRequest(request, request.getServletContext().getRealPath("/img"), maxSize, encoding, new DefaultFileRenamePolicy());
 		MultipartRequest mr = new MultipartRequest(request, saveDir, maxSize, encoding, new DefaultFileRenamePolicy());
 		System.out.println("HostController insert called...........");

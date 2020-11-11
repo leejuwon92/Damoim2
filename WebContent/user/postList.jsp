@@ -58,9 +58,13 @@
 					dataType:"json",
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 					success: function(result){
+						if(result[0] == 0){
+							result[0]++;
+						}
 						$("#pagination").twbsPagination("changeTotalPages", result[0], page);
 						var str = "";
-						if(result[1] == null){
+						console.log(result[1])
+						if(result[1].length == 0){
 							str += "<h1 color = 'Brown'>해당하는 모임 정보가 없습니다</h1><br><br>";
 						} else {
 							for(var i in result[1]){

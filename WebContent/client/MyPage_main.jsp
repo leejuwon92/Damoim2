@@ -68,7 +68,6 @@ $(function(){
 					$.each(result,function(index,item){
 						if(index<=2){
 							$("#joinMoim").empty();
-							
 							str += "<div class='row' style='padding: 20px'>";
 							str += "<div class='col-xl-5'>";
 							str += "<a href='${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=" + item.postNo + "'>";

@@ -25,7 +25,7 @@ public class ClientService {
 	}
 	
 	public static int clientInsertReply(ReplyDTO replyDTO) throws SQLException{
-		int result = dao.clientInsertReply(replyDTO);
+		int result = dao.clientInsertReply(replyDTO);	
 		return result;
 	}
 	

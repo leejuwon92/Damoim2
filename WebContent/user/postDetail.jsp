@@ -235,7 +235,7 @@ $(document).ready(function(){
 			<table class="table table-borderless">
 				<tr>
 					<td>
-						<h5>모임장소</h5>
+						<h5>상세 주소</h5>
 						<p>${postDTO.locationDetail}
 					</td>
 					<td>

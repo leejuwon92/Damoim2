@@ -35,7 +35,7 @@
 			
 			<!-- 진행중인 나의 모임 -->
 			<div style="text-align: left" >
-				<h4><b>진행중인 나의 모임</b></h4>
+				<h4><b>진행중인 참가 모임</b></h4>
 			</div>
 			<div class="myJoinMoim_current">
 				<c:choose>
@@ -48,7 +48,7 @@
 						<c:forEach items="${postList}" var="post">
 							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
 							<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>
-							<c:if test="${today < date}">
+							<c:if test="${today <= date}">
 							<!-- Project One -->				
 							<div class="row">
 								<div class="col-xl-5">
@@ -74,42 +74,47 @@
 			</div><!-- myJoinMoim_current -->
 			<hr color="black">
 			<div style="text-align: left" >
-				<h4><b>지난 나의 모임</b></h4>
+				<h4><b>지난 참가 모임</b></h4>
 			</div>
 			<div class="myJoinMoim_past">
-				
-  				
-				<%-- <c:choose>
+				<c:choose>
 					<c:when test="${empty postList}">
 						<div style="padding-bottom: 300px">
 							참가한 지난 모임이 없습니다.
 						</div>
 					</c:when>
-					<c:otherwise> --%>
+					<c:otherwise>
 						<c:forEach items="${postList}" var="post">
 							<fmt:parseDate value="${post.meetingDate}" var="meetingDate" pattern="yyyy-MM-dd"/>
 							<fmt:formatDate value="${meetingDate}" pattern="yyyy-MM-dd" var="date"/>
-							<c:if test="${today > date}">	
-								<!-- Project two -->
-								<div class="row">
-									<div class="col-xl-5">
-										<a href="${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=${post.postNo}">
-											<img src="${pageContext.request.contextPath}/img/uploadImg/${post.thumbnailFile}" width='450px' height='280px' >
-										</a>	
-								 	</div><!-- col-5 -->
-									<div class="col-xl-7">
-										<h3>${post.postTitle }</h3>
-	          							<p>모임 간단설명 : ${post.postDescr}</p>
-	          							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode) }</p>
-	          							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
-	          							<p>현재신청인원 : ${post.currentPeople}</p>
-	         							<p>모임일 : ${date}</p>
-								 	</div><!-- col-7 -->
-								</div><!-- row -->
-							</c:if>		
+							<c:choose>
+								<c:when test="${today > date}">
+									<!-- Project two -->
+									<div class="row">
+										<div class="col-xl-5">
+											<a href="${pageContext.request.contextPath}/front?key=user&mn=userSelectBoard&postNo=${post.postNo}">
+												<img src="${pageContext.request.contextPath}/img/uploadImg/${post.thumbnailFile}" width='450px' height='280px' >
+											</a>	
+									 	</div><!-- col-5 -->
+										<div class="col-xl-7">
+											<h3>${post.postTitle }</h3>
+		          							<p>모임 간단설명 : ${post.postDescr}</p>
+		          							<p>모임 카테고리 : ${post.categoryNoTocategoryName(post.categoryCode) }</p>
+		          							<p>모임 장소 : ${post.locationNoTolocationName(post.locationCode)} ${post.locationDetail}</p>
+		          							<p>현재신청인원 : ${post.currentPeople}</p>
+		         							<p>모임일 : ${date}</p>
+									 	</div><!-- col-7 -->
+									</div><!-- row -->
+								</c:when>
+								<c:otherwise>
+									<div style="padding-bottom: 300px">
+										참가했던 지난 모임이 없습니다.
+									</div>
+								</c:otherwise>
+							</c:choose>
       					</c:forEach>
-        	 	<%-- 	</c:otherwise>
-				</c:choose> --%>
+        	 		</c:otherwise>
+				</c:choose>
 			
 			</div><!-- myJoinMoim_past -->
 		</div><!-- container-fluid -->
